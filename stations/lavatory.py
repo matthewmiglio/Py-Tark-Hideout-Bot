@@ -18,7 +18,7 @@ def handle_lavatory(logger):
     logger.log('Handling lavatory')
     
     # get to lavatory
-    get_to_lavatory()
+    if get_to_lavatory()=='restart':return 'restart'
     time.sleep(4)
 
     # check if get_items exists
@@ -83,11 +83,17 @@ def handle_lavatory(logger):
 
 
 def get_to_lavatory():
+    start_time = time.time()
+
     for x in range(300,900,100):
         click(x,930)
 
     coord = None
     while coord is None:
+        time_taken = time.time() - start_time
+        if time_taken > 60:
+            return "restart"
+
         cycle_hideout_tab()
         time.sleep(1)
         coord = find_lavatory_icon()

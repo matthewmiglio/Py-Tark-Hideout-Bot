@@ -19,7 +19,7 @@ def handle_medstation(logger):
     logger.log("Handling medstation")
 
     # get to medstation
-    get_to_medstation()
+    if get_to_medstation()=='restart':return 'restart'
     time.sleep(4)
 
     # check for start
@@ -61,11 +61,16 @@ def handle_medstation(logger):
 
 
 def get_to_medstation():
+    start_time = time.time()
+
     for x in range(300, 900, 100):
         click(x, 930)
 
     coord = None
     while coord is None:
+        if time.time() - start_time > 60:
+            return "restart"
+
         cycle_hideout_tab()
         time.sleep(1)
         coord = find_medstation_icon()

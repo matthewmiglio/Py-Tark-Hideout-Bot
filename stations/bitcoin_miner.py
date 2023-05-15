@@ -15,7 +15,7 @@ def handle_bitcoin_miner(logger):
     
     logger.log("Handling bitcoin miner")
 
-    get_to_bitcoin_miner()
+    if get_to_bitcoin_miner()=='restart':return'restart'
     time.sleep(4)
 
     if check_for_bitcoin_miner_get_items():
@@ -31,11 +31,17 @@ def handle_bitcoin_miner(logger):
 
 
 def get_to_bitcoin_miner():
+    start_time = time.time()
+
     for x in range(300, 900, 100):
         click(x, 930)
 
     coord = None
     while coord is None:
+        time_taken = time.time() - start_time
+        if time_taken > 60:
+            return "restart"
+
         cycle_hideout_tab()
         time.sleep(1)
         coord = find_bitcoin_miner_icon()

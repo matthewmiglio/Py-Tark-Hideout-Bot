@@ -19,7 +19,7 @@ def handle_water_collector(logger):
 
     logger.log("Handling water collector")
 
-    get_to_water_collector()
+    if get_to_water_collector()=='restart':return 'restart'
     time.sleep(4)
 
     if check_for_water_collector_get_items():
@@ -73,11 +73,16 @@ def find_water_collector_icon():
 
 
 def get_to_water_collector():
+    start_time = time.time()
+
     for x in range(300, 900, 100):
         click(x, 930)
 
     coord = None
     while coord is None:
+        if time.time() - start_time > 60:
+            return "restart"
+
         cycle_hideout_tab()
         time.sleep(1)
         coord = find_water_collector_icon()
