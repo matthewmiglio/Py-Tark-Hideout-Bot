@@ -10,7 +10,7 @@ import pytesseract
 from joblib import Parallel, delayed
 from PIL import Image
 
-from dependency import get_tesseract_path
+from utils.dependency import get_tesseract_path
 
 
 def coords_is_equal(coords_a, coords_b, tol=30):

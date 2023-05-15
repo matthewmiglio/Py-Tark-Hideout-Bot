@@ -1,5 +1,5 @@
-from admin_check import check_if_program_is_running_in_admin
-from logger import Logger
+from utils.admin_check import check_if_program_is_running_in_admin
+from utils.logger import Logger
 from bitcoin_miner import handle_bitcoin_miner
 from client import get_to_hideout, orientate_tarkov_client
 from lavatory import handle_lavatory
