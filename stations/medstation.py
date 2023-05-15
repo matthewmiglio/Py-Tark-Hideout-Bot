@@ -45,6 +45,7 @@ def handle_medstation(logger):
     elif check_for_medstation_get_items():
         logger.log('Collecting medstation items')
 
+
         #click get items
         click(x=1094, y=674)
         time.sleep(3)
@@ -52,6 +53,8 @@ def handle_medstation(logger):
         #click esc
         pyautogui.press("esc")
         time.sleep(2)
+
+        logger.add_medstation_collect()
         
         return "medstation"
 
