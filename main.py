@@ -17,7 +17,8 @@ def main():
         handle_workbench()
 
 
-main()
+# main()
+orientate_tarkov_client()
 
 
 """

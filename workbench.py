@@ -24,7 +24,11 @@ def handle_workbench():
         pyautogui.press('esc')
 
     elif check_for_workbench_get_items():
-        print('Dont know how to collect workbench craft')
+        print('Collecting items from workbench')
+        
+        click(x=1091, y=713)
+        time.sleep(2)
+        
         pyautogui.press('esc')
         time.sleep(2)
 
