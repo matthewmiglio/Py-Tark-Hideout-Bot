@@ -20,6 +20,72 @@ import time
 from utils.thread import StoppableThread, ThreadKilled
 
 
+def shutdown_thread(thread: StoppableThread | None, kill=True):
+    if thread is not None:
+        thread.shutdown_flag.set()
+        if kill:
+            thread.kill()
+
+
+def update_layout(window: sg.Window, logger: Logger):
+    # comm_queue: Queue[dict[str, str | int]] = logger.queue
+    window["time_since_start"].update(logger.calc_time_since_start())  # type: ignore
+    # update the statistics in the gui
+
+    if not logger.queue.empty():
+        # read the statistics from the logger
+        for stat, val in logger.queue.get().items():
+            window[stat].update(val)  # type: ignore
+
+
+def start_button_event(logger: Logger, window, values):
+    logger.log("Starting")
+
+    for key in disable_keys:
+        window[key].update(disabled=True)
+
+    # setup thread and start it
+    # args = (values["rows_to_target"], values["remove_offers_timer"])
+    thread = WorkerThread(logger, args=[0, 0])
+    thread.start()
+
+    # enable the stop button after the thread is started
+    window["Stop"].update(disabled=False)
+
+    return thread
+
+
+def stop_button_event(logger: Logger, window, thread):
+    logger.log("Stopping")
+    window["Stop"].update(disabled=True)
+    shutdown_thread(thread, kill=True)  # send the shutdown flag to the thread
+
+
+class WorkerThread(StoppableThread):
+    def __init__(self, logger: Logger, args, kwargs=None):
+        super().__init__(args, kwargs)
+        self.logger = logger
+
+    def run(self):
+        try:
+            placeholder_arg_1, placeholder_arg_2 = self.args  # parse thread args
+
+            state = "restart"
+            logger = Logger()
+
+            loops = 0
+            # loop until shutdown flag is set
+            while not self.shutdown_flag.is_set():
+                state = state_tree(state, self.logger)
+
+        except ThreadKilled:
+            return
+
+        except Exception as exc:  # pylint: disable=broad-except
+            # catch exceptions and log to not crash the main thread
+            self.logger.error(str(exc))
+
+
 def main():
     # orientate_terminal()
 
@@ -106,74 +172,8 @@ def main():
     window.close()
 
 
-def shutdown_thread(thread: StoppableThread | None, kill=True):
-    if thread is not None:
-        thread.shutdown_flag.set()
-        if kill:
-            thread.kill()
-
-
-def update_layout(window: sg.Window, logger: Logger):
-    # comm_queue: Queue[dict[str, str | int]] = logger.queue
-    window["time_since_start"].update(logger.calc_time_since_start())  # type: ignore
-    # update the statistics in the gui
-    if not logger.queue.empty():
-        # read the statistics from the logger
-        for stat, val in logger.queue.get().items():
-            window[stat].update(val)  # type: ignore
-
-
-def start_button_event(logger: Logger, window, values):
-    logger.log("Starting")
-
-    for key in disable_keys:
-        window[key].update(disabled=True)
-
-    # setup thread and start it
-    # args = (values["rows_to_target"], values["remove_offers_timer"])
-    thread = WorkerThread(logger, args=[0, 0])
-    thread.start()
-
-    # enable the stop button after the thread is started
-    window["Stop"].update(disabled=False)
-
-    return thread
-
-
-def stop_button_event(logger: Logger, window, thread):
-    logger.log("Stopping")
-    window["Stop"].update(disabled=True)
-    shutdown_thread(thread, kill=True)  # send the shutdown flag to the thread
-
-
-class WorkerThread(StoppableThread):
-    def __init__(self, logger: Logger, args, kwargs=None):
-        super().__init__(args, kwargs)
-        self.logger = logger
-
-    def run(self):
-        try:
-            placeholder_arg_1, placeholder_arg_2 = self.args  # parse thread args
-
-            state = "restart"
-            logger = Logger()
-
-            loops = 0
-            # loop until shutdown flag is set
-            while not self.shutdown_flag.is_set():
-                state = state_tree(state, logger)
-
-        except ThreadKilled:
-            return
-
-        except Exception as exc:  # pylint: disable=broad-except
-            # catch exceptions and log to not crash the main thread
-            self.logger.error(str(exc))
-
-
 if __name__ == "__main__":
     main()
 
     # from client import orientate_tarkov_client
     # orientate_tarkov_client()
-    # print(check_for_medstation_get_items())

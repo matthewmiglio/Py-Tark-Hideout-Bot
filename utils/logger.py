@@ -109,7 +109,11 @@ class Logger:
     @_updates_queue
     def log(self, string):
         self.message = string
-        print(f"[{time.time()}] {string}")
+        self.time_since_start =self.calc_time_since_start()
+
+
+
+        print(f"[{self.time_since_start}] {string}")
 
     @_updates_queue
     def error(self, message: str):
@@ -117,11 +121,6 @@ class Logger:
         self.errored = True
         self.status = f"Error: {message}"
         print(f"Error: {message}")
-
-
-
-
-    
 
     @_updates_queue
     def add_restart(self):

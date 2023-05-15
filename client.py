@@ -245,7 +245,6 @@ def get_to_hideout():
 
         click(x=150, y=977)
         time.sleep(5)
-    print("At hideout")
 
 
 def check_if_in_hideout():
