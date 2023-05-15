@@ -10,12 +10,12 @@ class Logger:
         """Logger init"""
 
         self.queue: Queue[dict[str, str | int]] = Queue() if queue is None else queue
-        
-        #time stats
-        self.start_time = time.time()
+
+        # time stats
+        self.start_time = time.time() if timed else None
         self.time_since_start = 0
-        
-        #station stats
+
+        # station stats
         self.workbench_starts = 0
         self.workbench_collects = 0
         self.bitcoin_collects = 0
@@ -26,7 +26,11 @@ class Logger:
         self.water_filters = 0
         self.water_collects = 0
 
-        #idk lol
+        # log
+        self.message = ""
+        self.restarts = 0
+
+        # idk lol
         self.errored = False
 
     def _update_queue(self):
@@ -35,52 +39,20 @@ class Logger:
             return
 
         statistics: dict[str, str | int] = {
-            "current_status": 0,
-            "time_since_start": 0,
-            "restarts": 0,
-            "item_sold": 0,
-            "roubles_made": 0,  
-            "sale_attempts": 0,
-            "success_rate": 0,
-            "offers_removed": 0,
-            "fee_total": 0,
-            "starting_money": 0,
-            "current_money": 0,
+            "workbench_starts": self.workbench_starts,
+            "time_since_start": self.calc_time_since_start(),
+            "workbench_collects": self.workbench_collects,
+            "bitcoin_collects": self.bitcoin_collects,
+            "lavatory_starts": self.lavatory_starts,
+            "lavatory_collects": self.lavatory_collects,
+            "medstation_starts": self.medstation_starts,
+            "medstation_collects": self.medstation_collects,
+            "water_filters": self.water_filters,
+            "water_collects": self.water_collects,
+            "message": self.message,
+            "restarts": self.restarts,
         }
         self.queue.put(statistics)
-
-
-    def add_workbench_start(self):
-        self.workbench_starts += 1
-
-    def add_workbench_collect(self):
-        self.workbench_collects += 1
-
-    def add_bitcoin_collect(self):
-        self.bitcoin_collects += 1
-
-    def add_lavatory_start(self):
-        self.lavatory_starts += 1
-
-    def add_lavatory_collect(self):
-        self.lavatory_collects += 1
-
-    def add_medstation_start(self):
-        self.medstation_starts += 1
-
-    def add_medstation_collect(self):
-        self.medstation_collects += 1
-
-    def add_water_filter(self):
-        self.water_filters += 1
-
-    def add_water_collect(self):
-        self.water_collects += 1
-
-    def log(self, message):
-        print(f"[{get_time()}] {message}")
-
-
 
     @staticmethod
     def _updates_queue(func):
@@ -95,11 +67,61 @@ class Logger:
         return wrapper
 
     @_updates_queue
+    def add_restart(self):
+        self.restarts += 1
+
+    @_updates_queue
+    def add_workbench_start(self):
+        self.workbench_starts += 1
+
+    @_updates_queue
+    def add_workbench_collect(self):
+        self.workbench_collects += 1
+
+    @_updates_queue
+    def add_bitcoin_collect(self):
+        self.bitcoin_collects += 1
+
+    @_updates_queue
+    def add_lavatory_start(self):
+        self.lavatory_starts += 1
+
+    @_updates_queue
+    def add_lavatory_collect(self):
+        self.lavatory_collects += 1
+
+    @_updates_queue
+    def add_medstation_start(self):
+        self.medstation_starts += 1
+
+    @_updates_queue
+    def add_medstation_collect(self):
+        self.medstation_collects += 1
+
+    @_updates_queue
+    def add_water_filter(self):
+        self.water_filters += 1
+
+    @_updates_queue
+    def add_water_collect(self):
+        self.water_collects += 1
+
+    @_updates_queue
+    def log(self, string):
+        self.message = string
+        print(f"[{time.time()}] {string}")
+
+    @_updates_queue
     def error(self, message: str):
         """logs an error"""
         self.errored = True
         self.status = f"Error: {message}"
         print(f"Error: {message}")
+
+
+
+
+    
 
     @_updates_queue
     def add_restart(self):
@@ -114,9 +136,6 @@ class Logger:
         return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
 
 
-
 # method to get the time in a readable format
 def get_time():
     return time.strftime("%H:%M:%S", time.localtime())
-
-

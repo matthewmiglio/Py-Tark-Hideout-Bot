@@ -25,27 +25,27 @@ main_layout = [
     [
         sg.Frame(
             layout=[
-                [
-                    sg.Text("Rows in Stash:"),
-                    sg.Slider(
-                        range=(1, 11),
-                        default_value=11,
-                        key="rows_to_target",
-                        orientation="horizontal",
-                        size=(26, None),
-                        relief=sg.RELIEF_FLAT,
-                        enable_events=True,
-                    ),
-                ],
-                [
-                    sg.Text("Remove Offers Timer:"),
-                    sg.Combo(
-                        ["1m", "2m", "5m", "10m"],
-                        key="remove_offers_timer",
-                        default_value="5m",
-                        enable_events=True,
-                    ),
-                ],
+                # [
+                #     sg.Text("Rows in Stash:"),
+                #     sg.Slider(
+                #         range=(1, 11),
+                #         default_value=11,
+                #         key="rows_to_target",
+                #         orientation="horizontal",
+                #         size=(26, None),
+                #         relief=sg.RELIEF_FLAT,
+                #         enable_events=True,
+                #     ),
+                # ],
+                # [
+                #     sg.Text("Remove Offers Timer:"),
+                #     sg.Combo(
+                #         ["1m", "2m", "5m", "10m"],
+                #         key="remove_offers_timer",
+                #         default_value="5m",
+                #         enable_events=True,
+                #     ),
+                # ],
                 [
                     sg.Column(
                         [
@@ -85,7 +85,7 @@ main_layout = [
         stat_box("time_since_start", size=(7, 1)),
         sg.InputText(
             "Idle",
-            key="current_status",
+            key="message",
             use_readonly_for_disable=True,
             disabled=True,
             text_color="blue",
@@ -98,8 +98,8 @@ main_layout = [
 # a list of all the keys that contain user configuration
 # user_config_keys = ["rows_to_target", "remove_offers_timer", "autostart"]
 user_config_keys = [
-    "rows_to_target",
-    "remove_offers_timer",
+    # "rows_to_target",
+    # "remove_offers_timer",
     "autostart",
 ]
 

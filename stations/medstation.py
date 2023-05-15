@@ -53,7 +53,7 @@ def handle_medstation(logger):
         pyautogui.press("esc")
         time.sleep(2)
         
-        return "workbench"
+        return "medstation"
 
     else:
         logger.log("No actions for medstation yet...")

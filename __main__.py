@@ -20,9 +20,6 @@ import time
 from utils.thread import StoppableThread, ThreadKilled
 
 
-logger = Logger()
-
-
 def main():
     # orientate_terminal()
 
@@ -133,8 +130,8 @@ def start_button_event(logger: Logger, window, values):
         window[key].update(disabled=True)
 
     # setup thread and start it
-    args = (values["rows_to_target"], values["remove_offers_timer"])
-    thread = WorkerThread(logger, args)
+    # args = (values["rows_to_target"], values["remove_offers_timer"])
+    thread = WorkerThread(logger, args=[0, 0])
     thread.start()
 
     # enable the stop button after the thread is started
@@ -156,9 +153,10 @@ class WorkerThread(StoppableThread):
 
     def run(self):
         try:
-            number_of_rows, remove_offers_timer = self.args  # parse thread args
+            placeholder_arg_1, placeholder_arg_2 = self.args  # parse thread args
 
             state = "restart"
+            logger = Logger()
 
             loops = 0
             # loop until shutdown flag is set
@@ -174,8 +172,8 @@ class WorkerThread(StoppableThread):
 
 
 if __name__ == "__main__":
-    # main()
+    main()
 
     # from client import orientate_tarkov_client
     # orientate_tarkov_client()
-    print(check_for_medstation_get_items())
+    # print(check_for_medstation_get_items())

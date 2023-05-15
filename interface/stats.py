@@ -18,33 +18,36 @@ def stat_box(stat_name: str, size=(5, 1)):
 stats_title = [
     [
         [
-            sg.Text("Starting Money: "),
+            sg.Text("workbench_starts: "),
         ],
         [
-            sg.Text("Current Money: "),
+            sg.Text("workbench_collects"),
         ],
         [
-            sg.Text("Fee Total: "),
+            sg.Text("bitcoin_collects"),
         ],
         [
-            sg.Text("Items Sold: "),
+            sg.Text("lavatory_starts"),
         ],
         [
-            sg.Text("Roubles Made: "),
+            sg.Text("lavatory_collects"),
         ],
     ],
     [
         [
-            sg.Text("Sale Attempts: "),
+            sg.Text("medstation_starts"),
         ],
         [
-            sg.Text("Offers Removed: "),
+            sg.Text("medstation_collects"),
         ],
         [
-            sg.Text("Success Rate: "),
+            sg.Text("water_filters"),
         ],
         [
-            sg.Text("Restarts: "),
+            sg.Text("water_collects"),
+        ],
+        [
+            sg.Text("restarts"),
         ],
     ],
 ]
@@ -53,30 +56,33 @@ stats_title = [
 stats_values = [
     [
         [
-            stat_box("starting_money"),
+            stat_box("workbench_starts"),
         ],
         [
-            stat_box("current_money"),
+            stat_box("workbench_collects"),
         ],
         [
-            stat_box("fee_total"),
+            stat_box("bitcoin_collects"),
         ],
         [
-            stat_box("item_sold"),
+            stat_box("lavatory_starts"),
         ],
         [
-            stat_box("roubles_made"),
+            stat_box("lavatory_collects"),
         ],
     ],
     [
         [
-            stat_box("sale_attempts"),
+            stat_box("medstation_starts"),
         ],
         [
-            stat_box("offers_removed"),
+            stat_box("medstation_collects"),
         ],
         [
-            stat_box("success_rate"),
+            stat_box("water_filters"),
+        ],
+        [
+            stat_box("water_collects"),
         ],
         [
             stat_box("restarts"),
