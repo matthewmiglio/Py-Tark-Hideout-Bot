@@ -11,8 +11,8 @@ import pyautogui
 # screenshot(region=[1000, 640, 200, 100])
 
 
-def handle_medstation():
-    print('Handling medstation')
+def handle_medstation(logger):
+    logger.log('Handling medstation')
     
     # get to medstation
     get_to_medstation()
@@ -20,7 +20,7 @@ def handle_medstation():
     
     #check for start
     if check_for_medstation_start():
-        print('Starting medstation craft')
+        logger.log('Starting medstation craft')
         
         #click start button
         click(x=1113, y=677)
@@ -33,14 +33,16 @@ def handle_medstation():
         #press esc to leave this menu 
         pyautogui.press('esc')
 
+        logger.add_medstation_start()
+
 
 
     #check for get items
     elif check_for_medstation_get_items():
-        print('Dont know how to medstation collect yet')
+        logger.log('Dont know how to medstation collect yet')
 
     else:
-        print('No actions for medstation yet...')
+        logger.log('No actions for medstation yet...')
 
 def get_to_medstation():
     for x in range(300,900,100):

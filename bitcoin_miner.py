@@ -9,17 +9,18 @@ from detection.image_rec import (
 import pyautogui
 
 
-def handle_bitcoin_miner():
-    print("Handling bitcoin miner")
+def handle_bitcoin_miner(logger):
+    logger.log("Handling bitcoin miner")
 
     get_to_bitcoin_miner()
     time.sleep(4)
 
     if check_for_bitcoin_miner_get_items():
-        print("Collecting bitcoin")
+        logger.log("Collecting bitcoin")
         click(x=1111, y=761)
         time.sleep(2)
         pyautogui.press("esc")
+        logger.add_workstation_collect()
 
 
 def get_to_bitcoin_miner():

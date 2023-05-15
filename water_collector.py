@@ -12,20 +12,25 @@ from detection.image_rec import (
 )
 
 
-def handle_water_collector():
-    # get_to_water_collector()
-    # time.sleep(4)
+def handle_water_collector(logger):
+    logger.log('Handling water collector')
+
+    get_to_water_collector()
+    time.sleep(4)
 
     if check_for_water_collector_get_items():
-        print("Collecting water collector items")
+        logger.log("Collecting water collector items")
         click(x=1051, y=796)
         time.sleep(3)
         pyautogui.press("esc")
         time.sleep(2)
+
+        logger.add_water_collect()
+
         return handle_water_collector()
 
     elif not check_for_water_collector_filter():
-        print("Adding a filter to water collector")
+        logger.log("Adding a filter to water collector")
 
         # click filters dropdown
         click(x=930, y=790)
@@ -38,8 +43,11 @@ def handle_water_collector():
         # click escape
         pyautogui.press("esc")
         time.sleep(1)
+
+        logger.add_water_filter()
+
     else:
-        print("No actions for water collector yet...")
+        logger.log("No actions for water collector yet...")
 
 
 def find_water_collector_icon():

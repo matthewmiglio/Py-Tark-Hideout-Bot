@@ -10,8 +10,8 @@ from detection.image_rec import (
 )
 
 
-def handle_lavatory():
-    print('Handling lavatory')
+def handle_lavatory(logger):
+    logger.log('Handling lavatory')
     
     # get to lavatory
     get_to_lavatory()
@@ -19,15 +19,17 @@ def handle_lavatory():
 
     # check if get_items exists
     if check_for_get_items_in_lavatory():
-        print('Getting items')
+        logger.log('Getting items')
         click(x=1072, y=678)
         time.sleep(3)
         pyautogui.press("esc")
+        logger.add_lavatory_collect()
         return handle_lavatory()
+    
 
     # if start exists, buy items, start, return None
     elif check_for_start_in_lavatory():
-        print('Starting item craft')
+        logger.log('Starting item craft')
 
         #right click bag
         click(871,674,button='right')
@@ -65,10 +67,11 @@ def handle_lavatory():
         click(x=641, y=678)
         time.sleep(3)
         pyautogui.press("esc")
-        return 
+        
+        logger.add_lavatory_start()
     
     else:
-        print('No actions for lavatory yet...')
+        logger.log('No actions for lavatory yet...')
         pyautogui.press("esc")
         time.sleep(2)
         return

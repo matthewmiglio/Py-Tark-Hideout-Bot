@@ -4,13 +4,13 @@ from client import click, cycle_hideout_tab, screenshot
 from detection.image_rec import check_for_location, find_references, get_first_location, make_reference_image_list
 
 
-def handle_workbench():
-    print('Handling workbench')
+def handle_workbench(logger):
+    logger.log('Handling workbench')
     get_to_workbench()
     time.sleep(4)
 
     if check_for_workbench_start():
-        print('Starting workbench craft')
+        logger.log('Starting workbench craft')
 
         #click start button
         click(x=1100, y=711)
@@ -23,8 +23,10 @@ def handle_workbench():
         #click escape to leave workbench
         pyautogui.press('esc')
 
+        logger.add_workbench_start()
+
     elif check_for_workbench_get_items():
-        print('Collecting items from workbench')
+        logger.log('Collecting items from workbench')
         
         #click get items
         click(x=1091, y=713)
@@ -34,11 +36,13 @@ def handle_workbench():
         pyautogui.press('esc')
         time.sleep(2)
 
+        logger.add_workbench_collect()
+
         #rerun workbench alg to start the craft after collecting items
         return handle_workbench()
 
     else:
-        print('No actions for workbench yet...')
+        logger.log('No actions for workbench yet...')
         pyautogui.press('esc')
         time.sleep(2)
 
