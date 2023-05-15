@@ -1,5 +1,7 @@
 import webbrowser
+from client import orientate_tarkov_client
 from states import state_tree
+from stations.medstation import check_for_medstation_get_items
 
 from utils.logger import Logger
 
@@ -172,4 +174,8 @@ class WorkerThread(StoppableThread):
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+
+    # from client import orientate_tarkov_client
+    # orientate_tarkov_client()
+    print(check_for_medstation_get_items())

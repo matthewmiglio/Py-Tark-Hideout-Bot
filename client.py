@@ -16,15 +16,15 @@ pyautogui.FAILSAFE = False
 
 def close_tarkov_client(logger, tark_window):
     try:
-        logger.change_status("Tark found open. Closing it.")
+        logger.log("Tark found open. Closing it.")
         tark_window = tark_window[0]
         tark_window.close()
     except BaseException:
-        logger.change_status("error closing tarkov client.")
+        logger.log("error closing tarkov client.")
 
 
 def close_launcher(logger, tark_launcher):
-    logger.change_status("Tark launcher found open. Closing it.")
+    logger.log("Tark launcher found open. Closing it.")
     tark_launcher = tark_launcher[0]
     tark_launcher.close()
 
@@ -74,7 +74,7 @@ def restart_tarkov(logger):
             has_window = True
         if index > 25:
             logger.log("Launcher failed to open.")
-            restart_tarkov(logger)
+            return restart_tarkov(logger)
     time.sleep(5)
 
     # orientate launcher
@@ -86,7 +86,7 @@ def restart_tarkov(logger):
     # wait for launcher play button to appear
     logger.log("Waiting for launcher's play button")
     if wait_for_play_button_in_launcher(logger) == "restart":
-        restart_tarkov(logger)
+        return restart_tarkov(logger)
 
     # click play
     logger.log("Clicking play.")
@@ -96,7 +96,7 @@ def restart_tarkov(logger):
     # wait for client opening
     logger.log("Waiting for tarkov client to open.")
     if wait_for_tarkov_to_open(logger) == "restart":
-        restart_tarkov(logger)
+        return restart_tarkov(logger)
     for index in range(0, 30, 2):
         orientate_terminal()
         logger.log(f"Manually giving tark time to load: {index}")
@@ -110,7 +110,7 @@ def restart_tarkov(logger):
     # wait for us to reach main menu
     logger.log("Waiting for tarkov client to reach main menu.")
     if wait_for_tark_main(logger) == "restart":
-        restart_tarkov(logger)
+        return restart_tarkov(logger)
 
 
 def wait_for_tarkov_to_open(logger):
@@ -118,14 +118,14 @@ def wait_for_tarkov_to_open(logger):
     loops = 0
     while len(tark_window) == 0:
         orientate_terminal()
-        logger.change_status(f"Waiting for tarkov to open {loops}")
+        logger.log(f"Waiting for tarkov to open {loops}")
         loops = loops + 2
         time.sleep(2)
         tark_window = pygetwindow.getWindowsWithTitle("EscapeFromTarkov")
         if loops > 50:
             return "restart"
 
-    logger.change_status("Tarkov client detected. Done waiting")
+    logger.log("Tarkov client detected. Done waiting")
 
 
 def wait_for_tark_main(logger):
@@ -133,17 +133,17 @@ def wait_for_tark_main(logger):
     loops = 0
     while not on_main:
         orientate_terminal()
-        logger.change_status(f"Waiting for tark main {loops}")
+        logger.log(f"Waiting for tark main {loops}")
         loops = loops + 2
         time.sleep(2)
         on_main = check_if_on_tark_main(logger)
         if loops > 120:
             return "restart"
-    logger.change_status("Made it to tarkov main.")
+    logger.log("Made it to tarkov main.")
 
 
 def check_if_on_tark_main(logger):
-    logger.change_status("Checking if on tark main")
+    logger.log("Checking if on tark main")
     iar = numpy.asarray(screenshot())
     pix_list = [
         iar[613][762],
@@ -160,14 +160,14 @@ def check_if_on_tark_main(logger):
 
 def wait_for_play_button_in_launcher(logger):
     loops = 0
-    logger.change_status("Waiting for play button to appear.")
+    logger.log("Waiting for play button to appear.")
     while not check_if_play_button_exists_in_launcher():
         loops += 1
         if loops > 20:
             return "restart"
         time.sleep(1)
 
-    logger.change_status("Done waiting for play button to appear.")
+    logger.log("Done waiting for play button to appear.")
 
 
 def check_if_play_button_exists_in_launcher():

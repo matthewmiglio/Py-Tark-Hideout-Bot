@@ -13,7 +13,8 @@ def state_tree(state,logger):
 
     if state == 'restart':
         #leads to medstation
-        state = restart_tarkov()
+        restart_tarkov(logger)
+        state = 'medstation'
 
     elif state == 'medstation':
         #leads to workbench

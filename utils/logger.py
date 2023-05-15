@@ -29,6 +29,27 @@ class Logger:
         #idk lol
         self.errored = False
 
+    def _update_queue(self):
+        """updates the queue with a dictionary of mutable statistics"""
+        if self.queue is None:
+            return
+
+        statistics: dict[str, str | int] = {
+            "current_status": 0,
+            "time_since_start": 0,
+            "restarts": 0,
+            "item_sold": 0,
+            "roubles_made": 0,  
+            "sale_attempts": 0,
+            "success_rate": 0,
+            "offers_removed": 0,
+            "fee_total": 0,
+            "starting_money": 0,
+            "current_money": 0,
+        }
+        self.queue.put(statistics)
+
+
     def add_workbench_start(self):
         self.workbench_starts += 1
 

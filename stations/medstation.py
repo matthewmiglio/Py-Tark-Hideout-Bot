@@ -43,7 +43,16 @@ def handle_medstation(logger):
 
     # check for get items
     elif check_for_medstation_get_items():
-        logger.log("Dont know how to medstation collect yet")
+        logger.log('Collecting medstation items')
+
+        #click get items
+        click(x=1094, y=674)
+        time.sleep(3)
+
+        #click esc
+        pyautogui.press("esc")
+        time.sleep(2)
+        
         return "workbench"
 
     else:
@@ -94,4 +103,16 @@ def check_for_medstation_start():
 
 
 def check_for_medstation_get_items():
-    pass
+    current_image = screenshot()
+    reference_folder = "medstation_get_items"
+    references = make_reference_image_list(reference_folder)
+
+    locations = find_references(
+        screenshot=current_image,
+        folder=reference_folder,
+        names=references,
+        tolerance=0.99,
+    )
+
+    return check_for_location(locations)
+
