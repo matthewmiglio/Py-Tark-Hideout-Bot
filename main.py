@@ -1,6 +1,8 @@
 from bitcoin_miner import handle_bitcoin_miner
 from client import get_to_hideout, orientate_tarkov_client
 from lavatory import handle_lavatory
+from medstation import handle_medstation
+from water_collector import handle_water_collector
 from workbench import handle_workbench
 
 
@@ -16,9 +18,12 @@ def main():
 
         handle_workbench()
 
+        handle_water_collector()
 
-# main()
-orientate_tarkov_client()
+        handle_medstation()
+
+main()
+# orientate_tarkov_client()
 
 
 """

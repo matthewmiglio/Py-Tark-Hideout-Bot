@@ -26,11 +26,16 @@ def handle_workbench():
     elif check_for_workbench_get_items():
         print('Collecting items from workbench')
         
+        #click get items
         click(x=1091, y=713)
         time.sleep(2)
         
+        #leave workbench
         pyautogui.press('esc')
         time.sleep(2)
+
+        #rerun workbench alg to start the craft after collecting items
+        return handle_workbench()
 
     else:
         print('No actions for workbench yet...')

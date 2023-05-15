@@ -17,29 +17,29 @@ def handle_water_collector():
     # time.sleep(4)
 
     if check_for_water_collector_get_items():
-        print('Collecting water collector items')
+        print("Collecting water collector items")
         click(x=1051, y=796)
         time.sleep(3)
-        pyautogui.press('esc')
+        pyautogui.press("esc")
         time.sleep(2)
         return handle_water_collector()
 
     elif not check_for_water_collector_filter():
-        print('Adding a filter to water collector')
-        
-        #click filters dropdown
+        print("Adding a filter to water collector")
+
+        # click filters dropdown
         click(x=930, y=790)
         time.sleep(1)
 
-        #click topleft most filter
+        # click topleft most filter
         click(x=975, y=796)
         time.sleep(1)
 
-        #click escape
-        pyautogui.press('esc')
+        # click escape
+        pyautogui.press("esc")
         time.sleep(1)
     else:
-        print('No actions for water collector yet...')
+        print("No actions for water collector yet...")
 
 
 def find_water_collector_icon():
@@ -92,5 +92,3 @@ def check_for_water_collector_filter():
     return False
 
 
-
-handle_water_collector()
