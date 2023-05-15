@@ -1,11 +1,11 @@
 from utils.admin_check import check_if_program_is_running_in_admin
 from utils.logger import Logger
-from bitcoin_miner import handle_bitcoin_miner
+from stations.bitcoin_miner import handle_bitcoin_miner
 from client import get_to_hideout, orientate_tarkov_client
-from lavatory import handle_lavatory
-from medstation import handle_medstation
-from water_collector import handle_water_collector
-from workbench import handle_workbench
+from stations.lavatory import handle_lavatory
+from stations.medstation import handle_medstation
+from stations.water_collector import handle_water_collector
+from stations.workbench import handle_workbench
 
 logger = Logger()
 
