@@ -1,5 +1,5 @@
 import time
-from client import click, cycle_hideout_tab, screenshot
+from client import click, cycle_hideout_tab, get_to_hideout, screenshot
 from detection.image_rec import (
     check_for_location,
     find_references,
@@ -10,6 +10,9 @@ import pyautogui
 
 
 def handle_bitcoin_miner(logger):
+
+    if get_to_hideout()=='restart':return'restart'
+    
     logger.log("Handling bitcoin miner")
 
     get_to_bitcoin_miner()
@@ -21,6 +24,8 @@ def handle_bitcoin_miner(logger):
         time.sleep(2)
         pyautogui.press("esc")
         logger.add_workstation_collect()
+
+    return 'medstation'
 
 
 def get_to_bitcoin_miner():

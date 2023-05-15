@@ -1,4 +1,4 @@
-from client import click, cycle_hideout_tab, screenshot
+from client import click, cycle_hideout_tab, get_to_hideout, screenshot
 from detection.image_rec import (
     check_for_location,
     find_references,
@@ -12,41 +12,48 @@ import pyautogui
 
 
 def handle_medstation(logger):
-    logger.log('Handling medstation')
+
+    if get_to_hideout()=='restart':return'restart'
     
+
+    logger.log("Handling medstation")
+
     # get to medstation
     get_to_medstation()
     time.sleep(4)
-    
-    #check for start
+
+    # check for start
     if check_for_medstation_start():
-        logger.log('Starting medstation craft')
-        
-        #click start button
+        logger.log("Starting medstation craft")
+
+        # click start button
         click(x=1113, y=677)
         time.sleep(2)
 
-        #click handover button
+        # click handover button
         click(x=645, y=673)
         time.sleep(2)
 
-        #press esc to leave this menu 
-        pyautogui.press('esc')
+        # press esc to leave this menu
+        pyautogui.press("esc")
 
         logger.add_medstation_start()
 
+        return "workbench"
 
-
-    #check for get items
+    # check for get items
     elif check_for_medstation_get_items():
-        logger.log('Dont know how to medstation collect yet')
+        logger.log("Dont know how to medstation collect yet")
+        return "workbench"
 
     else:
-        logger.log('No actions for medstation yet...')
+        logger.log("No actions for medstation yet...")
+        return "workbench"
+
 
 def get_to_medstation():
-    for x in range(300,900,100):
-        click(x,930)
+    for x in range(300, 900, 100):
+        click(x, 930)
 
     coord = None
     while coord is None:
@@ -54,7 +61,6 @@ def get_to_medstation():
         time.sleep(1)
         coord = find_medstation_icon()
     click(coord[1], coord[0])
-
 
 
 def find_medstation_icon():
@@ -89,8 +95,3 @@ def check_for_medstation_start():
 
 def check_for_medstation_get_items():
     pass
-
-
-
-
-

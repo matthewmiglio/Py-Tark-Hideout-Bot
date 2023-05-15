@@ -2,7 +2,7 @@ import pyautogui
 import numpy
 
 import time
-from client import click, cycle_hideout_tab, screenshot
+from client import click, cycle_hideout_tab, get_to_hideout, screenshot
 from detection.image_rec import (
     check_for_location,
     find_references,
@@ -13,7 +13,11 @@ from detection.image_rec import (
 
 
 def handle_water_collector(logger):
-    logger.log('Handling water collector')
+    if get_to_hideout()=='restart':return'restart'
+
+    
+
+    logger.log("Handling water collector")
 
     get_to_water_collector()
     time.sleep(4)
@@ -27,7 +31,7 @@ def handle_water_collector(logger):
 
         logger.add_water_collect()
 
-        return handle_water_collector()
+        return "water"
 
     elif not check_for_water_collector_filter():
         logger.log("Adding a filter to water collector")
@@ -46,8 +50,11 @@ def handle_water_collector(logger):
 
         logger.add_water_filter()
 
+        return "bitcoin"
+
     else:
         logger.log("No actions for water collector yet...")
+        return "bitcoin"
 
 
 def find_water_collector_icon():
@@ -98,5 +105,3 @@ def check_for_water_collector_filter():
     if pixel_is_equal(pixel, [116, 205, 248], tol=15):
         return True
     return False
-
-

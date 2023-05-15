@@ -1,10 +1,13 @@
 import pyautogui
 import time
-from client import click, cycle_hideout_tab, screenshot
+from client import click, cycle_hideout_tab, get_to_hideout, screenshot
 from detection.image_rec import check_for_location, find_references, get_first_location, make_reference_image_list
 
 
 def handle_workbench(logger):
+    if get_to_hideout()=='restart':return'restart'
+    
+
     logger.log('Handling workbench')
     get_to_workbench()
     time.sleep(4)
@@ -25,6 +28,8 @@ def handle_workbench(logger):
 
         logger.add_workbench_start()
 
+        return 'lavatory'
+
     elif check_for_workbench_get_items():
         logger.log('Collecting items from workbench')
         
@@ -39,13 +44,14 @@ def handle_workbench(logger):
         logger.add_workbench_collect()
 
         #rerun workbench alg to start the craft after collecting items
-        return handle_workbench()
+        return 'lavatory'
 
     else:
         logger.log('No actions for workbench yet...')
         pyautogui.press('esc')
         time.sleep(2)
 
+        return 'lavatory'
 
 
 

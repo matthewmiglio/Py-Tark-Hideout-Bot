@@ -1,5 +1,5 @@
 import time
-from client import click, cycle_hideout_tab, screenshot
+from client import click, cycle_hideout_tab, get_to_hideout, screenshot
 import pyautogui
 
 from detection.image_rec import (
@@ -11,6 +11,10 @@ from detection.image_rec import (
 
 
 def handle_lavatory(logger):
+
+    if get_to_hideout()=='restart':return'restart'
+    
+
     logger.log('Handling lavatory')
     
     # get to lavatory
@@ -24,7 +28,7 @@ def handle_lavatory(logger):
         time.sleep(3)
         pyautogui.press("esc")
         logger.add_lavatory_collect()
-        return handle_lavatory()
+        return 'lavatory'
     
 
     # if start exists, buy items, start, return None
@@ -69,12 +73,13 @@ def handle_lavatory(logger):
         pyautogui.press("esc")
         
         logger.add_lavatory_start()
+        return 'water'
     
     else:
         logger.log('No actions for lavatory yet...')
         pyautogui.press("esc")
         time.sleep(2)
-        return
+        return 'water'
 
 
 def get_to_lavatory():
