@@ -8,7 +8,6 @@ def main():
     orientate_tarkov_client()
 
     while 1:
-        # get to hideout
         get_to_hideout()
 
         handle_bitcoin_miner()
