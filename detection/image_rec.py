@@ -10,8 +10,6 @@ import pytesseract
 from joblib import Parallel, delayed
 from PIL import Image
 
-from utils.dependency import get_tesseract_path
-
 
 def coords_is_equal(coords_a, coords_b, tol=30):
     if (coords_a is None) or (coords_b is None):
