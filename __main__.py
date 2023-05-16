@@ -1,8 +1,12 @@
 import webbrowser
-from client import orientate_tarkov_client
 from states import state_tree
-from stations.generator import check_for_fuel, check_pixels_for_no_fuel, find_generator_icon
-from stations.medstation import check_for_medstation_get_items
+from stations.bitcoin_miner import check_if_at_bitcoin_miner
+from stations.generator import check_if_at_generator
+from stations.lavatory import check_if_at_lavatory
+from stations.medstation import check_if_at_medstation
+from stations.water_collector import check_if_at_water_collector
+from stations.workbench import check_if_at_workbench
+
 
 from utils.logger import Logger
 
@@ -10,7 +14,6 @@ from queue import Queue
 import PySimpleGUI as sg
 
 from interface import (
-    THEME,
     disable_keys,
     main_layout,
     show_help_gui,
@@ -177,6 +180,12 @@ if __name__ == "__main__":
     # from client import orientate_tarkov_client
     # orientate_tarkov_client()
 
-    logger=Logger()
     while 1:
-        print(check_for_fuel(logger))
+        print(f"at bitcoin: {check_if_at_bitcoin_miner()}")
+        print(f"at generator: {check_if_at_generator()}")
+        print(f"at lavatory: {check_if_at_lavatory()}")
+        print(f"at medstation: {check_if_at_medstation()}")
+        print(f"at water: {check_if_at_water_collector()}")
+        print(f"at workbench: {check_if_at_workbench()}")
+        print("---------------------------------------------")
+        time.sleep(2)

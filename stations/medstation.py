@@ -1,9 +1,11 @@
+import numpy
 from client import click, cycle_hideout_tab, get_to_hideout, screenshot
 from detection.image_rec import (
     check_for_location,
     find_references,
     get_first_location,
     make_reference_image_list,
+    pixel_is_equal,
 )
 import time
 import pyautogui
@@ -12,14 +14,14 @@ import pyautogui
 
 
 def handle_medstation(logger):
-
-    if get_to_hideout()=='restart':return'restart'
-    
+    if get_to_hideout() == "restart":
+        return "restart"
 
     logger.log("Handling medstation")
 
     # get to medstation
-    if get_to_medstation()=='restart':return 'restart'
+    if get_to_medstation() == "restart":
+        return "restart"
     time.sleep(4)
 
     # check for start
@@ -43,19 +45,18 @@ def handle_medstation(logger):
 
     # check for get items
     elif check_for_medstation_get_items():
-        logger.log('Collecting medstation items')
+        logger.log("Collecting medstation items")
 
-
-        #click get items
+        # click get items
         click(x=1094, y=674)
         time.sleep(3)
 
-        #click esc
+        # click esc
         pyautogui.press("esc")
         time.sleep(2)
 
         logger.add_medstation_collect()
-        
+
         return "medstation"
 
     else:
@@ -63,7 +64,55 @@ def handle_medstation(logger):
         return "workbench"
 
 
+def check_if_at_medstation():
+    iar = numpy.asarray(screenshot())
+
+    medstation_text_exists = False
+    for x in range(790, 802):
+        pixel = iar[349][x]
+        if pixel_is_equal(pixel, [237, 235, 214], tol=20):
+            medstation_text_exists = True
+
+    medstation_description_exists = False
+    for x in range(965, 995):
+        pixel = iar[414][x]
+        if pixel_is_equal(pixel, [111, 119, 121], tol=20):
+            medstation_description_exists = True
+
+    production_text_exists = False
+    for x in range(955, 975):
+        pixel = iar[585][x]
+        if pixel_is_equal(pixel, [167, 166, 151], tol=20):
+            production_text_exists = True
+
+    close_button_exists = False
+    for x in range(1232, 1246):
+        pixel = iar[355][x]
+        if pixel_is_equal(pixel, [65, 7, 7], tol=20):
+            close_button_exists = True
+
+    current_bonuses_text_exists = False
+    for x in range(970,1010):
+        pixel = iar[478][x]
+        if pixel_is_equal(pixel, [177,175,160], tol=20):
+            current_bonuses_text_exists = True
+
+    
+
+    if (
+        medstation_text_exists
+        and medstation_description_exists
+        and close_button_exists
+        and production_text_exists
+        and current_bonuses_text_exists
+    ):
+        return True
+    return False
+
+
 def get_to_medstation():
+    if check_if_at_medstation():return
+
     start_time = time.time()
 
     for x in range(300, 900, 100):
@@ -78,7 +127,10 @@ def get_to_medstation():
         time.sleep(1)
         coord = find_medstation_icon()
     click(coord[1], coord[0])
+    time.sleep(2)
 
+    if not check_if_at_medstation():
+        return 'restart'
 
 def find_medstation_icon():
     current_image = screenshot()
@@ -123,4 +175,3 @@ def check_for_medstation_get_items():
     )
 
     return check_for_location(locations)
-

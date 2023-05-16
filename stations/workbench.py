@@ -1,7 +1,8 @@
+import numpy
 import pyautogui
 import time
 from client import click, cycle_hideout_tab, get_to_hideout, screenshot
-from detection.image_rec import check_for_location, find_references, get_first_location, make_reference_image_list
+from detection.image_rec import check_for_location, find_references, get_first_location, make_reference_image_list, pixel_is_equal
 
 
 def handle_workbench(logger):
@@ -54,6 +55,40 @@ def handle_workbench(logger):
         return 'lavatory'
 
 
+def check_if_at_workbench():
+    iar=numpy.asarray(screenshot())
+
+    workbench_icon_exists=False
+    for x in range(665,690):
+        pixel = iar[352][x]
+        if pixel_is_equal(pixel,[211,210,201], tol=20):
+            workbench_icon_exists=True
+    
+    workbench_description_exists=False
+    for x in range(740,780):
+        pixel = iar[427][x]
+        if pixel_is_equal(pixel,[98,104,105], tol=20):
+            workbench_description_exists=True
+
+    
+
+    production_text_exists=False
+    for x in range(960,1000):
+        pixel = iar[628][x]
+        if pixel_is_equal(pixel,[134,133,121], tol=20):
+            production_text_exists=True
+
+
+
+    close_button_exists=False
+    for x in range(1232,1247):
+        pixel = iar[354][x]
+        if pixel_is_equal(pixel,[65,7,7], tol=20):
+            close_button_exists=True
+    
+    if workbench_icon_exists and workbench_description_exists and close_button_exists and production_text_exists:
+        return True
+    return False
 
 def check_for_workbench_start():
     current_image = screenshot()
@@ -86,6 +121,9 @@ def check_for_workbench_get_items():
 
 
 def get_to_workbench():
+    if check_if_at_workbench():
+        return
+
     start_time = time.time()
 
     for x in range(300,900,100):
@@ -100,6 +138,10 @@ def get_to_workbench():
         time.sleep(1)
         coord = find_workbench_icon()
     click(coord[1], coord[0])
+    time.sleep(2)
+
+    if not check_if_at_workbench():
+        return 'restart'
 
 
 

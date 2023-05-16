@@ -13,13 +13,13 @@ from detection.image_rec import (
 
 
 def handle_water_collector(logger):
-    if get_to_hideout()=='restart':return'restart'
-
-    
+    if get_to_hideout() == "restart":
+        return "restart"
 
     logger.log("Handling water collector")
 
-    if get_to_water_collector()=='restart':return 'restart'
+    if get_to_water_collector() == "restart":
+        return "restart"
     time.sleep(4)
 
     if check_for_water_collector_get_items():
@@ -57,6 +57,36 @@ def handle_water_collector(logger):
         return "bitcoin"
 
 
+def check_if_at_water_collector():
+    iar = numpy.asarray(screenshot())
+
+    water_collector_text_exists = False
+    for x in range(790, 820):
+        pixel = iar[494][x]
+        if pixel_is_equal(pixel, [237, 235, 214], tol=20):
+            water_collector_text_exists = True
+
+    purified_water_icon_exists = False
+    for x in range(957, 975):
+        pixel = iar[797][x]
+        if pixel_is_equal(pixel, [210, 238, 243], tol=20):
+            purified_water_icon_exists = True
+
+    close_button_exists = False
+    for x in range(1232, 1247):
+        pixel = iar[493][x]
+        if pixel_is_equal(pixel, [65, 7, 7], tol=20):
+            close_button_exists = True
+
+    if (
+        water_collector_text_exists
+        and purified_water_icon_exists
+        and close_button_exists
+    ):
+        return True
+    return False
+
+
 def find_water_collector_icon():
     current_image = screenshot()
     reference_folder = "water_collector_icon"
@@ -73,6 +103,9 @@ def find_water_collector_icon():
 
 
 def get_to_water_collector():
+    if check_if_at_water_collector():
+        return
+
     start_time = time.time()
 
     for x in range(300, 900, 100):
@@ -87,6 +120,10 @@ def get_to_water_collector():
         time.sleep(1)
         coord = find_water_collector_icon()
     click(coord[1], coord[0])
+    time.sleep(2)
+
+    if not check_if_at_water_collector():
+        return 'restart'
 
 
 def check_for_water_collector_get_items():

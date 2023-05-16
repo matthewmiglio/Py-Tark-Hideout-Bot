@@ -1,3 +1,4 @@
+import numpy
 import time
 from client import click, cycle_hideout_tab, get_to_hideout, screenshot
 import pyautogui
@@ -7,86 +8,127 @@ from detection.image_rec import (
     find_references,
     get_first_location,
     make_reference_image_list,
+    pixel_is_equal,
 )
 
 
 def handle_lavatory(logger):
+    if get_to_hideout() == "restart":
+        return "restart"
 
-    if get_to_hideout()=='restart':return'restart'
-    
+    logger.log("Handling lavatory")
 
-    logger.log('Handling lavatory')
-    
     # get to lavatory
-    if get_to_lavatory()=='restart':return 'restart'
+    if get_to_lavatory() == "restart":
+        return "restart"
     time.sleep(4)
 
     # check if get_items exists
     if check_for_get_items_in_lavatory():
-        logger.log('Getting items')
+        logger.log("Getting items")
         click(x=1072, y=678)
         time.sleep(3)
         pyautogui.press("esc")
         logger.add_lavatory_collect()
-        return 'lavatory'
-    
+        return "lavatory"
 
     # if start exists, buy items, start, return None
     elif check_for_start_in_lavatory():
-        logger.log('Starting item craft')
+        logger.log("Starting item craft")
 
-        #right click bag
-        click(871,674,button='right')
+        # right click bag
+        click(871, 674, button="right")
         time.sleep(1)
 
-        #click FBI
+        # click FBI
         click(x=930, y=700)
         time.sleep(4)
 
-        #click purchase
+        # click purchase
         click(x=1191, y=152)
         time.sleep(1)
 
-        #click input box
+        # click input box
         click(x=695, y=482)
         time.sleep(1)
 
-        #type 4
-        pyautogui.press('4')
+        # type 4
+        pyautogui.press("4")
         time.sleep(1)
 
-        #press y
-        pyautogui.press('y')
+        # press y
+        pyautogui.press("y")
         time.sleep(1)
 
-        #press escape to get back to lavatory
-        pyautogui.press('esc')
+        # press escape to get back to lavatory
+        pyautogui.press("esc")
         time.sleep(2)
 
-        #click start
+        # click start
         click(x=1064, y=678)
         time.sleep(1)
 
-        #click handover
+        # click handover
         click(x=641, y=678)
         time.sleep(3)
         pyautogui.press("esc")
-        
+
         logger.add_lavatory_start()
-        return 'water'
-    
+        return "water"
+
     else:
-        logger.log('No actions for lavatory yet...')
+        logger.log("No actions for lavatory yet...")
         pyautogui.press("esc")
         time.sleep(2)
-        return 'water'
+        return "water"
+
+
+def check_if_at_lavatory():
+    iar = numpy.asarray(screenshot())
+
+    lavatory_text_exists = False
+    for x in range(732, 744):
+        pixel = iar[358][x]
+        if pixel_is_equal(pixel, [237, 235, 214], tol=20):
+            lavatory_text_exists = True
+
+    lavatory_description_text_exists = False
+    for x in range(890, 925):
+        pixel = iar[399][x]
+        if pixel_is_equal(pixel, [126, 133, 137], tol=20):
+            lavatory_description_text_exists = True
+
+    black_region_deosnt_exist = True
+    for x in range(850, 1150):
+        for y in range(537, 580):
+            pixel = iar[y][x]
+            if not (pixel_is_equal(pixel, [2, 1, 1], tol=20)):
+                black_region_deosnt_exist = False
+
+    close_button_exists = False
+    for x in range(1232, 1247):
+        pixel = iar[352][x]
+        if pixel_is_equal(pixel, [65, 7, 7], tol=20):
+            close_button_exists = True
+
+    if (
+        lavatory_text_exists
+        and lavatory_description_text_exists
+        and close_button_exists
+        and black_region_deosnt_exist
+    ):
+        return True
+    return False
 
 
 def get_to_lavatory():
+    if check_if_at_lavatory():
+        return
+
     start_time = time.time()
 
-    for x in range(300,900,100):
-        click(x,930)
+    for x in range(300, 900, 100):
+        click(x, 930)
 
     coord = None
     while coord is None:
@@ -99,6 +141,9 @@ def get_to_lavatory():
         coord = find_lavatory_icon()
     click(coord[1], coord[0])
 
+    time.sleep(2)
+    if not check_if_at_lavatory():
+        return 'restart'
 
 def find_lavatory_icon():
     current_image = screenshot()
@@ -143,5 +188,3 @@ def check_for_start_in_lavatory():
     )
 
     return check_for_location(locations)
-
-

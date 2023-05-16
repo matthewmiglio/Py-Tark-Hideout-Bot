@@ -31,6 +31,34 @@ def check_for_fuel(logger):
 
 
 
+def check_if_at_generator():
+    iar=numpy.asarray(screenshot())
+
+    generator_icon_exists=False
+    for x in range(660,690):
+        pixel = iar[448][x]
+        if pixel_is_equal(pixel,[206,205,195], tol=20):
+            generator_icon_exists=True
+            break
+    
+    current_bonuses_text_exists=False
+    for x in range(880,920):
+        pixel = iar[571][x]
+        if pixel_is_equal(pixel,[176,175,159], tol=20):
+            current_bonuses_text_exists=True
+            break
+    close_button_exists=False
+    for x in range(1234,1246):
+        pixel = iar[450][x]
+        if pixel_is_equal(pixel,[65,7,7], tol=20):
+            close_button_exists=True
+            break
+    if generator_icon_exists and current_bonuses_text_exists and close_button_exists:
+        return True
+    return False
+
+
+
 def check_pixels_for_no_fuel():
     pass
     iar=numpy.asarray(screenshot())
@@ -61,6 +89,8 @@ def check_pixels_for_no_fuel():
 
 
 def get_to_generator():
+    if check_if_at_generator():return
+
     start_time = time.time()
 
     for x in range(300,900,100):
@@ -76,6 +106,10 @@ def get_to_generator():
         time.sleep(1)
         coord = find_generator_icon()
     click(coord[1], coord[0])
+    time.sleep(2)
+
+    if not check_if_at_generator():
+        return 'restart'
 
 def find_generator_icon():
     current_image = screenshot()

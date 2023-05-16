@@ -7,12 +7,27 @@ info_text = """1. Tarkov must be set to windowed mode
 
 Matthew Miglio, Martin Miglio - Nov 2022"""
 
+instructions_text = """The bot farms crafts for lavatory,
+water collector, bitcoin farm, medstation, and workbench.
+
+The bot farms cordura, purified water, bitcoins, pile of meds, and green gunpowder. Favorite these crafts in each station.
+"""
+
 # defining various things that r gonna be in the gui.
 main_layout = [
     [
         sg.Frame(
             layout=[[sg.Text(info_text, size=(35, None))]],
             title="Info",
+            relief=sg.RELIEF_SUNKEN,
+            expand_x=True,
+        ),
+    ],
+    # directions
+    [
+        sg.Frame(
+            layout=[[sg.Text(instructions_text, size=(35, None))]],
+            title="Directions",
             relief=sg.RELIEF_SUNKEN,
             expand_x=True,
         ),

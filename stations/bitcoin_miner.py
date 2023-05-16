@@ -1,3 +1,4 @@
+import numpy
 import time
 from client import click, cycle_hideout_tab, get_to_hideout, screenshot
 from detection.image_rec import (
@@ -5,6 +6,7 @@ from detection.image_rec import (
     find_references,
     get_first_location,
     make_reference_image_list,
+    pixel_is_equal,
 )
 import pyautogui
 
@@ -30,7 +32,36 @@ def handle_bitcoin_miner(logger):
     return 'medstation'
 
 
+def check_if_at_bitcoin_miner():
+    iar=numpy.asarray(screenshot())
+
+    yellow_bitcoin_icon_exists=False
+    for x in range(990,1015):
+        pixel = iar[765][x]
+        if pixel_is_equal(pixel,[169,123,33], tol=20):
+            yellow_bitcoin_icon_exists=True
+    
+    bitcoin_farm_text_exists=False
+    for x in range(720,840):
+        pixel = iar[512][x]
+        if pixel_is_equal(pixel,[232,231,210], tol=20):
+            bitcoin_farm_text_exists=True
+    
+    close_button_exists=False
+    for x in range(1230,1247):
+        pixel = iar[509][x]
+        if pixel_is_equal(pixel,[65,7,7], tol=20):
+            close_button_exists=True
+    
+    if yellow_bitcoin_icon_exists and bitcoin_farm_text_exists and close_button_exists:
+        return True
+    return False
+
+
 def get_to_bitcoin_miner():
+    if check_if_at_bitcoin_miner():
+        return
+
     start_time = time.time()
 
     for x in range(300, 900, 100):
@@ -46,6 +77,10 @@ def get_to_bitcoin_miner():
         time.sleep(1)
         coord = find_bitcoin_miner_icon()
     click(coord[1], coord[0])
+    time.sleep(2)
+
+    if not check_if_at_bitcoin_miner():
+        return 'restart'
 
 
 def find_bitcoin_miner_icon():
