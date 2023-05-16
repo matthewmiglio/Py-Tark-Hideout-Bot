@@ -115,7 +115,7 @@ def get_to_generator():
         time.sleep(1)
         coord = find_generator_icon()
         print('Found generator coord')
-    click(coord[1], coord[0])
+    click(coord[1]+10, coord[0]+5)
     time.sleep(2)
 
     if not check_if_at_generator():

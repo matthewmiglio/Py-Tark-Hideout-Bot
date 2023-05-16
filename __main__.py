@@ -1,7 +1,7 @@
 import webbrowser
 from states import state_tree
 from stations.bitcoin_miner import check_if_at_bitcoin_miner
-from stations.generator import check_if_at_generator
+from stations.generator import check_if_at_generator, get_to_generator
 from stations.lavatory import check_if_at_lavatory
 from stations.medstation import check_if_at_medstation
 from stations.water_collector import check_if_at_water_collector, get_to_water_collector
@@ -206,9 +206,10 @@ def dummy_main():
 
     # orientate_tarkov_client()
 
-    get_to_water_collector()
     # print(check_if_at_water_collector())
+    get_to_generator()
+    pass
+dummy_main()
 
-
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
