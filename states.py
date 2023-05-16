@@ -8,8 +8,6 @@ from stations.workbench import handle_workbench
 
 
 def state_tree(state, logger, jobs):  # -> check_fuel
-    print('jobs in state tree : ', jobs)
-    while 1:pass
 
     if state == "start":
         restart_tarkov(logger)
