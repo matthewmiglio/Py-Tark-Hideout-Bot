@@ -7,7 +7,10 @@ from stations.water_collector import handle_water_collector
 from stations.workbench import handle_workbench
 
 
-def state_tree(state, logger):  # -> check_fuel
+def state_tree(state, logger, jobs):  # -> check_fuel
+    print('jobs in state tree : ', jobs)
+    while 1:pass
+
     if state == "start":
         restart_tarkov(logger)
 
@@ -32,23 +35,38 @@ def state_tree(state, logger):  # -> check_fuel
 
     elif state == "medstation":
         # leads to workbench
-        state = handle_medstation(logger)
+        if 'medstation' in jobs:
+            state = handle_medstation(logger)
+        else:
+            state = 'workbench'
 
     elif state == "workbench":
         # leads to lavatory
-        state = handle_workbench(logger)
+        if 'Workbench' in jobs:
+            state = handle_workbench(logger)
+        else:
+            state = 'lavatory'
 
     elif state == "lavatory":
         # leads to water
-        state = handle_lavatory(logger)
+        if 'Lavatory' in jobs:
+            state = handle_lavatory(logger)
+        else:
+            state = 'water'
 
     elif state == "water":
         # leads to bitcoin
-        state = handle_water_collector(logger)
+        if 'water' in jobs:
+            state = handle_water_collector(logger)
+        else:
+            state = 'bitcoin'
 
     elif state == "bitcoin":
         # leads to medstation
-        state = handle_bitcoin_miner(logger)
+
+        if 'Bitcoin' in jobs:
+            state = handle_bitcoin_miner(logger)
+        else: state = 'medstation'
 
     return state
 
