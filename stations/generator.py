@@ -1,0 +1,95 @@
+import numpy
+
+import time
+from client import click, cycle_hideout_tab, get_to_hideout, screenshot
+import pyautogui
+
+from detection.image_rec import (
+    check_for_location,
+    find_references,
+    get_first_location,
+    make_reference_image_list,
+    pixel_is_equal,
+)
+
+
+def check_for_fuel(logger):
+    if get_to_hideout()=='restart':return'restart'
+
+
+    logger.log('Checking for fuel in generator')
+
+    # get to lavatory
+    if get_to_generator()=='restart':return 'restart'
+    time.sleep(4)
+
+    if check_pixels_for_no_fuel():
+        logger.log('There is no fuel')
+        return 'no_fuel'
+    logger.log('There is fuel!')
+    return 'medstation'
+
+
+
+def check_pixels_for_no_fuel():
+    pass
+    iar=numpy.asarray(screenshot())
+
+    red_no_fuel_text_exists = False
+    for x in range(840,900):
+        this_pixel = iar[440][x]
+        if pixel_is_equal(this_pixel,[138,25,25],tol=20):
+            red_no_fuel_text_exists =  True
+
+    generator_text_exists = False
+    for x in range(740,800):
+        this_pixel = iar[450][x]
+        if pixel_is_equal(this_pixel,[237,235,214],tol=20):
+            generator_text_exists =  True
+
+    close_menu_icon_exists = False
+    for x in range(1230,1250):
+        this_pixel = iar[452][x]
+        if pixel_is_equal(this_pixel,[62,6,6],tol=20):
+            close_menu_icon_exists =  True
+
+    if red_no_fuel_text_exists and generator_text_exists and close_menu_icon_exists:
+        return True
+    return False
+    
+
+
+
+def get_to_generator():
+    start_time = time.time()
+
+    for x in range(300,900,100):
+        click(x,930)
+
+    coord = None
+    while coord is None:
+        time_taken = time.time() - start_time
+        if time_taken > 60:
+            return "restart"
+
+        cycle_hideout_tab()
+        time.sleep(1)
+        coord = find_generator_icon()
+    click(coord[1], coord[0])
+
+def find_generator_icon():
+    current_image = screenshot()
+    reference_folder = "generator_icon"
+    references = make_reference_image_list(reference_folder)
+
+    locations = find_references(
+        screenshot=current_image,
+        folder=reference_folder,
+        names=references,
+        tolerance=0.99,
+    )
+
+    return get_first_location(locations)
+
+
+

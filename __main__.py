@@ -1,6 +1,7 @@
 import webbrowser
 from client import orientate_tarkov_client
 from states import state_tree
+from stations.generator import check_for_fuel, check_pixels_for_no_fuel, find_generator_icon
 from stations.medstation import check_for_medstation_get_items
 
 from utils.logger import Logger
@@ -71,9 +72,7 @@ class WorkerThread(StoppableThread):
             placeholder_arg_1, placeholder_arg_2 = self.args  # parse thread args
 
             state = "restart"
-            logger = Logger()
 
-            loops = 0
             # loop until shutdown flag is set
             while not self.shutdown_flag.is_set():
                 state = state_tree(state, self.logger)
@@ -173,7 +172,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # main()
 
     # from client import orientate_tarkov_client
     # orientate_tarkov_client()
+
+    logger=Logger()
+    while 1:
+        print(check_for_fuel(logger))
