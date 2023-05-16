@@ -191,8 +191,5 @@ def dummy_main():
     # print(check_if_at_water_collector())
 
 
-dummy_main()
-
 if __name__ == "__main__":
-    pass
-    # main()
+    main()
