@@ -48,9 +48,26 @@ def start_button_event(logger: Logger, window, values):
     for key in disable_keys:
         window[key].update(disabled=True)
 
+    # unpack job list
+    jobs = []
+    if values["bitcoin_checkbox"]:
+        jobs.append("Bitcoin")
+
+    if values["lavatory_checkbox"]:
+        jobs.append("Lavatory")
+
+    if values["medstation_checkbox"]:
+        jobs.append("medstation")
+
+    if values["water_checkbox"]:
+        jobs.append("water")
+
+    if values["workbench_checkbox"]:
+        jobs.append("Workbench")
+
     # setup thread and start it
-    # args = (values["rows_to_target"], values["remove_offers_timer"])
-    thread = WorkerThread(logger, args=[0, 0])
+
+    thread = WorkerThread(logger, jobs)
     thread.start()
 
     # enable the stop button after the thread is started
@@ -66,19 +83,21 @@ def stop_button_event(logger: Logger, window, thread):
 
 
 class WorkerThread(StoppableThread):
-    def __init__(self, logger: Logger, args, kwargs=None):
-        super().__init__(args, kwargs)
+    def __init__(self, logger: Logger, args):
+        super().__init__(args)
         self.logger = logger
+
 
     def run(self):
         try:
-            placeholder_arg_1, placeholder_arg_2 = self.args  # parse thread args
+            jobs =self.args
+
 
             state = "start"
 
             # loop until shutdown flag is set
             while not self.shutdown_flag.is_set():
-                state = state_tree(state, self.logger)
+                state = state_tree(state, self.logger, jobs)
 
         except ThreadKilled:
             return

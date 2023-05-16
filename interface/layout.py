@@ -32,6 +32,35 @@ main_layout = [
             expand_x=True,
         ),
     ],
+    [
+        sg.Frame(
+            layout=[
+                [
+                    sg.Text("Bitcoin Farming"),
+                    sg.Checkbox("", key="bitcoin_checkbox", default=True),
+                ],
+                [
+                    sg.Text("Lavatory Cordura Farming"),
+                    sg.Checkbox("", key="lavatory_checkbox", default=True),
+                ],
+                [
+                    sg.Text("Medstation Pile of Meds Farming"),
+                    sg.Checkbox("", key="medstation_checkbox", default=True),
+                ],
+                [
+                    sg.Text("Purified Water Farming"),
+                    sg.Checkbox("", key="water_checkbox", default=True),
+                ],
+                [
+                    sg.Text("Workbench Green Gunpowder Farming"),
+                    sg.Checkbox("", key="workbench_checkbox", default=True),
+                ],
+            ],
+            title="Job List",
+            relief=sg.RELIEF_SUNKEN,
+            expand_x=True,
+        ),
+    ],
     # stats
     [
         sg.Frame(layout=stats, title="Stats", relief=sg.RELIEF_SUNKEN, expand_x=True),
