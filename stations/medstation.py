@@ -24,6 +24,8 @@ def handle_medstation(logger):
         return "restart"
     time.sleep(4)
 
+    print('Doing checks')
+
     # check for start
     if check_for_medstation_start():
         logger.log("Starting medstation craft")
@@ -41,6 +43,8 @@ def handle_medstation(logger):
 
         logger.add_medstation_start()
 
+        print('Going to workbench now')
+
         return "workbench"
 
     # check for get items
@@ -55,12 +59,15 @@ def handle_medstation(logger):
         pyautogui.press("esc")
         time.sleep(2)
 
+        print('Gonna redo medstation to restart craft')
+
         logger.add_medstation_collect()
 
         return "medstation"
 
     else:
         logger.log("No actions for medstation yet...")
+        print('moving to workbench')
         return "workbench"
 
 
@@ -92,12 +99,10 @@ def check_if_at_medstation():
             close_button_exists = True
 
     current_bonuses_text_exists = False
-    for x in range(970,1010):
+    for x in range(970, 1010):
         pixel = iar[478][x]
-        if pixel_is_equal(pixel, [177,175,160], tol=20):
+        if pixel_is_equal(pixel, [177, 175, 160], tol=20):
             current_bonuses_text_exists = True
-
-    
 
     if (
         medstation_text_exists
@@ -111,16 +116,23 @@ def check_if_at_medstation():
 
 
 def get_to_medstation():
-    if check_if_at_medstation():return
+    print("Getting to medstation")
+
+    
 
     start_time = time.time()
 
     for x in range(300, 900, 100):
         click(x, 930)
 
+    if check_if_at_medstation():
+        print('already at medstation')
+        return
+
     coord = None
     while coord is None:
         if time.time() - start_time > 60:
+            print("Took too long getting to medstation, returning")
             return "restart"
 
         cycle_hideout_tab()
@@ -130,7 +142,12 @@ def get_to_medstation():
     time.sleep(2)
 
     if not check_if_at_medstation():
-        return 'restart'
+        print("Didnt get to medstation, restarting...")
+
+        return "restart"
+
+    print("made it to medstation")
+
 
 def find_medstation_icon():
     current_image = screenshot()

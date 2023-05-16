@@ -23,6 +23,8 @@ def handle_lavatory(logger):
         return "restart"
     time.sleep(4)
 
+    print('Doing checks')
+
     # check if get_items exists
     if check_for_get_items_in_lavatory():
         logger.log("Getting items")
@@ -30,6 +32,8 @@ def handle_lavatory(logger):
         time.sleep(3)
         pyautogui.press("esc")
         logger.add_lavatory_collect()
+        print('Returning back to lavatory to restart the craft')
+        
         return "lavatory"
 
     # if start exists, buy items, start, return None
@@ -74,12 +78,17 @@ def handle_lavatory(logger):
         pyautogui.press("esc")
 
         logger.add_lavatory_start()
+
+        print('Going to water now')
         return "water"
 
     else:
         logger.log("No actions for lavatory yet...")
         pyautogui.press("esc")
         time.sleep(2)
+        
+        print('going to water now')
+        
         return "water"
 
 
@@ -122,18 +131,24 @@ def check_if_at_lavatory():
 
 
 def get_to_lavatory():
-    if check_if_at_lavatory():
-        return
+    print('Getting to lavatory')
+
+    
 
     start_time = time.time()
 
     for x in range(300, 900, 100):
         click(x, 930)
 
+    if check_if_at_lavatory():
+        print('already at lavatory')
+        return
+
     coord = None
     while coord is None:
         time_taken = time.time() - start_time
         if time_taken > 60:
+            print('Took too long to get to lavatory. returning restart')
             return "restart"
 
         cycle_hideout_tab()
@@ -143,7 +158,10 @@ def get_to_lavatory():
 
     time.sleep(2)
     if not check_if_at_lavatory():
+        print('didnt make it to lavatory')
         return 'restart'
+    
+    print('made it to lavatory')
 
 def find_lavatory_icon():
     current_image = screenshot()

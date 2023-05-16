@@ -21,6 +21,7 @@ def handle_water_collector(logger):
     if get_to_water_collector() == "restart":
         return "restart"
     time.sleep(4)
+    print("doing water checks")
 
     if check_for_water_collector_get_items():
         logger.log("Collecting water collector items")
@@ -30,6 +31,8 @@ def handle_water_collector(logger):
         time.sleep(2)
 
         logger.add_water_collect()
+
+        print("returning to water to check for filter")
 
         return "water"
 
@@ -50,10 +53,13 @@ def handle_water_collector(logger):
 
         logger.add_water_filter()
 
+        print("going to bitcoin")
+
         return "bitcoin"
 
     else:
         logger.log("No actions for water collector yet...")
+        print("going to bitcoin")
         return "bitcoin"
 
 
@@ -103,27 +109,30 @@ def find_water_collector_icon():
 
 
 def get_to_water_collector():
-    if check_if_at_water_collector():
-        return
+    print("Getting to water")
 
     start_time = time.time()
 
     for x in range(300, 900, 100):
         click(x, 930)
 
+    if check_if_at_water_collector():
+        print("already here. returning")
+        return
+
     coord = None
     while coord is None:
-        if time.time() - start_time > 60:
+        if time.time() - start_time > 90:
+            print("took too long getting to water. returning restart")
             return "restart"
 
-        cycle_hideout_tab()
-        time.sleep(1)
-        coord = find_water_collector_icon()
-    click(coord[1], coord[0])
-    time.sleep(2)
+        if check_if_at_water_collector():
+            print('made it to water collector')
 
-    if not check_if_at_water_collector():
-        return 'restart'
+            return
+
+        cycle_hideout_tab()
+        time.sleep(3)
 
 
 def check_for_water_collector_get_items():

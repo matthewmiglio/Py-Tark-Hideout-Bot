@@ -4,7 +4,7 @@ from stations.bitcoin_miner import check_if_at_bitcoin_miner
 from stations.generator import check_if_at_generator
 from stations.lavatory import check_if_at_lavatory
 from stations.medstation import check_if_at_medstation
-from stations.water_collector import check_if_at_water_collector
+from stations.water_collector import check_if_at_water_collector, get_to_water_collector
 from stations.workbench import check_if_at_workbench
 
 
@@ -174,18 +174,25 @@ def main():
     window.close()
 
 
-if __name__ == "__main__":
-    # main()
+def dummy_main():
+    # import random
+    # states = ['medstation','workbench','water','lavatory','bitcoin','lavatory',]
+    # state = random.choice(states)
+    # logger=Logger()
+    # while 1:
+    #     state = state_tree(state, logger)
+    #     print('\n\n')
 
     # from client import orientate_tarkov_client
+
     # orientate_tarkov_client()
 
-    while 1:
-        print(f"at bitcoin: {check_if_at_bitcoin_miner()}")
-        print(f"at generator: {check_if_at_generator()}")
-        print(f"at lavatory: {check_if_at_lavatory()}")
-        print(f"at medstation: {check_if_at_medstation()}")
-        print(f"at water: {check_if_at_water_collector()}")
-        print(f"at workbench: {check_if_at_workbench()}")
-        print("---------------------------------------------")
-        time.sleep(2)
+    get_to_water_collector()
+    # print(check_if_at_water_collector())
+
+
+dummy_main()
+
+if __name__ == "__main__":
+    pass
+    # main()
