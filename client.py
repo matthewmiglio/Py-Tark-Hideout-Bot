@@ -30,7 +30,6 @@ def close_launcher(logger, tark_launcher):
 
 
 def restart_tarkov(logger):
-    logger.add_restart()
     
     # sourcery skip: extract-duplicate-method, extract-method
     orientate_terminal()

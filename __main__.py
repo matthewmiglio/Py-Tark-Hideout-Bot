@@ -74,7 +74,7 @@ class WorkerThread(StoppableThread):
         try:
             placeholder_arg_1, placeholder_arg_2 = self.args  # parse thread args
 
-            state = "restart"
+            state = "start"
 
             # loop until shutdown flag is set
             while not self.shutdown_flag.is_set():

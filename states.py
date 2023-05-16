@@ -7,10 +7,18 @@ from stations.water_collector import handle_water_collector
 from stations.workbench import handle_workbench
 
 
-def state_tree(state, logger):
-    if state == "restart":  # -> check_fuel
-        # leads to medstation
+def state_tree(state, logger):  # -> check_fuel
+    if state == "start":
         restart_tarkov(logger)
+
+        state = "check_fuel"
+
+    if state == "restart":  # -> check_fuel
+        clip_that()
+        logger.add_restart()
+
+        restart_tarkov(logger)
+
         state = "check_fuel"
 
     elif state == "check_fuel":  # -> no_fuel, medstation
@@ -43,3 +51,14 @@ def state_tree(state, logger):
         state = handle_bitcoin_miner(logger)
 
     return state
+
+
+def clip_that():
+    import time
+    from client import click
+
+    click(x=1904, y=921)
+    print("Saved a replay of that failure")
+    time.sleep(3)
+
+
