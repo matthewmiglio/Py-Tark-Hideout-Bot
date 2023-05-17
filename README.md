@@ -33,5 +33,5 @@ cd Py-Tark-Hideout-Bot
 python -m pip install poetry # install poetry for dependency management if you don't have it
 poetry install --with dev # --with build # install dependencies
 poetry run pre-commit install # optional, but highly recommended for contributing
-poetry run python pytarkbot/__main__.py # run the program from source
+poetry run python src/__main__.py # run the program from source
 ```
