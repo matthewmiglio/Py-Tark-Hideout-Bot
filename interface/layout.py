@@ -4,6 +4,8 @@ from .stats import stat_box, stats
 
 info_text = """1. Tarkov must be set to windowed mode
 2. Program must be run as administrator.
+3. Crafts must be favorited in their respective stations
+4. Hideout lights must be set on using the fluorescent lights
 
 Matthew Miglio, Martin Miglio - Nov 2022"""
 
@@ -36,23 +38,23 @@ main_layout = [
         sg.Frame(
             layout=[
                 [
-                    sg.Text("Bitcoin Farming"),
+                    sg.Text("'Bitcoin' Farming"),
                     sg.Checkbox("", key="bitcoin_checkbox", default=True),
                 ],
                 [
-                    sg.Text("Lavatory Cordura Farming"),
+                    sg.Text("Lavatory 'Cordura' Farming"),
                     sg.Checkbox("", key="lavatory_checkbox", default=True),
                 ],
                 [
-                    sg.Text("Medstation Pile of Meds Farming"),
+                    sg.Text("Medstation 'Pile of Meds' Farming"),
                     sg.Checkbox("", key="medstation_checkbox", default=True),
                 ],
                 [
-                    sg.Text("Purified Water Farming"),
+                    sg.Text("'Purified Water' Farming"),
                     sg.Checkbox("", key="water_checkbox", default=True),
                 ],
                 [
-                    sg.Text("Workbench Green Gunpowder Farming"),
+                    sg.Text("Workbench 'Green Gunpowder' Farming"),
                     sg.Checkbox("", key="workbench_checkbox", default=True),
                 ],
             ],
@@ -69,27 +71,6 @@ main_layout = [
     [
         sg.Frame(
             layout=[
-                # [
-                #     sg.Text("Rows in Stash:"),
-                #     sg.Slider(
-                #         range=(1, 11),
-                #         default_value=11,
-                #         key="rows_to_target",
-                #         orientation="horizontal",
-                #         size=(26, None),
-                #         relief=sg.RELIEF_FLAT,
-                #         enable_events=True,
-                #     ),
-                # ],
-                # [
-                #     sg.Text("Remove Offers Timer:"),
-                #     sg.Combo(
-                #         ["1m", "2m", "5m", "10m"],
-                #         key="remove_offers_timer",
-                #         default_value="5m",
-                #         enable_events=True,
-                #     ),
-                # ],
                 [
                     sg.Column(
                         [

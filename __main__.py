@@ -87,11 +87,9 @@ class WorkerThread(StoppableThread):
         super().__init__(args)
         self.logger = logger
 
-
     def run(self):
         try:
-            jobs =self.args
-
+            jobs = self.args
 
             state = "start"
 
