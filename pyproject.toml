@@ -25,7 +25,8 @@ ipykernel = "^6.23.1"
 
 
 [tool.poetry.group.build.dependencies]
-cx-freeze = "^6.14.9"
+cx-logging = "^3.1.0"
+Cx_Freeze = [{ version = "^6.14.6", platform = 'win32' }]
 
 
 [build-system]
