@@ -114,7 +114,8 @@ def get_to_generator():
         cycle_hideout_tab()
         time.sleep(1)
         coord = find_generator_icon()
-    click(coord[1], coord[0])
+        print('Found generator coord')
+    click(coord[1]+10, coord[0]+5)
     time.sleep(2)
 
     if not check_if_at_generator():
