@@ -13,6 +13,9 @@ from detection.image_rec import (
 
 
 def handle_water_collector(logger):
+    collected = False
+    added_filter = False
+
     if get_to_hideout() == "restart":
         return "restart"
 
@@ -27,16 +30,14 @@ def handle_water_collector(logger):
         logger.log("Collecting water collector items")
         click(x=1051, y=796)
         time.sleep(3)
-        pyautogui.press("esc")
-        time.sleep(2)
 
         logger.add_water_collect()
 
         print("returning to water to check for filter")
+        collected = True
 
-        return "water"
 
-    elif not check_for_water_collector_filter():
+    if not check_for_water_collector_filter():
         logger.log("Adding a filter to water collector")
 
         # click filters dropdown
@@ -46,6 +47,8 @@ def handle_water_collector(logger):
         # click topleft most filter
         click(x=975, y=796)
         time.sleep(1)
+
+        added_filter = True
 
         # click escape
         pyautogui.press("esc")
@@ -57,7 +60,7 @@ def handle_water_collector(logger):
 
         return "bitcoin"
 
-    else:
+    if not collected and not added_filter:
         logger.log("No actions for water collector yet...")
         print("going to bitcoin")
         return "bitcoin"

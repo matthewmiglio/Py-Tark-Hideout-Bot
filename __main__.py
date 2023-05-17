@@ -2,7 +2,6 @@ import webbrowser
 from states import state_tree
 
 
-
 from utils.logger import Logger
 
 from queue import Queue
@@ -199,9 +198,9 @@ def dummy_main():
 
     # orientate_tarkov_client()
 
- 
-
     pass
+
+
 # dummy_main()
 
 if __name__ == "__main__":

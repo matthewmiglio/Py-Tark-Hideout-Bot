@@ -14,6 +14,9 @@ import pyautogui
 
 
 def handle_medstation(logger):
+    got_items = False
+    started_craft = False
+
     if get_to_hideout() == "restart":
         return "restart"
 
@@ -24,7 +27,20 @@ def handle_medstation(logger):
         return "restart"
     time.sleep(4)
 
-    print('Doing checks')
+    print("Doing checks")
+
+    # check for get items
+    if check_for_medstation_get_items():
+        logger.log("Collecting medstation items")
+
+        # click get items
+        click(x=1094, y=674)
+        time.sleep(3)
+
+        logger.add_medstation_collect()
+        got_items = True
+
+        return "medstation"
 
     # check for start
     if check_for_medstation_start():
@@ -42,32 +58,15 @@ def handle_medstation(logger):
         pyautogui.press("esc")
 
         logger.add_medstation_start()
+        started_craft = True
 
-        print('Going to workbench now')
+        print("Going to workbench now")
 
         return "workbench"
 
-    # check for get items
-    elif check_for_medstation_get_items():
-        logger.log("Collecting medstation items")
-
-        # click get items
-        click(x=1094, y=674)
-        time.sleep(3)
-
-        # click esc
-        pyautogui.press("esc")
-        time.sleep(2)
-
-        print('Gonna redo medstation to restart craft')
-
-        logger.add_medstation_collect()
-
-        return "medstation"
-
-    else:
+    if not got_items and not started_craft:
         logger.log("No actions for medstation yet...")
-        print('moving to workbench')
+        print("moving to workbench")
         return "workbench"
 
 
@@ -118,15 +117,13 @@ def check_if_at_medstation():
 def get_to_medstation():
     print("Getting to medstation")
 
-    
-
     start_time = time.time()
 
     for x in range(300, 900, 100):
         click(x, 930)
 
     if check_if_at_medstation():
-        print('already at medstation')
+        print("already at medstation")
         return
 
     coord = None

@@ -12,6 +12,9 @@ from detection.image_rec import (
 
 
 def handle_workbench(logger):
+    collected = False
+    started = False
+
     if get_to_hideout() == "restart":
         return "restart"
 
@@ -19,6 +22,22 @@ def handle_workbench(logger):
     if get_to_workbench() == "restart":
         return "restart"
     time.sleep(4)
+
+    if check_for_workbench_get_items():
+        logger.log("Collecting items from workbench")
+
+        # click get items
+        click(x=1091, y=713)
+        time.sleep(2)
+
+        collected = True
+
+        logger.add_workbench_collect()
+
+        # rerun workbench alg to start the craft after collecting items
+
+        print("rerunning workbench")
+        return "workbench"
 
     if check_for_workbench_start():
         logger.log("Starting workbench craft")
@@ -31,6 +50,8 @@ def handle_workbench(logger):
         click(x=654, y=672)
         time.sleep(3)
 
+        started = True
+
         # click escape to leave workbench
         pyautogui.press("esc")
 
@@ -40,25 +61,7 @@ def handle_workbench(logger):
 
         return "lavatory"
 
-    elif check_for_workbench_get_items():
-        logger.log("Collecting items from workbench")
-
-        # click get items
-        click(x=1091, y=713)
-        time.sleep(2)
-
-        # leave workbench
-        pyautogui.press("esc")
-        time.sleep(2)
-
-        logger.add_workbench_collect()
-
-        # rerun workbench alg to start the craft after collecting items
-
-        print("rerunning workbench")
-        return "workbench"
-
-    else:
+    if not started and not collected:
         logger.log("No actions for workbench yet...")
         pyautogui.press("esc")
         time.sleep(2)
