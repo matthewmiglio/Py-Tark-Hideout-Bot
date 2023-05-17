@@ -50,7 +50,7 @@ stats_title = [
             sg.Text("Restarts"),
         ],
         [
-            sg.Text("Profit"),
+            sg.Text("Est Profit"),
         ],
     ],
 ]
