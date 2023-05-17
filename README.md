@@ -8,6 +8,8 @@ The bot's purpose is to automatically start and collect hideout crafts. The bot 
 
 This bot's purpose is to make you money while you're afk!
 
+![hideout bot photo](https://github.com/matthewmiglio/Py-Tark-Hideout-Bot/assets/105177840/98ae05cc-90b7-41a3-8b2b-f408e16083ca)
+
 ## Install
 
 There is no download available for this project yet. You can only run this program from source.
