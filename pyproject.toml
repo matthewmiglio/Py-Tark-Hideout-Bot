@@ -1,0 +1,72 @@
+[tool.poetry]
+name = "py-tark-hideout-bot"
+version = "0.1.0"
+description = ""
+authors = ["Matthew Miglio <matthew@martinmiglio.dev>"]
+readme = "README.md"
+packages = [{ include = "src" }]
+include = ["README.md", "src/detection/reference_images/**/*.png"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+opencv-python = "^4.7.0.72"
+numpy = "^1.24.3"
+pytesseract = "^0.3.10"
+joblib = "^1.2.0"
+pillow = "^9.5.0"
+pysimplegui = "^4.60.4"
+pygetwindow = "^0.0.9"
+pyautogui = "^0.9.53"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+ipykernel = "^6.23.1"
+
+
+[tool.poetry.group.build.dependencies]
+cx-freeze = "^6.14.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+)
+'''
+
+
+[tool.isort]
+profile = "black"
+
+
+[tool.pylint.main]
+ignore = ["build", "debug"]
+py-version = "3.10"
+suggestion-mode = true
+disable = [
+    "C0114", # missing-module-docstring
+    "C0115", # missing-class-docstring
+    "C0116", # missing-function-docstring
+    "C0301", # line-too-long
+    "C0103", # invalid-name
+]
