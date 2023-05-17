@@ -77,4 +77,3 @@ def clip_that():
     print("Saved a replay of that failure")
     time.sleep(3)
 
-
