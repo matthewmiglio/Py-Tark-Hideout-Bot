@@ -33,6 +33,7 @@ def handle_workbench(logger):
         collected = True
 
         logger.add_workbench_collect()
+        logger.profit(70746)
 
         # rerun workbench alg to start the craft after collecting items
 

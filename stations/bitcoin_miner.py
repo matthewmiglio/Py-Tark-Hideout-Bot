@@ -29,6 +29,7 @@ def handle_bitcoin_miner(logger):
         time.sleep(2)
         pyautogui.press("esc")
         logger.add_workstation_collect()
+        logger.add_profit(327082)
 
     logger.log("No actions for bitcoin miner yet...")
     print('Moving to medstation')

@@ -18,36 +18,39 @@ def stat_box(stat_name: str, size=(5, 1)):
 stats_title = [
     [
         [
-            sg.Text("workbench_starts: "),
+            sg.Text("Workbench Starts: "),
         ],
         [
-            sg.Text("workbench_collects"),
+            sg.Text("Workbench Collects"),
         ],
         [
-            sg.Text("bitcoin_collects"),
+            sg.Text("Bitcoin Collects"),
         ],
         [
-            sg.Text("lavatory_starts"),
+            sg.Text("Lavatory Starts"),
         ],
         [
-            sg.Text("lavatory_collects"),
+            sg.Text("Lavatory Collects"),
         ],
     ],
     [
         [
-            sg.Text("medstation_starts"),
+            sg.Text("Medstation Starts"),
         ],
         [
-            sg.Text("medstation_collects"),
+            sg.Text("Medstation Collects"),
         ],
         [
-            sg.Text("water_filters"),
+            sg.Text("Water Filters"),
         ],
         [
-            sg.Text("water_collects"),
+            sg.Text("Water Collects"),
         ],
         [
-            sg.Text("restarts"),
+            sg.Text("Restarts"),
+        ],
+        [
+            sg.Text("Profit"),
         ],
     ],
 ]
@@ -86,6 +89,9 @@ stats_values = [
         ],
         [
             stat_box("restarts"),
+        ],
+        [
+            stat_box("profit"),
         ],
     ],
 ]

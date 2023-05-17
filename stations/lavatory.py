@@ -31,6 +31,7 @@ def handle_lavatory(logger):
         click(x=1072, y=678)
         time.sleep(3)
         logger.add_lavatory_collect()
+        logger.add_profit(10700)
         print("Returning back to lavatory to restart the craft")
 
 

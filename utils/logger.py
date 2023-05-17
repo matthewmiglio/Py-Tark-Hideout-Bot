@@ -26,6 +26,9 @@ class Logger:
         self.water_filters = 0
         self.water_collects = 0
 
+        #profit stats
+        self.profit = 0
+
         # log
         self.message = ""
         self.restarts = 0
@@ -51,6 +54,7 @@ class Logger:
             "water_collects": self.water_collects,
             "message": self.message,
             "restarts": self.restarts,
+            "profit": self.profit,
         }
         self.queue.put(statistics)
 
@@ -69,6 +73,10 @@ class Logger:
     @_updates_queue
     def add_restart(self):
         self.restarts += 1
+
+    @_updates_queue
+    def add_profit(self,amount):
+        self.profile += amount
 
     @_updates_queue
     def add_workbench_start(self):

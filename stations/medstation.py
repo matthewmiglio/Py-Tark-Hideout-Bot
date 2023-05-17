@@ -38,9 +38,8 @@ def handle_medstation(logger):
         time.sleep(3)
 
         logger.add_medstation_collect()
+        logger.add_profit(11000)
         got_items = True
-
-        return "medstation"
 
     # check for start
     if check_for_medstation_start():

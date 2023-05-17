@@ -32,6 +32,7 @@ def handle_water_collector(logger):
         time.sleep(3)
 
         logger.add_water_collect()
+        logger.add_profit(123300)
 
         print("returning to water to check for filter")
         collected = True
