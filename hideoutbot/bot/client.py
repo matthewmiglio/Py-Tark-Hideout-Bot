@@ -7,9 +7,12 @@ import numpy
 import pyautogui
 import pygetwindow
 
-from detection.image_rec import (check_for_location, find_references,
-                                 pixel_is_equal)
-from utils.dependency import get_bsg_launcher_path
+from hideoutbot.detection.image_rec import (
+    check_for_location,
+    find_references,
+    pixel_is_equal,
+)
+from hideoutbot.utils.dependency import get_bsg_launcher_path
 
 pyautogui.FAILSAFE = False
 
@@ -30,7 +33,7 @@ def close_launcher(logger, tark_launcher):
 
 
 def restart_tarkov(logger):
-    
+
     # sourcery skip: extract-duplicate-method, extract-method
     orientate_terminal()
 

@@ -243,8 +243,9 @@ def read_text_from_image(image, psm=7, oem=1):
     #   1    Neural nets LSTM engine only.
     #   2    Legacy + LSTM engines.
     #   3    Default, based on what is available.
+    
     # specify dir of pytesseract
-    pytesseract.pytesseract.tesseract_cmd = get_tesseract_path()
+    # pytesseract.pytesseract.tesseract_cmd = get_tesseract_path()
 
     config = f"-l eng --oem {oem} --psm {psm}"
     return pytesseract.image_to_string(image=image, config=config)

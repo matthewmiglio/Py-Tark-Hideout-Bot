@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Matthew Miglio <matthew@martinmiglio.dev>"]
 readme = "README.md"
-packages = [{ include = "src" }]
+packages = [{ include = "hideoutbot" }]
 include = ["README.md", "src/detection/reference_images/**/*.png"]
 
 [tool.poetry.dependencies]

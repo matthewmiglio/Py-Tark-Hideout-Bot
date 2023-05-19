@@ -1,21 +1,18 @@
+import time
 import webbrowser
-from states import state_tree
-
-
-from utils.logger import Logger
-
 from queue import Queue
+
 import PySimpleGUI as sg
 
-from interface import (
+from hideoutbot.bot.states import state_tree
+from hideoutbot.interface import (
     disable_keys,
     main_layout,
     show_help_gui,
     user_config_keys,
 )
-import time
-
-from utils.thread import StoppableThread, ThreadKilled
+from hideoutbot.utils.logger import Logger
+from hideoutbot.utils.thread import StoppableThread, ThreadKilled
 
 
 def shutdown_thread(thread: StoppableThread | None, kill=True):
