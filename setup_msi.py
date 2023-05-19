@@ -8,7 +8,7 @@ DESCRIPTION = "Automated Tarkov Hideout Bot"
 KEYWORDS = "tarkov hideout bot"
 COPYRIGHT = "2023 Matthew Miglio"
 ENTRY_POINT = "hideoutbot\\__main__.py"
-# ICON_PATH = "..\\assets\\pixel-pycb.ico"
+ICON_PATH = "assets\\logo.ico"
 GUI = True
 UPGRADE_CODE = "{494bebef-6fc3-42e5-98c8-d0b2e329755e}"
 
@@ -40,7 +40,7 @@ exe = Executable(
     shortcut_dir="DesktopFolder",
     target_name=f"{PROJECT_NAME}.exe",
     copyright=COPYRIGHT,
-    # icon=ICON_PATH,
+    icon=ICON_PATH,
 )
 
 setup(
