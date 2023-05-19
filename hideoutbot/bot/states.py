@@ -1,10 +1,10 @@
-from client import restart_tarkov
-from stations.bitcoin_miner import handle_bitcoin_miner
-from stations.generator import check_for_fuel
-from stations.lavatory import handle_lavatory
-from stations.medstation import handle_medstation
-from stations.water_collector import handle_water_collector
-from stations.workbench import handle_workbench
+from hideoutbot.bot.client import restart_tarkov
+from hideoutbot.stations.bitcoin_miner import handle_bitcoin_miner
+from hideoutbot.stations.generator import check_for_fuel
+from hideoutbot.stations.lavatory import handle_lavatory
+from hideoutbot.stations.medstation import handle_medstation
+from hideoutbot.stations.water_collector import handle_water_collector
+from hideoutbot.stations.workbench import handle_workbench
 
 
 def state_tree(state, logger, jobs):  # -> check_fuel
@@ -71,6 +71,7 @@ def state_tree(state, logger, jobs):  # -> check_fuel
 
 def clip_that():
     import time
+
     from client import click
 
     click(x=1904, y=921)

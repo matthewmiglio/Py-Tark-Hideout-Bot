@@ -1,4 +1,3 @@
-import tkinter.messagebox
 from os.path import abspath, join, pardir
 from pathlib import Path
 from winreg import HKEY_LOCAL_MACHINE, ConnectRegistry, OpenKey, QueryValueEx

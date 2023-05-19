@@ -1,11 +1,9 @@
+import time
+
 import numpy
 
-import time
-from client import click, cycle_hideout_tab, get_to_hideout, screenshot
-import pyautogui
-
-from detection.image_rec import (
-    check_for_location,
+from hideoutbot.bot.client import click, cycle_hideout_tab, get_to_hideout, screenshot
+from hideoutbot.detection.image_rec import (
     find_references,
     get_first_location,
     make_reference_image_list,
@@ -31,7 +29,7 @@ def check_for_fuel(logger):
         print('Moving to no fuel state')
         return "no_fuel"
     logger.log("There is fuel!")
-    
+
     print('Moving to medstation state')
     return "medstation"
 
@@ -93,7 +91,7 @@ def check_pixels_for_no_fuel():
 def get_to_generator():
     print("Getting to generator")
 
-    
+
 
     start_time = time.time()
 

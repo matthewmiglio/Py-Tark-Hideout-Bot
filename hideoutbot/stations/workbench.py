@@ -1,8 +1,10 @@
+import time
+
 import numpy
 import pyautogui
-import time
-from client import click, cycle_hideout_tab, get_to_hideout, screenshot
-from detection.image_rec import (
+
+from hideoutbot.bot.client import click, cycle_hideout_tab, get_to_hideout, screenshot
+from hideoutbot.detection.image_rec import (
     check_for_location,
     find_references,
     get_first_location,
