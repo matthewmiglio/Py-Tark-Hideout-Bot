@@ -76,7 +76,7 @@ class Logger:
 
     @_updates_queue
     def add_profit(self,amount):
-        self.profile += amount
+        self.profit += amount
 
     @_updates_queue
     def add_workbench_start(self):
