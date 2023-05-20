@@ -8,13 +8,13 @@ from hideoutbot.stations.workbench import handle_workbench
 
 
 def state_tree(state, logger, jobs):  # -> check_fuel
-
     if state == "start":
         restart_tarkov(logger)
 
         state = "check_fuel"
 
     if state == "restart":  # -> check_fuel
+        print("Eneterd restart state")
         clip_that()
         logger.add_restart()
 
@@ -33,38 +33,39 @@ def state_tree(state, logger, jobs):  # -> check_fuel
 
     elif state == "medstation":
         # leads to workbench
-        if 'medstation' in jobs:
+        if "medstation" in jobs:
             state = handle_medstation(logger)
         else:
-            state = 'workbench'
+            state = "workbench"
 
     elif state == "workbench":
         # leads to lavatory
-        if 'Workbench' in jobs:
+        if "Workbench" in jobs:
             state = handle_workbench(logger)
         else:
-            state = 'lavatory'
+            state = "lavatory"
 
     elif state == "lavatory":
         # leads to water
-        if 'Lavatory' in jobs:
+        if "Lavatory" in jobs:
             state = handle_lavatory(logger)
         else:
-            state = 'water'
+            state = "water"
 
     elif state == "water":
         # leads to bitcoin
-        if 'water' in jobs:
+        if "water" in jobs:
             state = handle_water_collector(logger)
         else:
-            state = 'bitcoin'
+            state = "bitcoin"
 
     elif state == "bitcoin":
         # leads to medstation
 
-        if 'Bitcoin' in jobs:
+        if "Bitcoin" in jobs:
             state = handle_bitcoin_miner(logger)
-        else: state = 'medstation'
+        else:
+            state = "medstation"
 
     return state
 
@@ -72,9 +73,8 @@ def state_tree(state, logger, jobs):  # -> check_fuel
 def clip_that():
     import time
 
-    from client import click
+    from hideoutbot.bot.client import click
 
     click(x=1904, y=921)
     print("Saved a replay of that failure")
     time.sleep(3)
-
