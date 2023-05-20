@@ -1,8 +1,10 @@
+import pyautogui
 import time
 import webbrowser
 from queue import Queue
 
 import PySimpleGUI as sg
+from hideoutbot.bot.client import click
 
 from hideoutbot.bot.states import state_tree
 from hideoutbot.interface import (
@@ -10,6 +12,15 @@ from hideoutbot.interface import (
     main_layout,
     show_help_gui,
     user_config_keys,
+)
+from hideoutbot.stations.scav_case import (
+    check_for_15000_start,
+    check_for_2500_start,
+    check_for_95000_start,
+    check_for_intel_start,
+    check_for_moonshine_start,
+    check_if_at_scav_case,
+    get_to_scav_case,
 )
 from hideoutbot.utils.logger import Logger
 from hideoutbot.utils.thread import StoppableThread, ThreadKilled
@@ -183,22 +194,26 @@ def main():
 
 
 def dummy_main():
-    # import random
-    # states = ['medstation','workbench','water','lavatory','bitcoin','lavatory',]
-    # state = random.choice(states)
-    # logger=Logger()
-    # while 1:
-    #     state = state_tree(state, logger)
-    #     print('\n\n')
-
-    # from client import orientate_tarkov_client
-
+    # from hideoutbot.bot.client import orientate_tarkov_client
     # orientate_tarkov_client()
+
+    # get_to_scav_case()
+
+    print("moonshine", check_for_moonshine_start())
+    print("intel", check_for_intel_start())
+    print("95000", check_for_95000_start())
+    print("15000", check_for_15000_start())
+    print("25000", check_for_2500_start())
+
+    # pyautogui.moveTo(x=1270, y=543)
+    # time.sleep(1)
+    # pyautogui.dragTo(x=1270, y=650)
+    # time.sleep(1)
 
     pass
 
 
-# dummy_main()
+dummy_main()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
