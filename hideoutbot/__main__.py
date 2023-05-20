@@ -80,6 +80,8 @@ class WorkerThread(StoppableThread):
 
     def run(self):
         try:
+
+    
             jobs = self.args
 
             state = "start"
@@ -87,6 +89,9 @@ class WorkerThread(StoppableThread):
             # loop until shutdown flag is set
             while not self.shutdown_flag.is_set():
                 state = state_tree(state, self.logger, jobs)
+
+
+
 
         except ThreadKilled:
             return
