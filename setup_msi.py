@@ -2,7 +2,7 @@ import sys
 
 from cx_Freeze import Executable, setup
 
-PROJECT_NAME = "py-tark-hideout-bot"
+PROJECT_NAME = "hideout-bot"
 AUTHOR = "Matthew Miglio"
 DESCRIPTION = "Automated Tarkov Hideout Bot"
 KEYWORDS = "tarkov hideout bot"
