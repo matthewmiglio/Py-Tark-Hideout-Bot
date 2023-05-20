@@ -38,7 +38,6 @@ def handle_water_collector(logger):
         print("returning to water to check for filter")
         collected = True
 
-
     if not check_for_water_collector_filter():
         logger.log("Adding a filter to water collector")
 
@@ -77,11 +76,11 @@ def check_if_at_water_collector():
         if pixel_is_equal(pixel, [237, 235, 214], tol=20):
             water_collector_text_exists = True
 
-    purified_water_icon_exists = False
-    for x in range(957, 975):
-        pixel = iar[797][x]
-        if pixel_is_equal(pixel, [210, 238, 243], tol=20):
-            purified_water_icon_exists = True
+    water_description_exists = False
+    for x in range(1215, 1250):
+        pixel = iar[568][x]
+        if pixel_is_equal(pixel, [128, 136, 140], tol=20):
+            water_description_exists = True
 
     close_button_exists = False
     for x in range(1232, 1247):
@@ -89,11 +88,7 @@ def check_if_at_water_collector():
         if pixel_is_equal(pixel, [65, 7, 7], tol=20):
             close_button_exists = True
 
-    if (
-        water_collector_text_exists
-        and purified_water_icon_exists
-        and close_button_exists
-    ):
+    if water_collector_text_exists and water_description_exists and close_button_exists:
         return True
     return False
 
@@ -120,24 +115,18 @@ def get_to_water_collector():
 
     for x in range(300, 900, 100):
         click(x, 930)
+    time.sleep(2)
 
-    if check_if_at_water_collector():
-        print("already here. returning")
-        return
-
-    coord = None
-    while coord is None:
-        if time.time() - start_time > 90:
-            print("took too long getting to water. returning restart")
-            return "restart"
-
-        if check_if_at_water_collector():
-            print('made it to water collector')
-
-            return
-
+    while not check_if_at_water_collector():
         cycle_hideout_tab()
         time.sleep(3)
+
+        time_taken = time.time() - start_time
+        if time_taken > 60:
+            print("Waited too long getting to water. restarting")
+            return "restart"
+
+    print("made it to water in ", (time.time() - start_time), " seconds")
 
 
 def check_for_water_collector_get_items():
