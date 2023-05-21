@@ -11,6 +11,7 @@ from hideoutbot.interface import (
     show_help_gui,
     user_config_keys,
 )
+from hideoutbot.stations.bitcoin_miner import check_if_at_bitcoin_miner, get_to_bitcoin_miner
 
 
 from hideoutbot.utils.logger import Logger
@@ -185,26 +186,17 @@ def main():
 
 
 def dummy_main():
-    from hideoutbot.bot.client import orientate_tarkov_client
+    # from hideoutbot.bot.client import orientate_tarkov_client
 
-    orientate_tarkov_client()
+    # orientate_tarkov_client()
 
-    # get_to_scav_case()
+    # logger = Logger()
 
-    # print("moonshine", check_for_moonshine_start())
-    # print("intel", check_for_intel_start())
-    # print("95000", check_for_95000_start())
-    # print("15000", check_for_15000_start())
-    # print("25000", check_for_2500_start())
+    get_to_bitcoin_miner()
 
-    # pyautogui.moveTo(x=1270, y=543)
-    # time.sleep(1)
-    # pyautogui.dragTo(x=1270, y=650)
-    # time.sleep(1)
+    # print(check_if_at_bitcoin_miner())
 
-    logger = Logger()
-
-    pass
+    # pass
 
 
 # dummy_main()

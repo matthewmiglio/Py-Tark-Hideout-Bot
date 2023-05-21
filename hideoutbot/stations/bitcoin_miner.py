@@ -23,7 +23,7 @@ def handle_bitcoin_miner(logger):
         return "restart"
     time.sleep(4)
 
-    print('Doing bitcoin miner checks')
+    print("Doing bitcoin miner checks")
 
     if check_for_bitcoin_miner_get_items():
         logger.log("Collecting bitcoin")
@@ -34,7 +34,7 @@ def handle_bitcoin_miner(logger):
         logger.add_profit(327082)
 
     logger.log("No actions for bitcoin miner yet...")
-    print('Moving to medstation')
+    print("Moving to medstation")
 
     return "medstation"
 
@@ -43,9 +43,9 @@ def check_if_at_bitcoin_miner():
     iar = numpy.asarray(screenshot())
 
     yellow_bitcoin_icon_exists = False
-    for x in range(990, 1015):
-        pixel = iar[765][x]
-        if pixel_is_equal(pixel, [169, 123, 33], tol=20):
+    for x in range(945,970):
+        pixel = iar[761][x]
+        if pixel_is_equal(pixel, [169,126,40], tol=20):
             yellow_bitcoin_icon_exists = True
 
     bitcoin_farm_text_exists = False
@@ -60,6 +60,7 @@ def check_if_at_bitcoin_miner():
         if pixel_is_equal(pixel, [65, 7, 7], tol=20):
             close_button_exists = True
 
+
     if yellow_bitcoin_icon_exists and bitcoin_farm_text_exists and close_button_exists:
         return True
     return False
@@ -68,34 +69,18 @@ def check_if_at_bitcoin_miner():
 def get_to_bitcoin_miner():
     print("Getting to bitcoin miner")
 
-
-
     start_time = time.time()
 
     for x in range(300, 900, 100):
         click(x, 930)
+    time.sleep(4)
 
-    if check_if_at_bitcoin_miner():
-        print("Already here")
-        return
-
-    coord = None
-    while coord is None:
-        time_taken = time.time() - start_time
-        if time_taken > 60:
-            print("Took too long getting to bitcoin miner")
-
+    while not check_if_at_bitcoin_miner():
+        if time.time() - start_time > 60:
+            print("Took too long to get to bitcoin miner")
             return "restart"
-
         cycle_hideout_tab()
-        time.sleep(1)
-        coord = find_bitcoin_miner_icon()
-    click(coord[1], coord[0])
-    time.sleep(2)
-
-    if not check_if_at_bitcoin_miner():
-        print("Didnt make it to bitcoin miner")
-        return "restart"
+        time.sleep(3)
 
     print("made it to bitcoin miner")
 
