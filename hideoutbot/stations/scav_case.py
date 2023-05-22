@@ -19,7 +19,7 @@ def handle_scav_case(logger, craft_type):
     # get_to_scav_case()
 
     # scroll down in scav case to see all the possible crafts
-    
+
     # pyautogui.moveTo(x=1271, y=543)
     # time.sleep(1)
     # pyautogui.dragTo(x=1271, y=650)
@@ -29,63 +29,54 @@ def handle_scav_case(logger, craft_type):
         logger.log("Handling moonshine craft")
 
         if check_for_moonshine_start():
-            logger.log('Starting moonshine scav case...')
-            click(1049,469)
-
-
-            pass
+            logger.log("Starting moonshine scav case...")
+            click(1049, 469)
 
     elif craft_type == "intel":
         logger.log("Handling intel craft")
 
         if check_for_intel_start():
-            logger.log('Starting intel scav case...')
-            click(1050,639)
-
+            logger.log("Starting intel scav case...")
+            click(1050, 639)
 
     elif craft_type == "95000":
         logger.log("Handling 95000 craft")
 
         if check_for_95000_start():
-            logger.log('Starting 95000 scav case...')
-            click(1070,725)
+            logger.log("Starting 95000 scav case...")
+            click(1070, 725)
 
-        
     elif craft_type == "15000":
         logger.log("Handling 15000 craft")
 
         if check_for_15000_get_items():
-            logger.log('Collecting 15000 scav case items...')
-            click(1066,784)
+            logger.log("Collecting 15000 scav case items...")
+            click(1066, 784)
             time.sleep(3)
-            pyautogui.press('esc')
+            pyautogui.press("esc")
             time.sleep(5)
 
-
         if check_for_15000_start():
-            logger.log('Starting 15000 scav case...')
-            click(1068,785)
+            logger.log("Starting 15000 scav case...")
+            click(1068, 785)
 
-        
     elif craft_type == "2500":
         logger.log("Handling 2500 craft")
 
         if check_for_2500_get_items():
-            logger.log('Collecting 2500 scav case items...')
-            click(1059,528)
+            logger.log("Collecting 2500 scav case items...")
+            click(1059, 528)
             time.sleep(3)
-            pyautogui.press('esc')
+            pyautogui.press("esc")
             time.sleep(5)
 
-
         if check_for_2500_start():
-            logger.log('Starting 2500 scav case...')
-            click(1060,555)
+            logger.log("Starting 2500 scav case...")
+            click(1060, 555)
 
-        
 
 def check_for_2500_get_items():
-    current_image = screenshot([1015,500,110,60])
+    current_image = screenshot([1015, 500, 110, 60])
     reference_folder = "scav_case_2500_get_items"
     references = make_reference_image_list(reference_folder)
 
@@ -100,7 +91,7 @@ def check_for_2500_get_items():
 
 
 def check_for_15000_get_items():
-    current_image = screenshot([1020,760,140,80])
+    current_image = screenshot([1020, 760, 140, 80])
     reference_folder = "scav_case_15000_get_items"
     references = make_reference_image_list(reference_folder)
 
@@ -112,7 +103,6 @@ def check_for_15000_get_items():
     )
 
     return check_for_location(locations)
-
 
 
 def check_for_moonshine_start():
@@ -161,7 +151,7 @@ def check_for_intel_start():
 
 
 def check_for_95000_start():
-    current_image = screenshot([1025,675, 200, 80])
+    current_image = screenshot([1025, 675, 200, 80])
     reference_folder = "scav_case_95000_start"
     references = make_reference_image_list(reference_folder)
 
