@@ -14,31 +14,59 @@ import pyautogui
 def handle_scav_case(logger, craft_type):
     logger.log("Handling scav case")
 
-    get_to_hideout()
+    # get_to_hideout()
 
-    get_to_scav_case()
+    # get_to_scav_case()
 
     # scroll down in scav case to see all the possible crafts
-    pyautogui.moveTo(x=1271, y=543)
-    time.sleep(1)
-    pyautogui.dragTo(x=1271, y=650)
-    time.sleep(1)
+    
+    # pyautogui.moveTo(x=1271, y=543)
+    # time.sleep(1)
+    # pyautogui.dragTo(x=1271, y=650)
+    # time.sleep(1)
 
     if craft_type == "moonshine":
         logger.log("Handling moonshine craft")
 
         if check_for_moonshine_start():
             logger.log('Starting moonshine scav case...')
+            click(1049,469)
+
+
             pass
 
     elif craft_type == "intel":
         logger.log("Handling intel craft")
+
+        if check_for_intel_start():
+            logger.log('Starting intel scav case...')
+            click(1050,639)
+
+
     elif craft_type == "95000":
         logger.log("Handling 95000 craft")
+
+        if check_for_95000_start():
+            logger.log('Starting 95000 scav case...')
+            click(1070,725)
+
+        
     elif craft_type == "15000":
         logger.log("Handling 15000 craft")
+
+        if check_for_15000_start():
+            logger.log('Starting 15000 scav case...')
+            click(1068,785)
+
+        
     elif craft_type == "2500":
         logger.log("Handling 2500 craft")
+
+        if check_for_2500_start():
+            logger.log('Starting 2500 scav case...')
+            click(1060,555)
+
+        
 
 
 def check_for_moonshine_start():

@@ -11,7 +11,18 @@ from hideoutbot.interface import (
     show_help_gui,
     user_config_keys,
 )
-from hideoutbot.stations.bitcoin_miner import check_if_at_bitcoin_miner, get_to_bitcoin_miner
+from hideoutbot.stations.bitcoin_miner import (
+    check_if_at_bitcoin_miner,
+    get_to_bitcoin_miner,
+)
+from hideoutbot.stations.scav_case import (
+    check_for_15000_start,
+    check_for_2500_start,
+    check_for_95000_start,
+    check_for_intel_start,
+    check_for_moonshine_start,
+    handle_scav_case,
+)
 
 
 from hideoutbot.utils.logger import Logger
@@ -186,20 +197,27 @@ def main():
 
 
 def dummy_main():
-    # from hideoutbot.bot.client import orientate_tarkov_client
+    from hideoutbot.bot.client import orientate_tarkov_client
 
-    # orientate_tarkov_client()
+    orientate_tarkov_client()
 
+    # print(check_for_moonshine_start())
+    # print(check_for_2500_start())
+    # print(check_for_intel_start())
+    # print(check_for_95000_start())
+    # print(check_for_15000_start())
     # logger = Logger()
 
-    get_to_bitcoin_miner()
+    # handle_scav_case(logger, craft_type="15000")
+
+    # get_to_bitcoin_miner()
 
     # print(check_if_at_bitcoin_miner())
 
     # pass
 
 
-# dummy_main()
+dummy_main()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
