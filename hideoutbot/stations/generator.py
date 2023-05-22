@@ -1,5 +1,5 @@
 import time
-
+import pyautogui
 import numpy
 
 from hideoutbot.bot.client import click, cycle_hideout_tab, get_to_hideout, screenshot
@@ -30,7 +30,12 @@ def check_for_fuel(logger):
         return "no_fuel"
     logger.log("There is fuel!")
 
+    print('exiting generator station')
+    pyautogui.press('esc')
+
     print('Moving to medstation state')
+
+    
     return "medstation"
 
 
@@ -91,35 +96,20 @@ def check_pixels_for_no_fuel():
 def get_to_generator():
     print("Getting to generator")
 
-
-
     start_time = time.time()
 
     for x in range(300, 900, 100):
         click(x, 930)
+    time.sleep(4)
 
-    if check_if_at_generator():
-        print("Already at generator")
-        return
-
-    coord = None
-    while coord is None:
-        time_taken = time.time() - start_time
-        if time_taken > 60:
-            print("Took too long getting to generator")
+    while not check_if_at_generator():
+        if time.time() - start_time > 60:
+            print("Took too long to get to generator")
             return "restart"
-
         cycle_hideout_tab()
-        time.sleep(1)
-        coord = find_generator_icon()
-        print('Found generator coord')
-    click(coord[1]+10, coord[0]+5)
-    time.sleep(2)
+        time.sleep(3)
 
-    if not check_if_at_generator():
-        print("Failed to get to generator")
-        return "restart"
-    print("Got to generator")
+    print("made it to generator")
 
 
 def find_generator_icon():

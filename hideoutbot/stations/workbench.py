@@ -37,9 +37,8 @@ def handle_workbench(logger):
         logger.add_workbench_collect()
         logger.add_profit(70746)
 
-        # rerun workbench alg to start the craft after collecting items
 
-        print("rerunning workbench")
+
         return "workbench"
 
     if check_for_workbench_start():
@@ -55,23 +54,24 @@ def handle_workbench(logger):
 
         started = True
 
-        # click escape to leave workbench
-        pyautogui.press("esc")
+        
 
         logger.add_workbench_start()
 
         print("moving to lavatory now")
 
         return "lavatory"
+    
+    # click escape to leave workbench
+    pyautogui.press("esc")
 
     if not started and not collected:
         logger.log("No actions for workbench yet...")
-        pyautogui.press("esc")
         time.sleep(2)
 
         print("moving to lavatory")
 
-        return "lavatory"
+    return "lavatory"
 
 
 def check_if_at_workbench():
@@ -142,32 +142,21 @@ def check_for_workbench_get_items():
 
 
 def get_to_workbench():
-    print("getting to workbench")
+    print("Getting to workbench")
 
     start_time = time.time()
 
     for x in range(300, 900, 100):
         click(x, 930)
+    time.sleep(4)
 
-    if check_if_at_workbench():
-        print("already here")
-        return
-
-    coord = None
-    while coord is None:
+    while not check_if_at_workbench():
         if time.time() - start_time > 60:
-            print("took too long getting to workbench")
+            print("Took too long to get to workbench")
             return "restart"
-
         cycle_hideout_tab()
-        time.sleep(1)
-        coord = find_workbench_icon()
-    click(coord[1], coord[0])
-    time.sleep(2)
+        time.sleep(3)
 
-    if not check_if_at_workbench():
-        print("didnt make it to workbench")
-        return "restart"
     print("made it to workbench")
 
 

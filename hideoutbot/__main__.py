@@ -199,9 +199,9 @@ def main():
 
 
 def dummy_main():
-    # from hideoutbot.bot.client import orientate_tarkov_client
+    from hideoutbot.bot.client import orientate_tarkov_client
 
-    # orientate_tarkov_client()
+    orientate_tarkov_client()
 
     # print(check_for_moonshine_start())
     # print(check_for_2500_start())
@@ -213,7 +213,7 @@ def dummy_main():
 
     # handle_scav_case(logger, craft_type="2500")
 
-    print(check_for_2500_get_items())
+    # print(check_for_2500_get_items())
 
     # print(check_for_15000_get_items())
 
@@ -224,7 +224,7 @@ def dummy_main():
     pass
 
 
-# dummy_main()
+dummy_main()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

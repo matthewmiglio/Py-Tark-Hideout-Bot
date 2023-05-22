@@ -55,20 +55,17 @@ def handle_medstation(logger):
         click(x=645, y=673)
         time.sleep(2)
 
-        # press esc to leave this menu
-        pyautogui.press("esc")
-
         logger.add_medstation_start()
         started_craft = True
 
         print("Going to workbench now")
 
-        return "workbench"
+    # press esc to leave this menu
+    print('leaving medstation station')
+    pyautogui.press("esc")
+    time.sleep(3)
 
-    if not got_items and not started_craft:
-        logger.log("No actions for medstation yet...")
-        print("moving to workbench")
-        return "workbench"
+    
 
 
 def check_if_at_medstation():
@@ -122,27 +119,14 @@ def get_to_medstation():
 
     for x in range(300, 900, 100):
         click(x, 930)
+    time.sleep(4)
 
-    if check_if_at_medstation():
-        print("already at medstation")
-        return
-
-    coord = None
-    while coord is None:
+    while not check_if_at_medstation():
         if time.time() - start_time > 60:
-            print("Took too long getting to medstation, returning")
+            print("Took too long to get to medstation")
             return "restart"
-
         cycle_hideout_tab()
-        time.sleep(1)
-        coord = find_medstation_icon()
-    click(coord[1], coord[0])
-    time.sleep(2)
-
-    if not check_if_at_medstation():
-        print("Didnt get to medstation, restarting...")
-
-        return "restart"
+        time.sleep(3)
 
     print("made it to medstation")
 

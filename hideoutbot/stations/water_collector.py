@@ -35,7 +35,6 @@ def handle_water_collector(logger):
         logger.add_water_collect()
         logger.add_profit(123300)
 
-        print("returning to water to check for filter")
         collected = True
 
     if not check_for_water_collector_filter():
@@ -51,20 +50,14 @@ def handle_water_collector(logger):
 
         added_filter = True
 
-        # click escape
-        pyautogui.press("esc")
-        time.sleep(1)
-
         logger.add_water_filter()
 
-        print("going to bitcoin")
+    # leave water station
+    print("leaving water station")
+    pyautogui.press("esc")
+    time.sleep(5)
 
-        return "bitcoin"
-
-    if not collected and not added_filter:
-        logger.log("No actions for water collector yet...")
-        print("going to bitcoin")
-        return "bitcoin"
+    return "bitcoin"
 
 
 def check_if_at_water_collector():
