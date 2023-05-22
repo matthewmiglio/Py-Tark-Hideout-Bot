@@ -18,6 +18,7 @@ from hideoutbot.stations.bitcoin_miner import (
 from hideoutbot.stations.scav_case import (
     check_for_15000_get_items,
     check_for_15000_start,
+    check_for_2500_get_items,
     check_for_2500_start,
     check_for_95000_start,
     check_for_intel_start,
@@ -207,10 +208,12 @@ def dummy_main():
     # print(check_for_intel_start())
     # print(check_for_95000_start())
     # print(check_for_15000_start())
-    
-    logger = Logger()
 
-    handle_scav_case(logger, craft_type="15000")
+    # logger = Logger()
+
+    # handle_scav_case(logger, craft_type="2500")
+
+    print(check_for_2500_get_items())
 
     # print(check_for_15000_get_items())
 
@@ -218,7 +221,7 @@ def dummy_main():
 
     # print(check_if_at_bitcoin_miner())
 
-    # pass
+    pass
 
 
 dummy_main()
