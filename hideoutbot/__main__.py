@@ -16,6 +16,7 @@ from hideoutbot.stations.bitcoin_miner import (
     get_to_bitcoin_miner,
 )
 from hideoutbot.stations.scav_case import (
+    check_for_15000_get_items,
     check_for_15000_start,
     check_for_2500_start,
     check_for_95000_start,
@@ -197,18 +198,21 @@ def main():
 
 
 def dummy_main():
-    from hideoutbot.bot.client import orientate_tarkov_client
+    # from hideoutbot.bot.client import orientate_tarkov_client
 
-    orientate_tarkov_client()
+    # orientate_tarkov_client()
 
     # print(check_for_moonshine_start())
     # print(check_for_2500_start())
     # print(check_for_intel_start())
     # print(check_for_95000_start())
     # print(check_for_15000_start())
-    # logger = Logger()
+    
+    logger = Logger()
 
-    # handle_scav_case(logger, craft_type="15000")
+    handle_scav_case(logger, craft_type="15000")
+
+    # print(check_for_15000_get_items())
 
     # get_to_bitcoin_miner()
 

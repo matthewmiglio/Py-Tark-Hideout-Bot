@@ -54,6 +54,14 @@ def handle_scav_case(logger, craft_type):
     elif craft_type == "15000":
         logger.log("Handling 15000 craft")
 
+        if check_for_15000_get_items():
+            logger.log('Collecting 15000 scav case items...')
+            click(1066,784)
+            time.sleep(3)
+            pyautogui.press('esc')
+            time.sleep(5)
+
+
         if check_for_15000_start():
             logger.log('Starting 15000 scav case...')
             click(1068,785)
@@ -67,6 +75,21 @@ def handle_scav_case(logger, craft_type):
             click(1060,555)
 
         
+
+def check_for_15000_get_items():
+    current_image = screenshot([1020,760,140,80])
+    reference_folder = "scav_case_15000_get_items"
+    references = make_reference_image_list(reference_folder)
+
+    locations = find_references(
+        screenshot=current_image,
+        folder=reference_folder,
+        names=references,
+        tolerance=0.99,
+    )
+
+    return check_for_location(locations)
+
 
 
 def check_for_moonshine_start():
