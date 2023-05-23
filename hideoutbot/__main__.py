@@ -251,7 +251,7 @@ def dummy_main():
 
     # print(check_for_2500_get_items())
 
-dummy_main()
+# dummy_main()
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
