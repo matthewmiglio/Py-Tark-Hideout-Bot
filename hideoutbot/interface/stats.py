@@ -32,6 +32,9 @@ stats_title = [
         [
             sg.Text("Lavatory Collects"),
         ],
+        [
+            sg.Text("Est Profit"),
+        ],
     ],
     [
         [
@@ -49,9 +52,7 @@ stats_title = [
         [
             sg.Text("Restarts"),
         ],
-        [
-            sg.Text("Est Profit"),
-        ],
+        
         [
             sg.Text("Est Time Per Station"),
         ],
@@ -76,6 +77,9 @@ stats_values = [
         [
             stat_box("lavatory_collects"),
         ],
+        [
+            stat_box("profit",size=(10,1)),
+        ],
     ],
     [
         [
@@ -93,9 +97,7 @@ stats_values = [
         [
             stat_box("restarts"),
         ],
-        [
-            stat_box("profit"),
-        ],
+        
         [
             stat_box("station_time"),
         ],
