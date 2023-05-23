@@ -45,9 +45,7 @@ def check_filters_window_orientation():
     return value1 <= 3 and value2 <= 3
 
 
-def orientate_filters_window(logger):
-    start_time = time.time()
-
+def orientate_filters_window(logger,start_time=time.time()):
     is_orientated = check_filters_window_orientation()
     loops = 0
     while not is_orientated:
@@ -71,9 +69,10 @@ def orientate_filters_window(logger):
 
 
 def open_filters_window(logger):
+    start_time = time.time()
     click(328, 87)
     time.sleep(0.33)
-    if orientate_filters_window(logger)=='restart':return 'restart'
+    if orientate_filters_window(logger,start_time=start_time)=='restart':return 'restart'
 
 
 def set_flea_filters(logger):
