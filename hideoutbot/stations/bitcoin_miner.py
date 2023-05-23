@@ -80,7 +80,7 @@ def get_to_bitcoin_miner():
     time.sleep(4)
 
     while not check_if_at_bitcoin_miner():
-        if time.time() - start_time > 60:
+        if time.time() - start_time > 120:
             print("Took too long to get to bitcoin miner")
             return "restart"
         cycle_hideout_tab()

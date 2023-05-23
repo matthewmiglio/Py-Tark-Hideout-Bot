@@ -126,7 +126,7 @@ def get_to_medstation():
     time.sleep(4)
 
     while not check_if_at_medstation():
-        if time.time() - start_time > 60:
+        if time.time() - start_time > 120:
             print("Took too long to get to medstation")
             return "restart"
         cycle_hideout_tab()

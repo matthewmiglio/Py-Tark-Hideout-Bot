@@ -252,7 +252,7 @@ def get_to_scav_case():
 
         time_taken = time.time() - start_time
 
-        if time_taken > 60:
+        if time_taken > 120:
             print("Took too long getting to scav case. restarting")
             return "restart"
 

@@ -119,7 +119,7 @@ def get_to_water_collector():
         time.sleep(3)
 
         time_taken = time.time() - start_time
-        if time_taken > 60:
+        if time_taken > 120:
             print("Waited too long getting to water. restarting")
             return "restart"
 

@@ -107,7 +107,7 @@ def get_to_generator():
     time.sleep(4)
 
     while not check_if_at_generator():
-        if time.time() - start_time > 60:
+        if time.time() - start_time > 120:
             print("Took too long to get to generator")
             return "restart"
         cycle_hideout_tab()
