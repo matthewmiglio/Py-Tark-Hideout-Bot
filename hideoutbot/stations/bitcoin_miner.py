@@ -34,7 +34,7 @@ def handle_bitcoin_miner(logger):
 
     if check_for_bitcoin_miner_get_items():
         logger.log("Collecting bitcoin")
-        click(x=1111, y=761)
+        click(x=1111, y=761,clicks=2)
         time.sleep(2)
         logger.add_profit(327082)
         logger.add_bitcoin_collect()

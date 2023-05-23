@@ -37,7 +37,7 @@ def handle_lavatory(logger):
     # check if get_items exists
     if check_for_get_items_in_lavatory():
         logger.log("Getting items")
-        click(x=1072, y=678)
+        click(x=1072, y=678,clicks=2)
         time.sleep(3)
         logger.add_lavatory_collect()
         logger.add_profit(10700)
@@ -79,7 +79,7 @@ def handle_lavatory(logger):
         time.sleep(2)
 
         # click start
-        click(x=1064, y=678)
+        click(x=1064, y=678,clicks=2)
         time.sleep(1)
 
         # click handover

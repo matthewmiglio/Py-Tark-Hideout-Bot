@@ -33,7 +33,7 @@ def handle_workbench(logger):
         logger.log("Collecting items from workbench")
 
         # click get items
-        click(x=1091, y=713)
+        click(x=1091, y=713,clicks=2)
         time.sleep(3)
 
         logger.add_workbench_collect()
@@ -43,7 +43,7 @@ def handle_workbench(logger):
         logger.log("Starting workbench craft")
 
         # click start button
-        click(x=1100, y=711)
+        click(x=1100, y=711,clicks=2)
         time.sleep(1)
 
         # click handover button

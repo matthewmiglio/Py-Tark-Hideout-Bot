@@ -40,7 +40,7 @@ def handle_medstation(logger):
         logger.log("Collecting medstation items")
 
         # click get items
-        click(x=1094, y=674)
+        click(x=1094, y=674,clicks=2)
         time.sleep(3)
 
         logger.add_medstation_collect()
@@ -51,7 +51,7 @@ def handle_medstation(logger):
         logger.log("Starting medstation craft")
 
         # click start button
-        click(x=1113, y=677)
+        click(x=1113, y=677,clicks=2)
         time.sleep(2)
 
         # click handover button
