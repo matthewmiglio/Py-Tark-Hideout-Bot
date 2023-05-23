@@ -9,6 +9,7 @@ from hideoutbot.bot.client import (
     cycle_hideout_tab,
     get_to_hideout,
     screenshot,
+    set_flea_filters,
 )
 from hideoutbot.detection.image_rec import (
     check_for_location,
@@ -51,6 +52,10 @@ def handle_lavatory(logger):
 
         # click FBI
         click(x=930, y=700)
+        time.sleep(4)
+
+        #set flea filtesr
+        set_flea_filters(logger)
         time.sleep(4)
 
         # click purchase

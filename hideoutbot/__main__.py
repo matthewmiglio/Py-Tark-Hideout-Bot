@@ -3,7 +3,11 @@ import webbrowser
 from queue import Queue
 
 import PySimpleGUI as sg
-from hideoutbot.bot.client import check_if_in_hideout_cycle_mode
+from hideoutbot.bot.client import (
+    check_if_in_hideout_cycle_mode,
+    find_filters_window,
+    set_flea_filters,
+)
 
 from hideoutbot.bot.states import state_tree
 from hideoutbot.interface import (
@@ -209,7 +213,12 @@ def main():
 def dummy_main():
     from hideoutbot.bot.client import orientate_tarkov_client
 
-    orientate_tarkov_client()
+    # orientate_tarkov_client()
+    logger = Logger()
+
+    set_flea_filters(logger)
+
+    # print(find_filters_window())
 
     # print(check_for_moonshine_start())
     # print(check_for_2500_start())
@@ -252,7 +261,7 @@ def dummy_main():
     pass
 
 
-# dummy_main()
+dummy_main()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

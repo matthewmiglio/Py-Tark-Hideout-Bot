@@ -10,12 +10,90 @@ import pygetwindow
 from hideoutbot.detection.image_rec import (
     check_for_location,
     find_references,
+    get_first_location,
     make_reference_image_list,
     pixel_is_equal,
 )
 from hideoutbot.utils.dependency import get_bsg_launcher_path
 
 pyautogui.FAILSAFE = False
+
+
+# flea filters window
+def find_filters_window():
+    current_image = screenshot()
+    reference_folder = "find_filters_tab"
+    references = make_reference_image_list(reference_folder)
+
+    locations = find_references(
+        screenshot=current_image,
+        folder=reference_folder,
+        names=references,
+        tolerance=0.99,
+    )
+
+    coords = get_first_location(locations)
+    return None if coords is None else [coords[1] + 3, coords[0] + 3]
+
+
+def check_filters_window_orientation():
+    coords = find_filters_window()
+    if coords is None:
+        return False
+    value1 = abs(coords[0] - 24)
+    value2 = abs(coords[1] - 35)
+    return value1 <= 3 and value2 <= 3
+
+
+def orientate_filters_window(logger):
+    is_orientated = check_filters_window_orientation()
+    loops = 0
+    while not is_orientated:
+        loops += 1
+        if loops > 10:
+            open_filters_window(logger)
+        logger.log("Orientating filters window.")
+        coords = find_filters_window()
+        if coords is not None:
+            origin = pyautogui.position()
+            pyautogui.moveTo(coords[0], coords[1], duration=0.1)
+            time.sleep(0.33)
+            pyautogui.dragTo(3, 3, duration=0.33)
+            pyautogui.moveTo(origin[0], origin[1])
+            time.sleep(0.33)
+        is_orientated = check_filters_window_orientation()
+    logger.log("Orientated filters window.")
+
+
+def open_filters_window(logger):
+    click(328, 87)
+    time.sleep(0.33)
+    orientate_filters_window(logger)
+
+
+def set_flea_filters(logger):
+    operation_delay = 0.25
+
+    logger.log("Setting the flea filters for price undercut recognition")
+
+    # open filter window
+    logger.log("Opening the filters window")
+    open_filters_window(logger)
+    time.sleep(operation_delay)
+
+    # click 'display offers from' dropdown
+    logger.log("Filtering by trader sales only.")
+    click(171, 188)
+    time.sleep(operation_delay)
+
+    # click players from dropdown
+    click(179, 228)
+    time.sleep(operation_delay)
+
+    # click OK
+    logger.log("Clicking OK in filters tab.")
+    click(83, 272)
+    time.sleep(operation_delay)
 
 
 def check_if_in_hideout_cycle_mode():
