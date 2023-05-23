@@ -35,65 +35,58 @@ def handle_scav_case(logger, craft_type):
 
     print("Done scrolling")
 
-    if craft_type == "moonshine":
-        logger.log("Handling moonshine craft")
+    # collect any type of craft from this station
+    if check_for_moonshine_get_items():
+        logger.log("Collecting moonshine scav case items...")
+        click(1049, 440)
+        time.sleep(3)
+        pyautogui.press("esc")
+        time.sleep(5)
 
+    elif check_for_intel_get_items():
+        logger.log("Collecting intel scav case items...")
+        click(1048, 612)
+        time.sleep(3)
+        pyautogui.press("esc")
+        time.sleep(5)
+
+    elif check_for_15000_get_items():
+        logger.log("Collecting 15000 scav case items...")
+        click(1066, 784)
+        time.sleep(3)
+        pyautogui.press("esc")
+        time.sleep(5)
+
+    elif check_for_2500_get_items():
+        logger.log("Collecting 2500 scav case items...")
+        click(1059, 528)
+        time.sleep(3)
+        pyautogui.press("esc")
+        time.sleep(5)
+
+
+    # start the selected craft
+    if craft_type == "moonshine":
         if check_for_moonshine_start():
             logger.log("Starting moonshine scav case...")
             click(1049, 469)
 
-        if check_for_moonshine_get_items():
-            logger.log("Collecting moonshine scav case items...")
-            click(1049, 440)
-            time.sleep(3)
-            pyautogui.press("esc")
-            time.sleep(5)
-
     elif craft_type == "intel":
-        logger.log("Handling intel craft")
-
         if check_for_intel_start():
             logger.log("Starting intel scav case...")
             click(1050, 639)
 
-        if check_for_intel_get_items():
-            logger.log("Collecting intel scav case items...")
-            click(1048, 612)
-            time.sleep(3)
-            pyautogui.press("esc")
-            time.sleep(5)
-
     elif craft_type == "95000":
-        logger.log("Handling 95000 craft")
-
         if check_for_95000_start():
             logger.log("Starting 95000 scav case...")
             click(1070, 725)
 
     elif craft_type == "15000":
-        logger.log("Handling 15000 craft")
-
-        if check_for_15000_get_items():
-            logger.log("Collecting 15000 scav case items...")
-            click(1066, 784)
-            time.sleep(3)
-            pyautogui.press("esc")
-            time.sleep(5)
-
         if check_for_15000_start():
             logger.log("Starting 15000 scav case...")
             click(1068, 785)
 
     elif craft_type == "2500":
-        logger.log("Handling 2500 craft")
-
-        if check_for_2500_get_items():
-            logger.log("Collecting 2500 scav case items...")
-            click(1059, 528)
-            time.sleep(3)
-            pyautogui.press("esc")
-            time.sleep(5)
-
         if check_for_2500_start():
             logger.log("Starting 2500 scav case...")
             click(1060, 555)
@@ -254,9 +247,8 @@ def get_to_scav_case():
         if time_taken > 120:
             print("Took too long getting to scav case. restarting")
             return "restart"
-        
-        time.sleep(1.5)
 
+        time.sleep(1.5)
 
     print(f"made it to scav case in {str(time_taken)[:4]} sec")
 

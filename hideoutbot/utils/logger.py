@@ -159,7 +159,7 @@ class Logger:
         if stations_visited == 0:
             return "0 s"
 
-        time_taken = time.time() - self.start_time
+        time_taken = (time.time() - self.start_time) - 40
 
         time_per_station = time_taken / stations_visited
 

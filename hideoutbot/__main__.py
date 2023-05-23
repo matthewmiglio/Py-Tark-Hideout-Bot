@@ -188,9 +188,9 @@ def main():
 
 
 def dummy_main():
-    # from hideoutbot.bot.client import orientate_tarkov_client
+    from hideoutbot.bot.client import orientate_tarkov_client
 
-    # orientate_tarkov_client()
+    orientate_tarkov_client()
 
     # print(check_for_moonshine_start())
     # print(check_for_2500_start())
@@ -212,28 +212,28 @@ def dummy_main():
 
     # handle_scav_case(logger, craft_type="moonshine")
 
-    state = "check_fuel"
-    logger = Logger()
-    jobs = [
-        "medstation",
-        "Workbench",
-        "Lavatory",
-        "water",
-        "Bitcoin",
-    ]
-    loops = 0
+    # state = "check_fuel"
+    # logger = Logger()
+    # jobs = [
+    #     "medstation",
+    #     "Workbench",
+    #     "Lavatory",
+    #     "water",
+    #     "Bitcoin",
+    # ]
+    # loops = 0
 
-    while 1:
-        loops += 1
-        print(f"Loop: #{loops}")
-        state = state_tree(state, logger, jobs)
+    # while 1:
+    #     loops += 1
+    #     print(f"Loop: #{loops}")
+    #     state = state_tree(state, logger, jobs)
 
-        print("\n\n\n\n\n--------------")
+    #     print("\n\n\n\n\n--------------")
 
     pass
 
 
-# dummy_main()
+dummy_main()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

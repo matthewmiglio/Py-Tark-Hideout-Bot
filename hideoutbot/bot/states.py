@@ -16,6 +16,8 @@ from hideoutbot.stations.workbench import handle_workbench
 
 
 def state_tree(state, logger, jobs):  # -> check_fuel
+    print('-------------------------------------\n')
+
     if state == "start":
         restart_tarkov(logger)
 
