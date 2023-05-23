@@ -55,7 +55,7 @@ def handle_lavatory(logger):
         time.sleep(4)
 
         #set flea filtesr
-        set_flea_filters(logger)
+        if set_flea_filters(logger)=='restart':return 'restart'
         time.sleep(4)
 
         # click purchase
