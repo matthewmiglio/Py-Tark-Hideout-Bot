@@ -126,7 +126,7 @@ def get_to_medstation():
             print("Took too long to get to medstation")
             return "restart"
         cycle_hideout_tab()
-        time.sleep(3)
+        time.sleep(1.5)
 
     print(f"made it to medstation in {str(time_taken)[:4]}")
 

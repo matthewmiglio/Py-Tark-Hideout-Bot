@@ -90,7 +90,7 @@ def get_to_bitcoin_miner():
             print("Took too long to get to bitcoin miner")
             return "restart"
         cycle_hideout_tab()
-        time.sleep(3)
+        time.sleep(1.5)
 
     print(f"made it to bitcoin miner in {str(time_taken)[:4]}")
 

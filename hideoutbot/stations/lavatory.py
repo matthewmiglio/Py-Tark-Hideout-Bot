@@ -143,7 +143,7 @@ def get_to_lavatory():
             print("Took too long to get to lavatory")
             return "restart"
         cycle_hideout_tab()
-        time.sleep(3)
+        time.sleep(1.5)
 
     print(f"made it to lavatory in {str(time_taken)[:4]}")
 

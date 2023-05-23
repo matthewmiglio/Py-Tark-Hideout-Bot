@@ -110,12 +110,13 @@ def get_to_water_collector():
 
     while not check_if_at_water_collector():
         cycle_hideout_tab()
-        time.sleep(3)
 
         time_taken = time.time() - start_time
         if time_taken > 120:
             print("Waited too long getting to water. restarting")
             return "restart"
+
+        time.sleep(1.5)
 
     print("made it to water in ", str(time.time() - start_time)[:4], " seconds")
 

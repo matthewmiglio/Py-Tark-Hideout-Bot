@@ -110,7 +110,7 @@ def get_to_generator():
             print("Took too long to get to generator")
             return "restart"
         cycle_hideout_tab()
-        time.sleep(3)
+        time.sleep(1.5)
 
     print(f"made it to generator in {str(time_taken)[:4]}")
 
