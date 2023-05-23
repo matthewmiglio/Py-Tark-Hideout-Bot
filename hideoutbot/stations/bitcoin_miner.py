@@ -36,7 +36,7 @@ def handle_bitcoin_miner(logger):
     logger.log("No actions for bitcoin miner yet...")
     print("Moving to medstation")
 
-    return "medstation"
+    return "workbench"
 
 
 def check_if_at_bitcoin_miner():
@@ -61,7 +61,6 @@ def check_if_at_bitcoin_miner():
             close_button_exists = True
 
 
-    print(current_bonuses_text_exists, bitcoin_farm_text_exists, close_button_exists)
 
     if current_bonuses_text_exists and bitcoin_farm_text_exists and close_button_exists:
         return True

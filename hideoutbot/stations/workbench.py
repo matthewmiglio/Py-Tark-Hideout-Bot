@@ -20,9 +20,6 @@ from hideoutbot.detection.image_rec import (
 
 
 def handle_workbench(logger):
-    collected = False
-    started = False
-
     if get_to_hideout() == "restart":
         return "restart"
 
@@ -36,14 +33,10 @@ def handle_workbench(logger):
 
         # click get items
         click(x=1091, y=713)
-        time.sleep(2)
-
-        collected = True
+        time.sleep(5)
 
         logger.add_workbench_collect()
         logger.add_profit(70746)
-
-        return "workbench"
 
     if check_for_workbench_start():
         logger.log("Starting workbench craft")
@@ -56,22 +49,7 @@ def handle_workbench(logger):
         click(x=654, y=672)
         time.sleep(3)
 
-        started = True
-
         logger.add_workbench_start()
-
-        print("moving to lavatory now")
-
-        return "water"
-
-    # click escape to leave workbench
-    pyautogui.press("esc")
-
-    if not started and not collected:
-        logger.log("No actions for workbench yet...")
-        time.sleep(2)
-
-        print("moving to lavatory")
 
     return "water"
 
@@ -164,7 +142,6 @@ def get_to_workbench():
         time.sleep(3)
 
     print(f"made it to workbench in {str(time_taken)[:4]}")
-
 
 
 def find_workbench_icon():

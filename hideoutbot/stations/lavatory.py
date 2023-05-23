@@ -83,8 +83,6 @@ def handle_lavatory(logger):
 
         logger.add_lavatory_start()
 
-        print("Going to water now")
-
     print("leaving lavatory")
     return "bitcoin"
 

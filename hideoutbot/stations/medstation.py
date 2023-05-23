@@ -3,7 +3,13 @@ import time
 import numpy
 import pyautogui
 
-from hideoutbot.bot.client import check_if_in_hideout_cycle_mode, click, cycle_hideout_tab, get_to_hideout, screenshot
+from hideoutbot.bot.client import (
+    check_if_in_hideout_cycle_mode,
+    click,
+    cycle_hideout_tab,
+    get_to_hideout,
+    screenshot,
+)
 from hideoutbot.detection.image_rec import (
     check_for_location,
     find_references,
@@ -16,7 +22,6 @@ from hideoutbot.detection.image_rec import (
 
 
 def handle_medstation(logger):
-
     if get_to_hideout() == "restart":
         return "restart"
 
@@ -54,15 +59,9 @@ def handle_medstation(logger):
 
         logger.add_medstation_start()
 
-        print("Going to workbench now")
-
     # press esc to leave this menu
-    print('leaving medstation station')
-    pyautogui.press("esc")
     time.sleep(3)
-    return 'lavatory'
-
-    
+    return "lavatory"
 
 
 def check_if_at_medstation():
@@ -114,9 +113,8 @@ def get_to_medstation():
 
     start_time = time.time()
 
-
     if not check_if_in_hideout_cycle_mode():
-        print('Not in hideout cycle mode. entering cycle mode...')
+        print("Not in hideout cycle mode. entering cycle mode...")
         for x in range(700, 1200, 100):
             click(x, 930)
 

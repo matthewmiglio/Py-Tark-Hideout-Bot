@@ -3,7 +3,13 @@ import time
 import numpy
 import pyautogui
 
-from hideoutbot.bot.client import check_if_in_hideout_cycle_mode, click, cycle_hideout_tab, get_to_hideout, screenshot
+from hideoutbot.bot.client import (
+    check_if_in_hideout_cycle_mode,
+    click,
+    cycle_hideout_tab,
+    get_to_hideout,
+    screenshot,
+)
 from hideoutbot.detection.image_rec import (
     check_for_location,
     find_references,
@@ -14,7 +20,6 @@ from hideoutbot.detection.image_rec import (
 
 
 def handle_water_collector(logger):
-
     if get_to_hideout() == "restart":
         return "restart"
 
@@ -33,7 +38,6 @@ def handle_water_collector(logger):
         logger.add_water_collect()
         logger.add_profit(123300)
 
-
     if not check_for_water_collector_filter():
         logger.log("Adding a filter to water collector")
 
@@ -43,11 +47,9 @@ def handle_water_collector(logger):
 
         # click topleft most filter
         click(x=975, y=796)
-        time.sleep(1)
-
+        time.sleep(5)
 
         logger.add_water_filter()
-
 
     return "scav_case"
 
@@ -98,9 +100,8 @@ def get_to_water_collector():
 
     start_time = time.time()
 
-
     if not check_if_in_hideout_cycle_mode():
-        print('Not in hideout cycle mode. entering cycle mode...')
+        print("Not in hideout cycle mode. entering cycle mode...")
         for x in range(700, 1200, 100):
             click(x, 930)
 
