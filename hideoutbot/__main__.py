@@ -12,20 +12,6 @@ from hideoutbot.interface import (
     show_help_gui,
     user_config_keys,
 )
-from hideoutbot.stations.bitcoin_miner import (
-    check_if_at_bitcoin_miner,
-    get_to_bitcoin_miner,
-)
-from hideoutbot.stations.scav_case import (
-    check_for_15000_get_items,
-    check_for_15000_start,
-    check_for_2500_get_items,
-    check_for_2500_start,
-    check_for_95000_start,
-    check_for_intel_start,
-    check_for_moonshine_start,
-    handle_scav_case,
-)
 
 
 from hideoutbot.utils.logger import Logger
