@@ -93,7 +93,7 @@ def start_button_event(logger: Logger, window, values):
         jobs.append(values['scav_case_type'])
 
     # setup thread and start it
-    print(jobs)
+    print('jobs: ',jobs)
 
     thread = WorkerThread(logger, jobs)
     thread.start()
