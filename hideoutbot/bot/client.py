@@ -10,11 +10,28 @@ import pygetwindow
 from hideoutbot.detection.image_rec import (
     check_for_location,
     find_references,
+    make_reference_image_list,
     pixel_is_equal,
 )
 from hideoutbot.utils.dependency import get_bsg_launcher_path
 
 pyautogui.FAILSAFE = False
+
+
+
+def check_if_in_hideout_cycle_mode():
+    current_image = screenshot(region=[0,890,80,90])
+    reference_folder = "in_hideout_cycle_mode_icon"
+    references = make_reference_image_list(reference_folder)
+
+    locations = find_references(
+        screenshot=current_image,
+        folder=reference_folder,
+        names=references,
+        tolerance=0.99,
+    )
+
+    return check_for_location(locations)
 
 
 def close_tarkov_client(logger, tark_window):
@@ -33,7 +50,6 @@ def close_launcher(logger, tark_launcher):
 
 
 def restart_tarkov(logger):
-
     # sourcery skip: extract-duplicate-method, extract-method
     orientate_terminal()
 
@@ -239,16 +255,16 @@ def click(x, y, clicks=1, interval=0.0, duration=0.1, button="left"):
 
 
 def get_to_hideout():
-    print('Getting to hideout')
+    print("Getting to hideout")
     start_time = time.time()
 
     while not check_if_in_hideout():
         if time.time() - start_time > 60:
-            return 'restart'
+            return "restart"
 
         click(x=150, y=977)
         time.sleep(5)
-    print('at hideout')
+    print("at hideout")
 
 
 def check_if_in_hideout():

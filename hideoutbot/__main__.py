@@ -3,6 +3,7 @@ import webbrowser
 from queue import Queue
 
 import PySimpleGUI as sg
+from hideoutbot.bot.client import check_if_in_hideout_cycle_mode
 
 from hideoutbot.bot.states import state_tree
 from hideoutbot.interface import (
@@ -199,9 +200,9 @@ def main():
 
 
 def dummy_main():
-    from hideoutbot.bot.client import orientate_tarkov_client
+    # from hideoutbot.bot.client import orientate_tarkov_client
 
-    orientate_tarkov_client()
+    # orientate_tarkov_client()
 
     # print(check_for_moonshine_start())
     # print(check_for_2500_start())
@@ -220,6 +221,8 @@ def dummy_main():
     # get_to_bitcoin_miner()
 
     # print(check_if_at_bitcoin_miner())
+
+    while 1:print(check_if_in_hideout_cycle_mode())
 
     pass
 
