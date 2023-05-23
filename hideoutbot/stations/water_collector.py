@@ -48,10 +48,6 @@ def handle_water_collector(logger):
 
         logger.add_water_filter()
 
-    # leave water station
-    print("leaving water station")
-    pyautogui.press("esc")
-    time.sleep(5)
 
     return "scav_case"
 

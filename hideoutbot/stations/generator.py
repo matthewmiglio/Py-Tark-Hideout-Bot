@@ -31,10 +31,10 @@ def check_for_fuel(logger):
     logger.log("There is fuel!")
 
 
-    print('Moving to medstation state')
+    print('Moving to bitcoin state')
 
     
-    return "water"
+    return "bitcoin"
 
 
 def check_if_at_generator():
