@@ -340,6 +340,8 @@ def click(x, y, clicks=1, interval=0.0, duration=0.1, button="left"):
 
 def get_to_hideout():
     print("Getting to hideout")
+
+    orientate_tarkov_client()
     start_time = time.time()
 
     while not check_if_in_hideout():

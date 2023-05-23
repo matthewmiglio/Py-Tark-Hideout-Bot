@@ -247,7 +247,7 @@ def dummy_main():
 
     while 1:print(check_for_not_enough_space_popup())
 
-dummy_main()
+# dummy_main()
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
