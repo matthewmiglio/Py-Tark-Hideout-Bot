@@ -76,9 +76,22 @@ def state_tree(state, logger, jobs):  # -> check_fuel
 
     elif state == "scav_case":
         print("Entered scav_case state")
-        
+
         if "scav_case" in jobs:
-            state = handle_scav_case(logger)
+            
+            #unpack scav case craft type from job list
+            craft_type = "2500"
+
+            if "15000" in jobs:
+                craft_type == "15000"
+            elif "95000" in jobs:
+                craft_type == "95000"
+            elif "Moonshine" in jobs:
+                craft_type == "moonshine"
+            elif "Intel" in jobs:
+                craft_type == "intel"
+
+            state = handle_scav_case(logger, craft_type)
         else:
             state = "medstation"
 
@@ -86,7 +99,7 @@ def state_tree(state, logger, jobs):  # -> check_fuel
 
     elif state == "medstation":
         print("Entered medstation state")
-        
+
         if "medstation" in jobs:
             state = handle_medstation(logger)
         else:
@@ -103,8 +116,6 @@ def state_tree(state, logger, jobs):  # -> check_fuel
             state = "bitcoin"
 
         print(f"State after lavatory is {state}")
-
-
 
     return state
 
