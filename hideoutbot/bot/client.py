@@ -50,6 +50,7 @@ def orientate_filters_window(logger,start_time=time.time()):
     loops = 0
     while not is_orientated:
         time_taken = time.time() - start_time
+        print(f'time taken orientating filters {time_taken}')
         if time_taken > 60:
             return 'restart'
         loops += 1

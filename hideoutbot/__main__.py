@@ -243,13 +243,27 @@ def dummy_main():
     # while 1:
     #     (check_if_at_scav_case())
 
-    # pass
+    pass
 
     # while 1:print(check_for_not_enough_space_popup())
 
-    handle_scav_case(logger=Logger(), craft_type='2500')
+    # handle_scav_case(logger=Logger(), craft_type='2500')
 
     # print(check_for_2500_get_items())
+
+    # scroll down in scav case to see all the possible crafts
+    import pyautogui
+    for _ in range(2):
+        print("Scrolling in scav case")
+        pyautogui.moveTo(x=1270, y=543)
+        time.sleep(0.5)
+        pyautogui.dragTo(x=1270, y=730)
+        time.sleep(0.5)
+        pyautogui.moveTo(x=1269, y=543)
+        time.sleep(0.5)
+        pyautogui.dragTo(x=1269, y=730)
+        time.sleep(0.5)
+    time.sleep(3)
 
 # dummy_main()
 
