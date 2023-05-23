@@ -22,9 +22,11 @@ def handle_scav_case(logger, craft_type):
 
     logger.log("Handling scav case")
 
-    if get_to_hideout()=='restart':return'restart'
+    if get_to_hideout() == "restart":
+        return "restart"
 
-    if get_to_scav_case()=='restart':return'restart'
+    if get_to_scav_case() == "restart":
+        return "restart"
 
     # scroll down in scav case to see all the possible crafts
     print("Scrolling in scav case")
@@ -64,6 +66,12 @@ def handle_scav_case(logger, craft_type):
         pyautogui.press("esc")
         time.sleep(5)
 
+    elif check_for_95000_get_items():
+        logger.log("Collecting 95000 scav case items...")
+        click(1071, 699)
+        time.sleep(3)
+        pyautogui.press("esc")
+        time.sleep(5)
 
     # start the selected craft
     if craft_type == "moonshine":
@@ -91,8 +99,23 @@ def handle_scav_case(logger, craft_type):
             logger.log("Starting 2500 scav case...")
             click(1060, 555)
 
+    return "medstation"
 
-    return 'medstation'
+
+def check_for_95000_get_items():
+    current_image = screenshot([995, 670, 160, 70])
+    reference_folder = "scav_case_95000_get_items"
+    references = make_reference_image_list(reference_folder)
+
+    locations = find_references(
+        screenshot=current_image,
+        folder=reference_folder,
+        names=references,
+        tolerance=0.99,
+    )
+
+    return check_for_location(locations)
+
 
 def check_for_moonshine_get_items():
     current_image = screenshot([1000, 411, 150, 65])

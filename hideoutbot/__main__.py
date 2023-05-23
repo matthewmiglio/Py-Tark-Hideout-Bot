@@ -237,10 +237,10 @@ def main():
 def dummy_main():
     from hideoutbot.bot.client import orientate_tarkov_client
 
-    # orientate_tarkov_client()
-    logger = Logger()
+    orientate_tarkov_client()
+    # logger = Logger()
 
-    set_flea_filters(logger)
+    # set_flea_filters(logger)
 
     # print(find_filters_window())
 
@@ -285,7 +285,7 @@ def dummy_main():
     pass
 
 
-# dummy_main()
+dummy_main()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
