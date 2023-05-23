@@ -235,65 +235,10 @@ def main():
 
 
 def dummy_main():
-    # from hideoutbot.bot.client import orientate_tarkov_client
-
-    # orientate_tarkov_client()
-    # logger = Logger()
-
-    # orientate_tarkov_client()
-
-    # while 1:
-    #     print(check_if_in_hideout_cycle_mode())
-    #     time.sleep(1)
-
-    # logger = Logger()
-
-    # set_flea_filters(logger)
-
-    # print(find_filters_window())
-
-    # print(check_for_moonshine_start())
-    # print(check_for_2500_start())
-    # print(check_for_intel_start())
-    # print(check_for_95000_start())
-    # print(check_for_15000_start())
-
-    # logger = Logger()
-
-    # handle_scav_case(logger, craft_type="2500")
-
-    # print(check_for_2500_get_items())
-
-    # print(check_for_15000_get_items())
-
-    # get_to_bitcoin_miner()
-
-    # print(check_if_at_bitcoin_miner())
-
-    # handle_scav_case(logger, craft_type="moonshine")
-
-    # state = "check_fuel"
-    # logger = Logger()
-    # jobs = [
-    #     "medstation",
-    #     "Workbench",
-    #     "Lavatory",
-    #     "water",
-    #     "Bitcoin",
-    # ]
-    # loops = 0
-
-    # while 1:
-    #     loops += 1
-    #     print(f"Loop: #{loops}")
-    #     state = state_tree(state, logger, jobs)
-
-    #     print("\n\n\n\n\n--------------")
-
     pass
 
 
-dummy_main()
+# dummy_main()
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
