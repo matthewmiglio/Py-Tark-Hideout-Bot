@@ -282,9 +282,9 @@ def check_if_at_scav_case():
     iar = numpy.asarray(screenshot())
 
     scav_case_text_exists = False
-    for x in range(770, 820):
-        this_pixel = iar[351][x]
-        if pixel_is_equal(this_pixel, [237, 235, 214], tol=20):
+    for x in range(710,760):
+        this_pixel = iar[354][x]
+        if pixel_is_equal(this_pixel, [214,212,193], tol=20):
             scav_case_text_exists = True
             break
 
@@ -308,6 +308,12 @@ def check_if_at_scav_case():
         if pixel_is_equal(this_pixel, [17, 71, 152], tol=20):
             blue_jacket_exists = True
             break
+        elif pixel_is_equal(this_pixel, [38,74,111], tol=20):
+            blue_jacket_exists = True
+            break
+
+    print(blue_jacket_exists,scav_case_text_exists,scav_case_description_exists,current_bonuses_text_exists)
+
     if (
         blue_jacket_exists
         and scav_case_text_exists

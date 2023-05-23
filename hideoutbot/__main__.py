@@ -17,7 +17,7 @@ from hideoutbot.interface import (
     user_config_keys,
 )
 from hideoutbot.stations.bitcoin_miner import check_if_at_bitcoin_miner
-from hideoutbot.stations.scav_case import handle_scav_case
+from hideoutbot.stations.scav_case import check_if_at_scav_case, handle_scav_case
 from hideoutbot.utils.caching import (
     cache_user_settings,
     check_user_settings,
@@ -235,10 +235,16 @@ def main():
 
 
 def dummy_main():
+    from hideoutbot.bot.client import orientate_tarkov_client
+
+    orientate_tarkov_client()
+
+    while 1:
+        (check_if_at_scav_case())
+
     pass
 
+dummy_main()
 
-# dummy_main()
-
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
