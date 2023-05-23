@@ -37,7 +37,7 @@ def handle_lavatory(logger):
     # check if get_items exists
     if check_for_get_items_in_lavatory():
         logger.log("Getting items")
-        click(x=1072, y=678,clicks=2)
+        click(x=1072, y=678, clicks=2)
         time.sleep(3)
         logger.add_lavatory_collect()
         logger.add_profit(10700)
@@ -54,8 +54,9 @@ def handle_lavatory(logger):
         click(x=930, y=700)
         time.sleep(4)
 
-        #set flea filtesr
-        if set_flea_filters(logger)=='restart':return 'restart'
+        # set flea filtesr
+        if set_flea_filters(logger) == "restart":
+            return "restart"
         time.sleep(4)
 
         # click purchase
@@ -72,14 +73,22 @@ def handle_lavatory(logger):
 
         # press y
         pyautogui.press("y")
-        time.sleep(1)
+        time.sleep(3)
+
+        # if not enoguh space for the bags, exit back to hideout, pass to bitcoin
+        if check_for_not_enough_space_popup():
+            pyautogui.press("esc")
+            time.sleep(2)
+            pyautogui.press("esc")
+            time.sleep(2)
+            return "bitcoin"
 
         # press escape to get back to lavatory
         pyautogui.press("esc")
         time.sleep(2)
 
         # click start
-        click(x=1064, y=678,clicks=2)
+        click(x=1064, y=678, clicks=2)
         time.sleep(1)
 
         # click handover
@@ -89,6 +98,32 @@ def handle_lavatory(logger):
         logger.add_lavatory_start()
 
     return "bitcoin"
+
+
+def check_for_not_enough_space_popup():
+    iar = numpy.asarray(screenshot())
+
+    error_1505_text_exists = False
+    for x in range(500, 560):
+        pixel = iar[477][x]
+        if pixel_is_equal(pixel, [162, 163, 163], tol=20):
+            error_1505_text_exists = True
+
+    not_enough_space_text_exists = False
+    for x in range(700, 740):
+        pixel = iar[498][x]
+        if pixel_is_equal(pixel, [152, 151, 137], tol=20):
+            not_enough_space_text_exists = True
+
+    ok_button_exists = False
+    for x in range(650, 660):
+        pixel = iar[525][x]
+        if pixel_is_equal(pixel, [113, 112, 103], tol=20):
+            ok_button_exists = True
+
+    if error_1505_text_exists and not_enough_space_text_exists and ok_button_exists:
+        return True
+    return False
 
 
 def check_if_at_lavatory():
