@@ -18,7 +18,7 @@ from hideoutbot.interface import (
 )
 from hideoutbot.stations.bitcoin_miner import check_if_at_bitcoin_miner
 from hideoutbot.stations.lavatory import check_for_not_enough_space_popup
-from hideoutbot.stations.scav_case import check_if_at_scav_case, handle_scav_case
+from hideoutbot.stations.scav_case import check_for_2500_get_items, check_if_at_scav_case, handle_scav_case
 from hideoutbot.utils.caching import (
     cache_user_settings,
     check_user_settings,
@@ -245,9 +245,13 @@ def dummy_main():
 
     # pass
 
-    while 1:print(check_for_not_enough_space_popup())
+    # while 1:print(check_for_not_enough_space_popup())
 
-# dummy_main()
+    handle_scav_case(logger=Logger(), craft_type='2500')
 
-if __name__ == "__main__":
-    main()
+    # print(check_for_2500_get_items())
+
+dummy_main()
+
+# if __name__ == "__main__":
+#     main()
