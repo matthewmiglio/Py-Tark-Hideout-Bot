@@ -43,11 +43,11 @@ def handle_workbench(logger):
         logger.log("Starting workbench craft")
 
         # click start button
-        click(x=1100, y=711,clicks=2)
+        click(x=1100, y=711,clicks=2,interval = 0.5)
         time.sleep(1)
 
         # click handover button
-        click(x=654, y=672,clicks=2)
+        click(x=654, y=672,clicks=2,interval = 0.5)
         time.sleep(3)
 
         logger.add_workbench_start()
