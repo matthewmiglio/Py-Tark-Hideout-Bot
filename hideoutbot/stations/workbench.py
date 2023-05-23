@@ -47,7 +47,7 @@ def handle_workbench(logger):
         time.sleep(1)
 
         # click handover button
-        click(x=654, y=672)
+        click(x=654, y=672,clicks=2)
         time.sleep(3)
 
         logger.add_workbench_start()

@@ -55,7 +55,7 @@ def handle_medstation(logger):
         time.sleep(2)
 
         # click handover button
-        click(x=645, y=673)
+        click(x=645, y=673,clicks=2)
         time.sleep(2)
 
         logger.add_medstation_start()
