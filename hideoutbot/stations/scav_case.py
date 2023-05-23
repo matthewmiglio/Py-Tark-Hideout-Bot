@@ -1,7 +1,13 @@
 import numpy
 import time
 
-from hideoutbot.bot.client import check_if_in_hideout_cycle_mode, click, cycle_hideout_tab, get_to_hideout, screenshot
+from hideoutbot.bot.client import (
+    check_if_in_hideout_cycle_mode,
+    click,
+    cycle_hideout_tab,
+    get_to_hideout,
+    screenshot,
+)
 from hideoutbot.detection.image_rec import (
     check_for_location,
     find_references,
@@ -14,16 +20,20 @@ import pyautogui
 def handle_scav_case(logger, craft_type):
     logger.log("Handling scav case")
 
-    # get_to_hideout()
+    get_to_hideout()
 
-    # get_to_scav_case()
+    get_to_scav_case()
+
+    time.sleep(4)
 
     # scroll down in scav case to see all the possible crafts
+    print('Scrolling in scav case')
+    pyautogui.moveTo(x=1270, y=543)
+    time.sleep(1)
+    pyautogui.dragTo(x=1270, y=650)
+    time.sleep(1)
 
-    # pyautogui.moveTo(x=1271, y=543)
-    # time.sleep(1)
-    # pyautogui.dragTo(x=1271, y=650)
-    # time.sleep(1)
+    print('Done scrolling')
 
     if craft_type == "moonshine":
         logger.log("Handling moonshine craft")
@@ -31,6 +41,13 @@ def handle_scav_case(logger, craft_type):
         if check_for_moonshine_start():
             logger.log("Starting moonshine scav case...")
             click(1049, 469)
+
+        if check_for_moonshine_get_items():
+            logger.log("Collecting moonshine scav case items...")
+            click(1049, 440)
+            time.sleep(3)
+            pyautogui.press("esc")
+            time.sleep(5)
 
     elif craft_type == "intel":
         logger.log("Handling intel craft")
@@ -41,7 +58,7 @@ def handle_scav_case(logger, craft_type):
 
         if check_for_intel_get_items():
             logger.log("Collecting intel scav case items...")
-            click(1048,612)
+            click(1048, 612)
             time.sleep(3)
             pyautogui.press("esc")
             time.sleep(5)
@@ -82,9 +99,9 @@ def handle_scav_case(logger, craft_type):
             click(1060, 555)
 
 
-def check_for_intel_get_items():
-    current_image = screenshot([980,580,220,70])
-    reference_folder = "scav_case_intel_get_items"
+def check_for_moonshine_get_items():
+    current_image = screenshot([1000, 411, 150, 65])
+    reference_folder = "scav_case_moonshine_get_items"
     references = make_reference_image_list(reference_folder)
 
     locations = find_references(
@@ -96,6 +113,20 @@ def check_for_intel_get_items():
 
     return check_for_location(locations)
 
+
+def check_for_intel_get_items():
+    current_image = screenshot([980, 580, 220, 70])
+    reference_folder = "scav_case_intel_get_items"
+    references = make_reference_image_list(reference_folder)
+
+    locations = find_references(
+        screenshot=current_image,
+        folder=reference_folder,
+        names=references,
+        tolerance=0.99,
+    )
+
+    return check_for_location(locations)
 
 
 def check_for_2500_get_items():
@@ -208,9 +239,8 @@ def get_to_scav_case():
 
     start_time = time.time()
 
-
     if not check_if_in_hideout_cycle_mode():
-        print('Not in hideout cycle mode. entering cycle mode...')
+        print("Not in hideout cycle mode. entering cycle mode...")
         for x in range(700, 1200, 100):
             click(x, 930)
 

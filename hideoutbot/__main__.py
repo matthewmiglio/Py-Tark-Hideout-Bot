@@ -12,6 +12,7 @@ from hideoutbot.interface import (
     show_help_gui,
     user_config_keys,
 )
+from hideoutbot.stations.scav_case import handle_scav_case
 
 
 from hideoutbot.utils.logger import Logger
@@ -208,7 +209,22 @@ def dummy_main():
 
     # print(check_if_at_bitcoin_miner())
 
-    while 1:print(check_if_in_hideout_cycle_mode())
+    # handle_scav_case(logger, craft_type="moonshine")
+
+    # state = 'check_fuel'
+    # logger=Logger()
+    # jobs=[
+    #     'medstation',
+    #     'Workbench',
+    #     'Lavatory',
+    #     'water',
+    #     'Bitcoin',
+    # ]
+    # loops=0
+    # while 1:
+    #     loops+=1
+    #     print(f'Loop: #{loops}')
+    #     state = state_tree(state, logger, jobs)
 
     pass
 
