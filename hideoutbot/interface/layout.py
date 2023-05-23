@@ -126,6 +126,11 @@ user_config_keys = [
     # "rows_to_target",
     # "remove_offers_timer",
     "autostart",
+    'bitcoin_checkbox',
+    'lavatory_checkbox',
+    'medstation_checkbox',
+    'water_checkbox',
+    'workbench_checkbox',
 ]
 
 # list of button and checkbox keys to disable when the bot is running

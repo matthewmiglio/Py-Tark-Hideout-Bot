@@ -14,10 +14,33 @@ from hideoutbot.interface import (
 )
 from hideoutbot.stations.bitcoin_miner import check_if_at_bitcoin_miner
 from hideoutbot.stations.scav_case import handle_scav_case
+from hideoutbot.utils.caching import (
+    cache_user_settings,
+    check_user_settings,
+    read_user_settings,
+)
 
 
 from hideoutbot.utils.logger import Logger
 from hideoutbot.utils.thread import StoppableThread, ThreadKilled
+
+
+def save_current_settings(values):
+    # read the currently selected values for each key in user_config_keys
+    user_settings = {key: values[key] for key in user_config_keys if key in values}
+    # cache the user settings
+    cache_user_settings(user_settings)
+
+
+def load_last_settings(window):
+    if check_user_settings():
+        window.read(timeout=10)  # read the window to edit the layout
+        user_settings = read_user_settings()
+        if user_settings is not None:
+            for key in user_config_keys:
+                if key in user_settings:
+                    window[key].update(user_settings[key])
+        window.refresh()  # refresh the window to update the layout
 
 
 def shutdown_thread(thread: StoppableThread | None, kill=True):
@@ -111,6 +134,8 @@ def main():
     # window layout
     window = sg.Window("Py-TarkBot", main_layout)
 
+    load_last_settings(window)
+
     # start timer for autostart
     start_time = time.time()
     auto_start_time = 30  # seconds
@@ -139,6 +164,8 @@ def main():
             break
 
         if event == "Start":
+            save_current_settings(values)
+
             # start the bot with new queue and logger
             comm_queue = Queue()
             logger = Logger(comm_queue)
@@ -158,14 +185,6 @@ def main():
                 + "&item_name=Support+my+projects%21"
                 + "&currency_code=USD"
             )
-
-        elif event == "issues-link":
-            webbrowser.open(
-                "https://github.com/matthewmiglio/Py-Tark-Hideout-Bot/issues"
-            )
-
-        elif event in user_config_keys:
-            print("User created an event in the window")
 
         # handle when thread is finished
         if thread is not None and not thread.is_alive():
