@@ -14,7 +14,7 @@ def state_tree(state, logger, jobs):  # -> check_fuel
         state = "check_fuel"
 
     if state == "restart":  # -> check_fuel
-        print("Eneterd restart state")
+        print("Entered restart state")
         clip_that()
         logger.add_restart()
 
