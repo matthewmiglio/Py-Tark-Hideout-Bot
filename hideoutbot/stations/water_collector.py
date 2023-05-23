@@ -3,7 +3,7 @@ import time
 import numpy
 import pyautogui
 
-from hideoutbot.bot.client import click, cycle_hideout_tab, get_to_hideout, screenshot
+from hideoutbot.bot.client import check_if_in_hideout_cycle_mode, click, cycle_hideout_tab, get_to_hideout, screenshot
 from hideoutbot.detection.image_rec import (
     check_for_location,
     find_references,
@@ -106,9 +106,13 @@ def get_to_water_collector():
 
     start_time = time.time()
 
-    for x in range(300, 900, 100):
-        click(x, 930)
-    time.sleep(2)
+
+    if not check_if_in_hideout_cycle_mode():
+        print('Not in hideout cycle mode. entering cycle mode...')
+        for x in range(700, 1200, 100):
+            click(x, 930)
+
+    time.sleep(4)
 
     while not check_if_at_water_collector():
         cycle_hideout_tab()
