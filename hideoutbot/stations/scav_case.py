@@ -40,28 +40,28 @@ def handle_scav_case(logger, craft_type):
     # collect any type of craft from this station
     if check_for_moonshine_get_items():
         logger.log("Collecting moonshine scav case items...")
-        click(1049, 440)
+        click(1049, 440,clicks=2)
         time.sleep(3)
         pyautogui.press("esc")
         time.sleep(5)
 
     elif check_for_intel_get_items():
         logger.log("Collecting intel scav case items...")
-        click(1048, 612)
+        click(1048, 612,clicks=2)
         time.sleep(3)
         pyautogui.press("esc")
         time.sleep(5)
 
     elif check_for_15000_get_items():
         logger.log("Collecting 15000 scav case items...")
-        click(1066, 784)
+        click(1066, 784,clicks=2)
         time.sleep(3)
         pyautogui.press("esc")
         time.sleep(5)
 
     elif check_for_2500_get_items():
         logger.log("Collecting 2500 scav case items...")
-        click(1059, 528)
+        click(1059, 528,clicks=2)
         time.sleep(3)
         pyautogui.press("esc")
         time.sleep(5)
@@ -77,27 +77,27 @@ def handle_scav_case(logger, craft_type):
     if craft_type == "moonshine":
         if check_for_moonshine_start():
             logger.log("Starting moonshine scav case...")
-            click(1049, 469)
+            click(1049, 469,clicks=2)
 
     elif craft_type == "intel":
         if check_for_intel_start():
             logger.log("Starting intel scav case...")
-            click(1050, 639)
+            click(1050, 639,clicks=2)
 
     elif craft_type == "95000":
         if check_for_95000_start():
             logger.log("Starting 95000 scav case...")
-            click(1070, 725)
+            click(1070, 725,clicks=2)
 
     elif craft_type == "15000":
         if check_for_15000_start():
             logger.log("Starting 15000 scav case...")
-            click(1068, 785)
+            click(1068, 785,clicks=2)
 
     elif craft_type == "2500":
         if check_for_2500_start():
             logger.log("Starting 2500 scav case...")
-            click(1060, 555)
+            click(1060, 555,clicks=2)
 
     return "medstation"
 

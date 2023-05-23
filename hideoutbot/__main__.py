@@ -235,9 +235,17 @@ def main():
 
 
 def dummy_main():
-    from hideoutbot.bot.client import orientate_tarkov_client
+    # from hideoutbot.bot.client import orientate_tarkov_client
 
-    orientate_tarkov_client()
+    # orientate_tarkov_client()
+    # logger = Logger()
+
+    # orientate_tarkov_client()
+
+    # while 1:
+    #     print(check_if_in_hideout_cycle_mode())
+    #     time.sleep(1)
+
     # logger = Logger()
 
     # set_flea_filters(logger)

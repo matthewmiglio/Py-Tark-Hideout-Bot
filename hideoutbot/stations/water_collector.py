@@ -33,7 +33,7 @@ def handle_water_collector(logger):
     print("doing water checks")
     if check_for_water_collector_get_items():
         logger.log("Collecting water collector items")
-        click(x=1051, y=796)
+        click(x=1051, y=796,clicks=2)
         time.sleep(3)
 
         logger.add_water_collect()
