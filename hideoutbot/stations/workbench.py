@@ -156,13 +156,15 @@ def get_to_workbench():
     time.sleep(4)
 
     while not check_if_at_workbench():
-        if time.time() - start_time > 120:
+        time_taken = time.time() - start_time
+        if time_taken > 120:
             print("Took too long to get to workbench")
             return "restart"
         cycle_hideout_tab()
         time.sleep(3)
 
-    print("made it to workbench")
+    print(f"made it to workbench in {str(time_taken)[:4]}")
+
 
 
 def find_workbench_icon():

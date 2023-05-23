@@ -119,7 +119,7 @@ def get_to_water_collector():
             print("Waited too long getting to water. restarting")
             return "restart"
 
-    print("made it to water in ", (time.time() - start_time), " seconds")
+    print("made it to water in ", str(time.time() - start_time)[:4], " seconds")
 
 
 def check_for_water_collector_get_items():
