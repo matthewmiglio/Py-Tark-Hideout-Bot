@@ -12,6 +12,7 @@ from hideoutbot.interface import (
     show_help_gui,
     user_config_keys,
 )
+from hideoutbot.stations.bitcoin_miner import check_if_at_bitcoin_miner
 from hideoutbot.stations.scav_case import handle_scav_case
 
 
@@ -210,6 +211,8 @@ def dummy_main():
     # print(check_if_at_bitcoin_miner())
 
     # handle_scav_case(logger, craft_type="moonshine")
+
+
 
 
     state = 'check_fuel'

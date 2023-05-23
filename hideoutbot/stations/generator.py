@@ -30,13 +30,11 @@ def check_for_fuel(logger):
         return "no_fuel"
     logger.log("There is fuel!")
 
-    print('exiting generator station')
-    pyautogui.press('esc')
 
     print('Moving to medstation state')
 
     
-    return "medstation"
+    return "water"
 
 
 def check_if_at_generator():

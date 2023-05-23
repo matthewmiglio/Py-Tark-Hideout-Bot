@@ -42,11 +42,11 @@ def handle_bitcoin_miner(logger):
 def check_if_at_bitcoin_miner():
     iar = numpy.asarray(screenshot())
 
-    yellow_bitcoin_icon_exists = False
-    for x in range(945,970):
-        pixel = iar[761][x]
-        if pixel_is_equal(pixel, [169,126,40], tol=20):
-            yellow_bitcoin_icon_exists = True
+    current_bonuses_text_exists = False
+    for x in range(972,984):
+        pixel = iar[633][x]
+        if pixel_is_equal(pixel, [222,220,201], tol=20):
+            current_bonuses_text_exists = True
 
     bitcoin_farm_text_exists = False
     for x in range(720, 840):
@@ -61,7 +61,9 @@ def check_if_at_bitcoin_miner():
             close_button_exists = True
 
 
-    if yellow_bitcoin_icon_exists and bitcoin_farm_text_exists and close_button_exists:
+    print(current_bonuses_text_exists, bitcoin_farm_text_exists, close_button_exists)
+
+    if current_bonuses_text_exists and bitcoin_farm_text_exists and close_button_exists:
         return True
     return False
 

@@ -3,7 +3,13 @@ import time
 import numpy
 import pyautogui
 
-from hideoutbot.bot.client import check_if_in_hideout_cycle_mode, click, cycle_hideout_tab, get_to_hideout, screenshot
+from hideoutbot.bot.client import (
+    check_if_in_hideout_cycle_mode,
+    click,
+    cycle_hideout_tab,
+    get_to_hideout,
+    screenshot,
+)
 from hideoutbot.detection.image_rec import (
     check_for_location,
     find_references,
@@ -79,9 +85,7 @@ def handle_lavatory(logger):
 
         print("Going to water now")
 
-
-    print('leaving lavatory')
-    pyautogui.press('esc')
+    print("leaving lavatory")
     return "bitcoin"
 
 
@@ -128,9 +132,8 @@ def get_to_lavatory():
 
     start_time = time.time()
 
-
     if not check_if_in_hideout_cycle_mode():
-        print('Not in hideout cycle mode. entering cycle mode...')
+        print("Not in hideout cycle mode. entering cycle mode...")
         for x in range(700, 1200, 100):
             click(x, 930)
 
@@ -144,7 +147,6 @@ def get_to_lavatory():
             return "restart"
         cycle_hideout_tab()
         time.sleep(3)
-
 
     print(f"made it to lavatory in {str(time_taken)[:4]}")
 
