@@ -26,8 +26,12 @@ class Logger:
         self.water_filters = 0
         self.water_collects = 0
 
-        #profit stats
+        # profit stats
         self.profit = 0
+
+        # time stats for runtime
+        self.stations_visited = 0
+        self.job_count = 0
 
         # log
         self.message = ""
@@ -55,6 +59,7 @@ class Logger:
             "message": self.message,
             "restarts": self.restarts,
             "profit": self.profit,
+            "rotation_time": self.calculate_rotation_time(),
         }
         self.queue.put(statistics)
 
@@ -75,7 +80,15 @@ class Logger:
         self.restarts += 1
 
     @_updates_queue
-    def add_profit(self,amount):
+    def set_job_count(self, amount):
+        self.job_count += amount
+
+    @_updates_queue
+    def add_station_visited(self):
+        self.stations_visited += 1
+
+    @_updates_queue
+    def add_profit(self, amount):
         self.profit += amount
 
     @_updates_queue
@@ -117,9 +130,7 @@ class Logger:
     @_updates_queue
     def log(self, string):
         self.message = string
-        self.time_since_start =self.calc_time_since_start()
-
-
+        self.time_since_start = self.calc_time_since_start()
 
         print(f"[{self.time_since_start}] {string}")
 
@@ -141,6 +152,21 @@ class Logger:
         else:
             hours, minutes, seconds = 0, 0, 0
         return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
+
+    def calculate_rotation_time(self):
+        job_count = self.job_count
+        stations_visited = self.stations_visited
+        time_taken = time.time - self.start_time
+
+        if stations_visited == 0:
+            return "0 seconds"
+
+        time_per_station = time_taken / stations_visited
+        time_per_rotation = time_per_station * job_count
+
+        time_string_formatted = f"{time_per_rotation:.2f} seconds"
+
+        return time_string_formatted
 
 
 # method to get the time in a readable format

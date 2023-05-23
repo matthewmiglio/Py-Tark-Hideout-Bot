@@ -3,7 +3,13 @@ import time
 import numpy
 import pyautogui
 
-from hideoutbot.bot.client import check_if_in_hideout_cycle_mode, click, cycle_hideout_tab, get_to_hideout, screenshot
+from hideoutbot.bot.client import (
+    check_if_in_hideout_cycle_mode,
+    click,
+    cycle_hideout_tab,
+    get_to_hideout,
+    screenshot,
+)
 from hideoutbot.detection.image_rec import (
     check_for_location,
     find_references,
@@ -14,6 +20,8 @@ from hideoutbot.detection.image_rec import (
 
 
 def handle_bitcoin_miner(logger):
+    logger.add_station_visited()
+
     if get_to_hideout() == "restart":
         return "restart"
 
@@ -43,9 +51,9 @@ def check_if_at_bitcoin_miner():
     iar = numpy.asarray(screenshot())
 
     current_bonuses_text_exists = False
-    for x in range(972,984):
+    for x in range(972, 984):
         pixel = iar[633][x]
-        if pixel_is_equal(pixel, [222,220,201], tol=20):
+        if pixel_is_equal(pixel, [222, 220, 201], tol=20):
             current_bonuses_text_exists = True
 
     bitcoin_farm_text_exists = False
@@ -60,8 +68,6 @@ def check_if_at_bitcoin_miner():
         if pixel_is_equal(pixel, [65, 7, 7], tol=20):
             close_button_exists = True
 
-
-
     if current_bonuses_text_exists and bitcoin_farm_text_exists and close_button_exists:
         return True
     return False
@@ -72,9 +78,8 @@ def get_to_bitcoin_miner():
 
     start_time = time.time()
 
-
     if not check_if_in_hideout_cycle_mode():
-        print('Not in hideout cycle mode. entering cycle mode...')
+        print("Not in hideout cycle mode. entering cycle mode...")
         for x in range(700, 1200, 100):
             click(x, 930)
 

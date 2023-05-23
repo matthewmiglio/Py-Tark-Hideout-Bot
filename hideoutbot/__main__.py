@@ -231,12 +231,8 @@ def dummy_main():
         print(f'Loop: #{loops}')
         state = state_tree(state, logger, jobs)
 
-    #bitcoin
-    #workbench
-    #water
-    #scav
-    #medstation
-    #lavavtory
+        print('\n\n\n\n\n--------------')
+
 
 
     pass

@@ -18,6 +18,8 @@ import pyautogui
 
 
 def handle_scav_case(logger, craft_type):
+    logger.add_station_visited()
+
     logger.log("Handling scav case")
 
     get_to_hideout()
@@ -27,13 +29,13 @@ def handle_scav_case(logger, craft_type):
     time.sleep(4)
 
     # scroll down in scav case to see all the possible crafts
-    print('Scrolling in scav case')
+    print("Scrolling in scav case")
     pyautogui.moveTo(x=1270, y=543)
     time.sleep(1)
     pyautogui.dragTo(x=1270, y=650)
     time.sleep(1)
 
-    print('Done scrolling')
+    print("Done scrolling")
 
     if craft_type == "moonshine":
         logger.log("Handling moonshine craft")

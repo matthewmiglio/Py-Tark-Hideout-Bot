@@ -20,6 +20,8 @@ from hideoutbot.detection.image_rec import (
 
 
 def handle_workbench(logger):
+    logger.add_station_visited()
+
     if get_to_hideout() == "restart":
         return "restart"
 
