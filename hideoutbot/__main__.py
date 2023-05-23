@@ -65,7 +65,13 @@ def update_layout(window: sg.Window, logger: Logger):
             window[stat].update(val)  # type: ignore
 
 
+def no_jobs_popup():
+    sg.popup("Please enter your message:", "Message Box")
+
+
 def start_button_event(logger: Logger, window, values):
+    # check for invalid inputs
+
     logger.log("Starting")
 
     for key in disable_keys:
@@ -88,12 +94,12 @@ def start_button_event(logger: Logger, window, values):
     if values["workbench_checkbox"]:
         jobs.append("Workbench")
 
-    if values['scav_case_checkbox']:
+    if values["scav_case_checkbox"]:
         jobs.append("scav_case")
-        jobs.append(values['scav_case_type'])
+        jobs.append(values["scav_case_type"])
 
     # setup thread and start it
-    print('jobs: ',jobs)
+    print("jobs: ", jobs)
 
     thread = WorkerThread(logger, jobs)
     thread.start()
@@ -173,12 +179,25 @@ def main():
             break
 
         if event == "Start":
-            save_current_settings(values)
+            # if values for bitcoin, lavatory,medstation,water,workbench,and scav case are all false, print 'fail'
+            if (
+                not values["bitcoin_checkbox"]
+                and not values["lavatory_checkbox"]
+                and not values["medstation_checkbox"]
+                and not values["water_checkbox"]
+                and not values["workbench_checkbox"]
+                and not values["scav_case_checkbox"]
+            ):
+                no_jobs_popup()
 
-            # start the bot with new queue and logger
-            comm_queue = Queue()
-            logger = Logger(comm_queue)
-            thread = start_button_event(logger, window, values)
+            # if job list is good, start the worker thread
+            else:
+                save_current_settings(values)
+
+                # start the bot with new queue and logger
+                comm_queue = Queue()
+                logger = Logger(comm_queue)
+                thread = start_button_event(logger, window, values)
 
         elif event == "Stop":
             stop_button_event(logger, window, thread)
