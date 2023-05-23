@@ -18,9 +18,8 @@ from hideoutbot.utils.dependency import get_bsg_launcher_path
 pyautogui.FAILSAFE = False
 
 
-
 def check_if_in_hideout_cycle_mode():
-    current_image = screenshot(region=[0,890,80,90])
+    current_image = screenshot(region=[0, 890, 80, 90])
     reference_folder = "in_hideout_cycle_mode_icon"
     references = make_reference_image_list(reference_folder)
 
@@ -131,6 +130,8 @@ def restart_tarkov(logger):
     logger.log("Waiting for tarkov client to reach main menu.")
     if wait_for_tark_main(logger) == "restart":
         return restart_tarkov(logger)
+    orientate_tarkov_client()
+    time.sleep(3)
 
 
 def wait_for_tarkov_to_open(logger):
@@ -225,7 +226,7 @@ def orientate_launcher():
 def orientate_terminal():
     try:
         terminal_window = pygetwindow.getWindowsWithTitle("Py-TarkBot")[0]
-        terminal_window.moveTo(pyautogui.size()[0] - 430, 0)
+        terminal_window.moveTo(pyautogui.size()[0] - 465, 0)
     except:
         print("Couldnt orientate terminal.")
 

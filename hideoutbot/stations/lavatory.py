@@ -30,7 +30,6 @@ def handle_lavatory(logger):
     # get to lavatory
     if get_to_lavatory() == "restart":
         return "restart"
-    time.sleep(4)
 
     print("Doing checks")
 
@@ -41,11 +40,10 @@ def handle_lavatory(logger):
         time.sleep(3)
         logger.add_lavatory_collect()
         logger.add_profit(10700)
-        print("Returning back to lavatory to restart the craft")
 
     # if start exists, buy items, start, return None
     if check_for_start_in_lavatory():
-        logger.log("Starting item craft")
+        logger.log("Starting cordura craft")
 
         # right click bag
         click(871, 674, button="right")
@@ -85,7 +83,6 @@ def handle_lavatory(logger):
 
         logger.add_lavatory_start()
 
-    print("leaving lavatory")
     return "bitcoin"
 
 

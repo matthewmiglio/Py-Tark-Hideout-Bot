@@ -1,4 +1,4 @@
-from hideoutbot.bot.client import restart_tarkov
+from hideoutbot.bot.client import orientate_tarkov_client, restart_tarkov
 from hideoutbot.stations.bitcoin_miner import handle_bitcoin_miner
 from hideoutbot.stations.generator import check_for_fuel
 from hideoutbot.stations.lavatory import handle_lavatory
@@ -96,11 +96,6 @@ def state_tree(state, logger, jobs):  # -> check_fuel
             state = "bitcoin"
 
         print(f"State after lavatory is {state}")
-
-
-
-
-
 
     # elif state == "water":
     #     print("Entered water state")

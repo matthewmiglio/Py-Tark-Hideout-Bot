@@ -59,7 +59,7 @@ class Logger:
             "message": self.message,
             "restarts": self.restarts,
             "profit": self.profit,
-            "rotation_time": self.calculate_rotation_time(),
+            "station_time": self.calculate_station_time(),
         }
         self.queue.put(statistics)
 
@@ -153,20 +153,19 @@ class Logger:
             hours, minutes, seconds = 0, 0, 0
         return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
 
-    def calculate_rotation_time(self):
-        job_count = self.job_count
+    def calculate_station_time(self):
         stations_visited = self.stations_visited
-        time_taken = time.time - self.start_time
 
         if stations_visited == 0:
-            return "0 seconds"
+            return "0 s"
+
+        time_taken = time.time() - self.start_time
 
         time_per_station = time_taken / stations_visited
-        time_per_rotation = time_per_station * job_count
 
-        time_string_formatted = f"{time_per_rotation:.2f} seconds"
 
-        return time_string_formatted
+
+        return str(time_per_station)[:5]
 
 
 # method to get the time in a readable format

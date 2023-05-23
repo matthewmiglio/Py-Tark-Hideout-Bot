@@ -32,9 +32,8 @@ def handle_medstation(logger):
     # get to medstation
     if get_to_medstation() == "restart":
         return "restart"
-    time.sleep(4)
 
-    print("Doing checks")
+    print("Doing checks for medstation")
 
     # check for get items
     if check_for_medstation_get_items():
@@ -61,8 +60,6 @@ def handle_medstation(logger):
 
         logger.add_medstation_start()
 
-    # press esc to leave this menu
-    time.sleep(3)
     return "lavatory"
 
 

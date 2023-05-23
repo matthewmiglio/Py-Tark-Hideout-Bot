@@ -28,14 +28,13 @@ def handle_workbench(logger):
     logger.log("Handling workbench")
     if get_to_workbench() == "restart":
         return "restart"
-    time.sleep(4)
 
     if check_for_workbench_get_items():
         logger.log("Collecting items from workbench")
 
         # click get items
         click(x=1091, y=713)
-        time.sleep(5)
+        time.sleep(3)
 
         logger.add_workbench_collect()
         logger.add_profit(70746)

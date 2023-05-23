@@ -2,7 +2,13 @@ import time
 import pyautogui
 import numpy
 
-from hideoutbot.bot.client import check_if_in_hideout_cycle_mode, click, cycle_hideout_tab, get_to_hideout, screenshot
+from hideoutbot.bot.client import (
+    check_if_in_hideout_cycle_mode,
+    click,
+    cycle_hideout_tab,
+    get_to_hideout,
+    screenshot,
+)
 from hideoutbot.detection.image_rec import (
     find_references,
     get_first_location,
@@ -20,20 +26,15 @@ def check_for_fuel(logger):
     # get to lavatory
     if get_to_generator() == "restart":
         return "restart"
-    time.sleep(4)
 
-    print('Doing check')
+    print("Doing check")
 
     if check_pixels_for_no_fuel():
         logger.log("There is no fuel")
-        print('Moving to no fuel state')
+        print("Moving to no fuel state")
         return "no_fuel"
     logger.log("There is fuel!")
 
-
-    print('Moving to bitcoin state')
-
-    
     return "bitcoin"
 
 
@@ -96,9 +97,8 @@ def get_to_generator():
 
     start_time = time.time()
 
-
     if not check_if_in_hideout_cycle_mode():
-        print('Not in hideout cycle mode. entering cycle mode...')
+        print("Not in hideout cycle mode. entering cycle mode...")
         for x in range(700, 1200, 100):
             click(x, 930)
 

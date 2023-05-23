@@ -26,12 +26,10 @@ def handle_scav_case(logger, craft_type):
 
     get_to_scav_case()
 
-    time.sleep(4)
-
     # scroll down in scav case to see all the possible crafts
     print("Scrolling in scav case")
     pyautogui.moveTo(x=1270, y=543)
-    time.sleep(1)
+    time.sleep(0.5)
     pyautogui.dragTo(x=1270, y=650)
     time.sleep(1)
 

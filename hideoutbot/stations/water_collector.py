@@ -29,9 +29,8 @@ def handle_water_collector(logger):
 
     if get_to_water_collector() == "restart":
         return "restart"
-    time.sleep(4)
-    print("doing water checks")
 
+    print("doing water checks")
     if check_for_water_collector_get_items():
         logger.log("Collecting water collector items")
         click(x=1051, y=796)
@@ -49,7 +48,7 @@ def handle_water_collector(logger):
 
         # click topleft most filter
         click(x=975, y=796)
-        time.sleep(5)
+        time.sleep(3)
 
         logger.add_water_filter()
 

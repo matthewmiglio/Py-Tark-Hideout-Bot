@@ -53,7 +53,7 @@ stats_title = [
             sg.Text("Est Profit"),
         ],
         [
-            sg.Text("Est Rotation Time"),
+            sg.Text("Est Time Per Station"),
         ],
     ],
 ]
@@ -97,7 +97,7 @@ stats_values = [
             stat_box("profit"),
         ],
         [
-            stat_box("rotation_time"),
+            stat_box("station_time"),
         ],
     ],
 ]

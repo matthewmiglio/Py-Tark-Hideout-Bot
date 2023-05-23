@@ -29,7 +29,6 @@ def handle_bitcoin_miner(logger):
 
     if get_to_bitcoin_miner() == "restart":
         return "restart"
-    time.sleep(4)
 
     print("Doing bitcoin miner checks")
 
@@ -37,12 +36,11 @@ def handle_bitcoin_miner(logger):
         logger.log("Collecting bitcoin")
         click(x=1111, y=761)
         time.sleep(2)
-        pyautogui.press("esc")
         logger.add_profit(327082)
         logger.add_bitcoin_collect()
 
-    logger.log("No actions for bitcoin miner yet...")
-    print("Moving to medstation")
+    else:
+        logger.log("No actions for bitcoin miner yet...")
 
     return "workbench"
 

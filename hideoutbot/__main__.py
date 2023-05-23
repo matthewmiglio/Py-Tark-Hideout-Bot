@@ -212,33 +212,28 @@ def dummy_main():
 
     # handle_scav_case(logger, craft_type="moonshine")
 
-
-
-
-    state = 'check_fuel'
-    logger=Logger()
-    jobs=[
-        'medstation',
-        'Workbench',
-        'Lavatory',
-        'water',
-        'Bitcoin',
+    state = "check_fuel"
+    logger = Logger()
+    jobs = [
+        "medstation",
+        "Workbench",
+        "Lavatory",
+        "water",
+        "Bitcoin",
     ]
-    loops=0
+    loops = 0
 
     while 1:
-        loops+=1
-        print(f'Loop: #{loops}')
+        loops += 1
+        print(f"Loop: #{loops}")
         state = state_tree(state, logger, jobs)
 
-        print('\n\n\n\n\n--------------')
-
-
+        print("\n\n\n\n\n--------------")
 
     pass
 
 
-dummy_main()
+# dummy_main()
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
