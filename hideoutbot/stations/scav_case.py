@@ -22,9 +22,9 @@ def handle_scav_case(logger, craft_type):
 
     logger.log("Handling scav case")
 
-    get_to_hideout()
+    if get_to_hideout()=='restart':return'restart'
 
-    get_to_scav_case()
+    if get_to_scav_case()=='restart':return'restart'
 
     # scroll down in scav case to see all the possible crafts
     print("Scrolling in scav case")
@@ -91,6 +91,8 @@ def handle_scav_case(logger, craft_type):
             logger.log("Starting 2500 scav case...")
             click(1060, 555)
 
+
+    return 'medstation'
 
 def check_for_moonshine_get_items():
     current_image = screenshot([1000, 411, 150, 65])

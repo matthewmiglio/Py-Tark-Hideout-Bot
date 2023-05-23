@@ -88,7 +88,12 @@ def start_button_event(logger: Logger, window, values):
     if values["workbench_checkbox"]:
         jobs.append("Workbench")
 
+    if values['scav_case_checkbox']:
+        jobs.append("scav_case")
+        jobs.append(values['scav_case_type'])
+
     # setup thread and start it
+    print(jobs)
 
     thread = WorkerThread(logger, jobs)
     thread.start()
@@ -261,7 +266,7 @@ def dummy_main():
     pass
 
 
-dummy_main()
+# dummy_main()
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()

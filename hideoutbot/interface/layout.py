@@ -57,6 +57,14 @@ main_layout = [
                     sg.Text("Workbench 'Green Gunpowder' Farming"),
                     sg.Checkbox("", key="workbench_checkbox", default=True),
                 ],
+                [
+                    sg.Text("Scav Case Farming"),
+                    sg.Checkbox("", key="scav_case_checkbox", default=True),
+                ],
+                [
+                    sg.Text("Scav Case Type"),
+                    sg.DropDown(['Moonshine', 'Intel', '95000', '15000', '2500'], default_value='2500', key='scav_case_type')
+                ]
             ],
             title="Job List",
             relief=sg.RELIEF_SUNKEN,
@@ -131,6 +139,8 @@ user_config_keys = [
     'medstation_checkbox',
     'water_checkbox',
     'workbench_checkbox',
+    'scav_case_checkbox',
+    'scav_case_type',
 ]
 
 # list of button and checkbox keys to disable when the bot is running
