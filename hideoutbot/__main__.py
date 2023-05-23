@@ -161,7 +161,7 @@ def main():
 
         elif event == "issues-link":
             webbrowser.open(
-                "https://github.com/matthewmiglio/py-tarkbot/issues/new/choose"
+                "https://github.com/matthewmiglio/Py-Tark-Hideout-Bot/issues"
             )
 
         elif event in user_config_keys:
