@@ -7,6 +7,14 @@ from hideoutbot.stations.water_collector import handle_water_collector
 from hideoutbot.stations.workbench import handle_workbench
 
 
+# workbench
+# water
+# scav case
+# medstation
+# lavatory
+# bitcoin
+
+
 def state_tree(state, logger, jobs):  # -> check_fuel
     if state == "start":
         restart_tarkov(logger)
@@ -22,7 +30,7 @@ def state_tree(state, logger, jobs):  # -> check_fuel
 
         state = "check_fuel"
 
-    elif state == "check_fuel":  # -> no_fuel, medstation
+    elif state == "check_fuel":  # -> no_fuel,
         state = check_for_fuel(logger)
 
     elif state == "no_fuel":  # -> program freeze
@@ -31,41 +39,40 @@ def state_tree(state, logger, jobs):  # -> check_fuel
         while 1:
             pass
 
+    # water state -> scav case -> medstation -> lavatory -> bitcoin -> workbench
+
+    elif state == "water":
+        if "water" in jobs:
+            state = handle_water_collector(logger)
+        else:
+            state = "scav_case"
+
+    elif state == "scav_case":
+        state = "medstation"
+
     elif state == "medstation":
-        # leads to workbench
         if "medstation" in jobs:
             state = handle_medstation(logger)
-        else:
-            state = "workbench"
-
-    elif state == "workbench":
-        # leads to lavatory
-        if "Workbench" in jobs:
-            state = handle_workbench(logger)
         else:
             state = "lavatory"
 
     elif state == "lavatory":
-        # leads to water
         if "Lavatory" in jobs:
             state = handle_lavatory(logger)
-        else:
-            state = "water"
-
-    elif state == "water":
-        # leads to bitcoin
-        if "water" in jobs:
-            state = handle_water_collector(logger)
         else:
             state = "bitcoin"
 
     elif state == "bitcoin":
-        # leads to medstation
-
         if "Bitcoin" in jobs:
             state = handle_bitcoin_miner(logger)
         else:
-            state = "medstation"
+            state = "workbench"
+
+    elif state == "workbench":
+        if "Workbench" in jobs:
+            state = handle_workbench(logger)
+        else:
+            state = "water"
 
     return state
 

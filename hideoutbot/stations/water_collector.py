@@ -14,8 +14,6 @@ from hideoutbot.detection.image_rec import (
 
 
 def handle_water_collector(logger):
-    collected = False
-    added_filter = False
 
     if get_to_hideout() == "restart":
         return "restart"
@@ -35,7 +33,6 @@ def handle_water_collector(logger):
         logger.add_water_collect()
         logger.add_profit(123300)
 
-        collected = True
 
     if not check_for_water_collector_filter():
         logger.log("Adding a filter to water collector")
@@ -48,7 +45,6 @@ def handle_water_collector(logger):
         click(x=975, y=796)
         time.sleep(1)
 
-        added_filter = True
 
         logger.add_water_filter()
 
@@ -57,7 +53,7 @@ def handle_water_collector(logger):
     pyautogui.press("esc")
     time.sleep(5)
 
-    return "bitcoin"
+    return "scav_case"
 
 
 def check_if_at_water_collector():

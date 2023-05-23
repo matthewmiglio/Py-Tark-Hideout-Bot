@@ -226,6 +226,15 @@ def dummy_main():
     #     print(f'Loop: #{loops}')
     #     state = state_tree(state, logger, jobs)
 
+
+
+    #workbench
+    #water
+    #scav case
+    #medstation
+    #lavatory
+    #bitcoin
+
     pass
 
 

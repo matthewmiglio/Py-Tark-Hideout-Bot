@@ -3,7 +3,13 @@ import time
 import numpy
 import pyautogui
 
-from hideoutbot.bot.client import check_if_in_hideout_cycle_mode, click, cycle_hideout_tab, get_to_hideout, screenshot
+from hideoutbot.bot.client import (
+    check_if_in_hideout_cycle_mode,
+    click,
+    cycle_hideout_tab,
+    get_to_hideout,
+    screenshot,
+)
 from hideoutbot.detection.image_rec import (
     check_for_location,
     find_references,
@@ -37,8 +43,6 @@ def handle_workbench(logger):
         logger.add_workbench_collect()
         logger.add_profit(70746)
 
-
-
         return "workbench"
 
     if check_for_workbench_start():
@@ -54,14 +58,12 @@ def handle_workbench(logger):
 
         started = True
 
-        
-
         logger.add_workbench_start()
 
         print("moving to lavatory now")
 
-        return "lavatory"
-    
+        return "water"
+
     # click escape to leave workbench
     pyautogui.press("esc")
 
@@ -71,7 +73,7 @@ def handle_workbench(logger):
 
         print("moving to lavatory")
 
-    return "lavatory"
+    return "water"
 
 
 def check_if_at_workbench():
@@ -146,9 +148,8 @@ def get_to_workbench():
 
     start_time = time.time()
 
-
     if not check_if_in_hideout_cycle_mode():
-        print('Not in hideout cycle mode. entering cycle mode...')
+        print("Not in hideout cycle mode. entering cycle mode...")
         for x in range(700, 1200, 100):
             click(x, 930)
 

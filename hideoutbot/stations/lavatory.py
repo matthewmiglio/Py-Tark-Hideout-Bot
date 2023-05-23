@@ -82,7 +82,7 @@ def handle_lavatory(logger):
 
     print('leaving lavatory')
     pyautogui.press('esc')
-    return "water"
+    return "bitcoin"
 
 
 def check_if_at_lavatory():

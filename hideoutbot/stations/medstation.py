@@ -16,8 +16,6 @@ from hideoutbot.detection.image_rec import (
 
 
 def handle_medstation(logger):
-    got_items = False
-    started_craft = False
 
     if get_to_hideout() == "restart":
         return "restart"
@@ -41,7 +39,6 @@ def handle_medstation(logger):
 
         logger.add_medstation_collect()
         logger.add_profit(11000)
-        got_items = True
 
     # check for start
     if check_for_medstation_start():
@@ -56,7 +53,6 @@ def handle_medstation(logger):
         time.sleep(2)
 
         logger.add_medstation_start()
-        started_craft = True
 
         print("Going to workbench now")
 
@@ -64,6 +60,7 @@ def handle_medstation(logger):
     print('leaving medstation station')
     pyautogui.press("esc")
     time.sleep(3)
+    return 'lavatory'
 
     
 
