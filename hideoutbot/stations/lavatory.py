@@ -77,6 +77,7 @@ def handle_lavatory(logger):
 
         # if not enoguh space for the bags, exit back to hideout, pass to bitcoin
         if check_for_not_enough_space_popup():
+            logger.log("Not enough space in inventory for bags")
             pyautogui.press("esc")
             time.sleep(2)
             pyautogui.press("esc")

@@ -17,8 +17,15 @@ from hideoutbot.interface import (
     user_config_keys,
 )
 from hideoutbot.stations.bitcoin_miner import check_if_at_bitcoin_miner
-from hideoutbot.stations.lavatory import check_for_not_enough_space_popup
-from hideoutbot.stations.scav_case import check_for_2500_get_items, check_if_at_scav_case, handle_scav_case
+from hideoutbot.stations.lavatory import (
+    check_for_not_enough_space_popup,
+    handle_lavatory,
+)
+from hideoutbot.stations.scav_case import (
+    check_for_2500_get_items,
+    check_if_at_scav_case,
+    handle_scav_case,
+)
 from hideoutbot.utils.caching import (
     cache_user_settings,
     check_user_settings,
@@ -240,6 +247,8 @@ def dummy_main():
 
     # orientate_tarkov_client()
 
+    handle_lavatory(logger=Logger())
+
     # while 1:
     #     (check_if_at_scav_case())
 
@@ -252,20 +261,21 @@ def dummy_main():
     # print(check_for_2500_get_items())
 
     # scroll down in scav case to see all the possible crafts
-    import pyautogui
-    for _ in range(2):
-        print("Scrolling in scav case")
-        pyautogui.moveTo(x=1270, y=543)
-        time.sleep(0.5)
-        pyautogui.dragTo(x=1270, y=730)
-        time.sleep(0.5)
-        pyautogui.moveTo(x=1269, y=543)
-        time.sleep(0.5)
-        pyautogui.dragTo(x=1269, y=730)
-        time.sleep(0.5)
-    time.sleep(3)
+    # import pyautogui
+    # for _ in range(2):
+    #     print("Scrolling in scav case")
+    #     pyautogui.moveTo(x=1270, y=543)
+    #     time.sleep(0.5)
+    #     pyautogui.dragTo(x=1270, y=730)
+    #     time.sleep(0.5)
+    #     pyautogui.moveTo(x=1269, y=543)
+    #     time.sleep(0.5)
+    #     pyautogui.dragTo(x=1269, y=730)
+    #     time.sleep(0.5)
+    # time.sleep(3)
 
-# dummy_main()
 
-if __name__ == "__main__":
-    main()
+dummy_main()
+
+# if __name__ == "__main__":
+# main()
