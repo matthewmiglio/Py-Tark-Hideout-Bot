@@ -45,14 +45,14 @@ def check_filters_window_orientation():
     return value1 <= 3 and value2 <= 3
 
 
-def orientate_filters_window(logger):
-    start_time = time.time()
-
+def orientate_filters_window(logger,start_time=time.time()):
     is_orientated = check_filters_window_orientation()
     loops = 0
     while not is_orientated:
         time_taken = time.time() - start_time
-        if time_taken > 60:
+        print(f'time taken orientating filters {time_taken}')
+        if time_taken > 23:
+            print('failed orientate filters window timeout')
             return 'restart'
         loops += 1
         if loops > 10:
@@ -71,9 +71,10 @@ def orientate_filters_window(logger):
 
 
 def open_filters_window(logger):
+    start_time = time.time()
     click(328, 87)
     time.sleep(0.33)
-    if orientate_filters_window(logger)=='restart':return 'restart'
+    if orientate_filters_window(logger,start_time=start_time)=='restart':return 'restart'
 
 
 def set_flea_filters(logger):
@@ -340,6 +341,8 @@ def click(x, y, clicks=1, interval=0.0, duration=0.1, button="left"):
 
 def get_to_hideout():
     print("Getting to hideout")
+
+    orientate_tarkov_client()
     start_time = time.time()
 
     while not check_if_in_hideout():

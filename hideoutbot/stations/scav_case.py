@@ -29,18 +29,19 @@ def handle_scav_case(logger, craft_type):
         return "restart"
 
     # scroll down in scav case to see all the possible crafts
-    print("Scrolling in scav case")
-    pyautogui.moveTo(x=1270, y=543)
-    time.sleep(0.5)
-    pyautogui.dragTo(x=1270, y=650)
-    time.sleep(1)
+    for _ in range(2):
+        print("Scrolling in scav case")
+        pyautogui.moveTo(x=1270, y=543)
+        time.sleep(0.5)
+        pyautogui.dragTo(x=1270, y=750)
+        time.sleep(3)
 
     print("Done scrolling")
 
     # collect any type of craft from this station
     if check_for_moonshine_get_items():
         logger.log("Collecting moonshine scav case items...")
-        click(1049, 440, clicks=2)
+        click(1049, 440,  clicks=2)
         logger.add_scav_case_collect()
         time.sleep(3)
         pyautogui.press("esc")
@@ -48,7 +49,7 @@ def handle_scav_case(logger, craft_type):
 
     elif check_for_intel_get_items():
         logger.log("Collecting intel scav case items...")
-        click(1048, 612, clicks=2)
+        click(1048, 612,  clicks=2)
         logger.add_scav_case_collect()
 
         time.sleep(3)
@@ -57,7 +58,7 @@ def handle_scav_case(logger, craft_type):
 
     elif check_for_15000_get_items():
         logger.log("Collecting 15000 scav case items...")
-        click(1066, 784, clicks=2)
+        click(1066, 784,  clicks=2)
         logger.add_scav_case_collect()
 
         time.sleep(3)
@@ -66,7 +67,7 @@ def handle_scav_case(logger, craft_type):
 
     elif check_for_2500_get_items():
         logger.log("Collecting 2500 scav case items...")
-        click(1059, 528, clicks=2)
+        click(1059, 528,  clicks=2)
         logger.add_scav_case_collect()
 
         time.sleep(3)
@@ -85,35 +86,35 @@ def handle_scav_case(logger, craft_type):
     if craft_type == "moonshine":
         if check_for_moonshine_start():
             logger.log("Starting moonshine scav case...")
-            click(1049, 469, clicks=2)
+            click(1049, 469,  clicks=2)
             time.sleep(2)
             logger.add_scav_case_start()
 
     elif craft_type == "intel":
         if check_for_intel_start():
             logger.log("Starting intel scav case...")
-            click(1050, 639, clicks=2)
+            click(1050, 639,  clicks=2)
             time.sleep(2)
             logger.add_scav_case_start()
 
     elif craft_type == "95000":
         if check_for_95000_start():
             logger.log("Starting 95000 scav case...")
-            click(1070, 725, clicks=2)
+            click(1070, 725,  clicks=2)
             time.sleep(2)
             logger.add_scav_case_start()
 
     elif craft_type == "15000":
         if check_for_15000_start():
             logger.log("Starting 15000 scav case...")
-            click(1068, 785, clicks=2)
+            click(1068, 785,  clicks=2)
             time.sleep(2)
             logger.add_scav_case_start()
 
     elif craft_type == "2500":
         if check_for_2500_start():
             logger.log("Starting 2500 scav case...")
-            click(1060, 555, clicks=2)
+            click(1062,527,  clicks=2)
             time.sleep(2)
             logger.add_scav_case_start()
 
@@ -166,7 +167,7 @@ def check_for_intel_get_items():
 
 
 def check_for_2500_get_items():
-    current_image = screenshot([1015, 500, 110, 60])
+    current_image = screenshot([1000,490,200,80])
     reference_folder = "scav_case_2500_get_items"
     references = make_reference_image_list(reference_folder)
 
@@ -211,7 +212,7 @@ def check_for_moonshine_start():
 
 
 def check_for_2500_start():
-    current_image = screenshot([992, 465, 200, 120])
+    current_image = screenshot([1010,490,220,85])
     reference_folder = "scav_case_2500_start"
     references = make_reference_image_list(reference_folder)
 
@@ -300,9 +301,9 @@ def check_if_at_scav_case():
     iar = numpy.asarray(screenshot())
 
     scav_case_text_exists = False
-    for x in range(770, 820):
-        this_pixel = iar[351][x]
-        if pixel_is_equal(this_pixel, [237, 235, 214], tol=20):
+    for x in range(710, 760):
+        this_pixel = iar[354][x]
+        if pixel_is_equal(this_pixel, [214, 212, 193], tol=20):
             scav_case_text_exists = True
             break
 
@@ -326,6 +327,10 @@ def check_if_at_scav_case():
         if pixel_is_equal(this_pixel, [17, 71, 152], tol=20):
             blue_jacket_exists = True
             break
+        elif pixel_is_equal(this_pixel, [38, 74, 111], tol=20):
+            blue_jacket_exists = True
+            break
+
     if (
         blue_jacket_exists
         and scav_case_text_exists
