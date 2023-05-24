@@ -26,6 +26,9 @@ class Logger:
         self.water_filters = 0
         self.water_collects = 0
 
+        self.scav_case_starts = 0
+        self.scav_case_collects = 0
+
         # profit stats
         self.profit = 0
 
@@ -56,6 +59,10 @@ class Logger:
             "medstation_collects": self.medstation_collects,
             "water_filters": self.water_filters,
             "water_collects": self.water_collects,
+
+            "scav_case_starts": self.scav_case_starts,
+            "scav_case_collects": self.scav_case_collects,
+
             "message": self.message,
             "restarts": self.restarts,
             "profit": self.profit,
@@ -128,6 +135,14 @@ class Logger:
         self.water_collects += 1
 
     @_updates_queue
+    def add_scav_case_start(self):
+        self.scav_case_starts += 1
+
+    @_updates_queue
+    def add_scav_case_collect(self):
+        self.scav_case_collects += 1
+
+    @_updates_queue
     def log(self, string):
         self.message = string
         self.time_since_start = self.calc_time_since_start()
@@ -162,8 +177,6 @@ class Logger:
         time_taken = (time.time() - self.start_time) - 40
 
         time_per_station = time_taken / stations_visited
-
-
 
         return str(time_per_station)[:5]
 

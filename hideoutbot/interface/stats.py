@@ -33,6 +33,12 @@ stats_title = [
             sg.Text("Lavatory Collects"),
         ],
         [
+            sg.Text("Scav Case Starts"),
+        ],
+        [
+            sg.Text("Scav Case Collects"),
+        ],
+        [
             sg.Text("Est Profit"),
         ],
     ],
@@ -52,7 +58,6 @@ stats_title = [
         [
             sg.Text("Restarts"),
         ],
-        
         [
             sg.Text("Est Time Per Station"),
         ],
@@ -78,7 +83,13 @@ stats_values = [
             stat_box("lavatory_collects"),
         ],
         [
-            stat_box("profit",size=(10,1)),
+            stat_box("scav_case_starts"),
+        ],
+        [
+            stat_box("scav_case_collects"),
+        ],
+        [
+            stat_box("profit", size=(10, 1)),
         ],
     ],
     [
@@ -97,7 +108,6 @@ stats_values = [
         [
             stat_box("restarts"),
         ],
-        
         [
             stat_box("station_time"),
         ],
