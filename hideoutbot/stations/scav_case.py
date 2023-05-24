@@ -194,7 +194,7 @@ def check_for_moonshine_start():
 
 
 def check_for_2500_start():
-    current_image = screenshot([992, 465, 200, 120])
+    current_image = screenshot([1010,490,220,85])
     reference_folder = "scav_case_2500_start"
     references = make_reference_image_list(reference_folder)
 
