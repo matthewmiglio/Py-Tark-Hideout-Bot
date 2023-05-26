@@ -16,7 +16,7 @@ joblib = "^1.2.0"
 pillow = "^9.5.0"
 pysimplegui = "^4.60.5"
 pygetwindow = "^0.0.9"
-pyautogui = "^0.9.53"
+pyautogui = "^0.9.54"
 
 
 [tool.poetry.group.dev.dependencies]
