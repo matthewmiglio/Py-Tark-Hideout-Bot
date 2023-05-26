@@ -292,7 +292,7 @@ def dummy_main():
     #     time.sleep(3)
 
 
-dummy_main()
+# dummy_main()
 
-# if __name__ == "__main__":
-# main()
+if __name__ == "__main__":
+    main()
