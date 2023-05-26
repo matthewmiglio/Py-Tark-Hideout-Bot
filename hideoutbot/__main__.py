@@ -248,7 +248,7 @@ def main():
 
 
 def dummy_main():
-    # from hideoutbot.bot.client import orientate_tarkov_client
+    from hideoutbot.bot.client import orientate_tarkov_client
 
     # orientate_tarkov_client()
 
@@ -258,6 +258,8 @@ def dummy_main():
     #     (check_if_at_scav_case())
 
     pass
+
+    handle_scav_case(logger=Logger(), craft_type='95000')
 
     # while 1:print(check_for_not_enough_space_popup())
 
@@ -290,7 +292,7 @@ def dummy_main():
     #     time.sleep(3)
 
 
-# dummy_main()
+dummy_main()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+# main()
