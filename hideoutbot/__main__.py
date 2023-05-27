@@ -11,14 +11,8 @@ from hideoutbot.interface import (
     show_help_gui,
     user_config_keys,
 )
-from hideoutbot.stations.bitcoin_miner import check_if_at_bitcoin_miner
 
-from hideoutbot.stations.scav_case import (
-    do_scav_case_scrolling,
-    handle_scav_case,
-)
-from hideoutbot.stations.water_collector import check_for_water_collector_get_items, handle_water_collector
-from hideoutbot.stations.workbench import check_for_workbench_get_items, check_for_workbench_start, handle_workbench
+
 from hideoutbot.utils.caching import (
     cache_user_settings,
     check_user_settings,
@@ -249,21 +243,18 @@ def dummy_main():
 
     # handle_water_collector(logger=Logger())
 
-    # handle_workbench(logger=Logger())
+    # handle_workbench(lo1gger=Logger())
 
-    while 1:print(check_for_workbench_start())
+    # while 1:print(check_for_workbench_start())
 
     # while 1:print(check_for_workbench_get_items())
 
     # while 1:print(check_for_water_collector_get_items())
 
-
-
-
     # do_scav_case_scrolling()
 
 
-dummy_main()
-
-# if __name__ == "__main__":
-#     main()
+# dummy_main()
+#
+if __name__ == "__main__":
+    main()

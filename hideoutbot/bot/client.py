@@ -72,7 +72,7 @@ def orientate_filters_window(logger,start_time=time.time()):
 
 def open_filters_window(logger):
     start_time = time.time()
-    click(328, 87)
+    click(328, 87,clicks=3,interval=0.5)
     time.sleep(0.33)
     if orientate_filters_window(logger,start_time=start_time)=='restart':return 'restart'
 
