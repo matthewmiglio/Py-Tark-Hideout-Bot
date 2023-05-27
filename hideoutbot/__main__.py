@@ -17,6 +17,7 @@ from hideoutbot.stations.scav_case import (
     do_scav_case_scrolling,
     handle_scav_case,
 )
+from hideoutbot.stations.water_collector import check_for_water_collector_get_items, handle_water_collector
 from hideoutbot.utils.caching import (
     cache_user_settings,
     check_user_settings,
@@ -243,7 +244,15 @@ def dummy_main():
 
     pass
 
-    handle_scav_case(logger=Logger(), craft_type="95000")
+    # handle_scav_case(logger=Logger(), craft_type="95000")
+
+    # handle_water_collector(logger=Logger())
+
+    while 1:print(check_for_water_collector_get_items())
+
+
+
+
     # do_scav_case_scrolling()
 
 
