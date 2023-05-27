@@ -28,20 +28,14 @@ def handle_scav_case(logger, craft_type):
     if get_to_scav_case() == "restart":
         return "restart"
 
-    # scroll down in scav case to see all the possible crafts
-    for _ in range(2):
-        print("Scrolling in scav case")
-        pyautogui.moveTo(x=1270, y=543)
-        time.sleep(0.5)
-        pyautogui.dragTo(x=1270, y=750)
-        time.sleep(3)
+    # scroll to the bottom of the list
+    do_scav_case_scrolling()
 
-    print("Done scrolling")
 
     # collect any type of craft from this station
     if check_for_moonshine_get_items():
         logger.log("Collecting moonshine scav case items...")
-        click(1049, 440,  clicks=2)
+        click(1049, 440, clicks=2)
         logger.add_scav_case_collect()
         time.sleep(3)
         pyautogui.press("esc")
@@ -49,7 +43,7 @@ def handle_scav_case(logger, craft_type):
 
     elif check_for_intel_get_items():
         logger.log("Collecting intel scav case items...")
-        click(1048, 612,  clicks=2)
+        click(1048, 612, clicks=2)
         logger.add_scav_case_collect()
 
         time.sleep(3)
@@ -58,7 +52,7 @@ def handle_scav_case(logger, craft_type):
 
     elif check_for_15000_get_items():
         logger.log("Collecting 15000 scav case items...")
-        click(1066, 784,  clicks=2)
+        click(1066, 784, clicks=2)
         logger.add_scav_case_collect()
 
         time.sleep(3)
@@ -67,7 +61,7 @@ def handle_scav_case(logger, craft_type):
 
     elif check_for_2500_get_items():
         logger.log("Collecting 2500 scav case items...")
-        click(1059, 528,  clicks=2)
+        click(1059, 528, clicks=2)
         logger.add_scav_case_collect()
 
         time.sleep(3)
@@ -86,39 +80,65 @@ def handle_scav_case(logger, craft_type):
     if craft_type == "moonshine":
         if check_for_moonshine_start():
             logger.log("Starting moonshine scav case...")
-            click(1050,440,  clicks=2)
+            click(1050, 440, clicks=2)
             time.sleep(2)
             logger.add_scav_case_start()
 
     elif craft_type == "intel":
         if check_for_intel_start():
             logger.log("Starting intel scav case...")
-            click(1051,613,  clicks=2)
+            click(1051, 613, clicks=2)
             time.sleep(2)
             logger.add_scav_case_start()
 
     elif craft_type == "95000":
         if check_for_95000_start():
             logger.log("Starting 95000 scav case...")
-            click(1070,699,  clicks=2)
+            click(1070, 699, clicks=2)
             time.sleep(2)
             logger.add_scav_case_start()
 
     elif craft_type == "15000":
         if check_for_15000_start():
             logger.log("Starting 15000 scav case...")
-            click(1068,785,  clicks=2)
+            click(1068, 785, clicks=2)
             time.sleep(2)
             logger.add_scav_case_start()
 
     elif craft_type == "2500":
         if check_for_2500_start():
             logger.log("Starting 2500 scav case...")
-            click(1062,527,  clicks=2)
+            click(1062, 527, clicks=2)
             time.sleep(2)
             logger.add_scav_case_start()
 
     return "medstation"
+
+
+def do_scav_case_scrolling():
+    coord_list = [
+        [1267, 410],
+        [1271, 410],
+    ]
+
+    index = 0
+    for coord in coord_list:
+        print(f"Doing first scroll index: {index}")
+
+        pyautogui.moveTo(x=coord[0], y=coord[1])
+        time.sleep(0.5)
+        pyautogui.dragTo(x=coord[0], y=750)
+        time.sleep(0.5)
+
+        print(f"Doing second scroll index: {index}")
+
+        pyautogui.moveTo(x=coord[0], y=650)
+        time.sleep(0.5)
+        pyautogui.dragTo(x=coord[0], y=750)
+        time.sleep(0.5)
+
+        index += 1
+        print("-------\n")
 
 
 def check_for_95000_get_items():
@@ -167,7 +187,7 @@ def check_for_intel_get_items():
 
 
 def check_for_2500_get_items():
-    current_image = screenshot([1000,490,200,80])
+    current_image = screenshot([1000, 490, 200, 80])
     reference_folder = "scav_case_2500_get_items"
     references = make_reference_image_list(reference_folder)
 
@@ -197,7 +217,7 @@ def check_for_15000_get_items():
 
 
 def check_for_moonshine_start():
-    current_image = screenshot([960, 405, 200, 100])
+    current_image = screenshot([1000, 413, 200, 65])
     reference_folder = "scav_case_moonshine_start"
     references = make_reference_image_list(reference_folder)
 
@@ -212,7 +232,7 @@ def check_for_moonshine_start():
 
 
 def check_for_2500_start():
-    current_image = screenshot([1010,490,220,85])
+    current_image = screenshot([1010, 490, 220, 85])
     reference_folder = "scav_case_2500_start"
     references = make_reference_image_list(reference_folder)
 
@@ -294,6 +314,7 @@ def get_to_scav_case():
 
         time.sleep(1.5)
 
+    time_taken = time.time() - start_time
     print(f"made it to scav case in {str(time_taken)[:4]} sec")
 
 
