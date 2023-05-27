@@ -80,16 +80,17 @@ def state_tree(state, logger, jobs):  # -> check_fuel
         if "scav_case" in jobs:
             
             #unpack scav case craft type from job list
-            craft_type = "2500"
 
             if "15000" in jobs:
-                craft_type == "15000"
+                craft_type = "15000"
             elif "95000" in jobs:
-                craft_type == "95000"
+                craft_type = "95000"
             elif "Moonshine" in jobs:
-                craft_type == "moonshine"
+                craft_type = "moonshine"
             elif "Intel" in jobs:
-                craft_type == "intel"
+                craft_type = "intel"
+            else:
+                craft_type = '2500'
 
             state = handle_scav_case(logger, craft_type)
         else:
