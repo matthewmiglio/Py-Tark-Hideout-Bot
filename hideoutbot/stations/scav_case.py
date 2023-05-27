@@ -31,7 +31,6 @@ def handle_scav_case(logger, craft_type):
     # scroll to the bottom of the list
     do_scav_case_scrolling()
 
-
     # collect any type of craft from this station
     if check_for_moonshine_get_items():
         logger.log("Collecting moonshine scav case items...")
@@ -119,6 +118,9 @@ def do_scav_case_scrolling():
     coord_list = [
         [1267, 410],
         [1271, 410],
+        [1269, 410],
+        [1270, 410],
+        [1273, 410],
     ]
 
     index = 0
