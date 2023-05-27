@@ -35,6 +35,7 @@ class Logger:
         # time stats for runtime
         self.stations_visited = 0
         self.job_count = 0
+        self.autorestarts = 0
 
         # log
         self.message = ""
@@ -59,10 +60,8 @@ class Logger:
             "medstation_collects": self.medstation_collects,
             "water_filters": self.water_filters,
             "water_collects": self.water_collects,
-
             "scav_case_starts": self.scav_case_starts,
             "scav_case_collects": self.scav_case_collects,
-
             "message": self.message,
             "restarts": self.restarts,
             "profit": self.profit,
@@ -83,8 +82,8 @@ class Logger:
         return wrapper
 
     @_updates_queue
-    def add_restart(self):
-        self.restarts += 1
+    def add_autorestart(self):
+        self.autorestarts += 1
 
     @_updates_queue
     def set_job_count(self, amount):

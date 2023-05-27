@@ -1,4 +1,4 @@
-from hideoutbot.bot.client import  restart_tarkov
+from hideoutbot.bot.client import restart_tarkov
 from hideoutbot.stations.bitcoin_miner import handle_bitcoin_miner
 from hideoutbot.stations.generator import check_for_fuel
 from hideoutbot.stations.lavatory import handle_lavatory
@@ -6,14 +6,6 @@ from hideoutbot.stations.medstation import handle_medstation
 from hideoutbot.stations.scav_case import handle_scav_case
 from hideoutbot.stations.water_collector import handle_water_collector
 from hideoutbot.stations.workbench import handle_workbench
-
-
-# bitcoin
-# workbench
-# water
-# scav
-# medstation
-# lavavtory
 
 
 def state_tree(state, logger, jobs):  # -> check_fuel
@@ -42,17 +34,36 @@ def state_tree(state, logger, jobs):  # -> check_fuel
         while 1:
             pass
 
+
+    elif state == 'autorestart':
+        print("Entered autorestart state")
+        logger.add_autorestart()
+
+        restart_tarkov(logger)
+
+        state = "check_fuel"
+
     # bitcoin -> workbench -> water -> scav -> medstation -> lavatory -> bitcoin
 
     elif state == "bitcoin":
-        print("Entered bitcoin state")
+        # if its time for autorestart, state = autorestart then return
+        time_string = logger.time_since_start
 
-        if "Bitcoin" in jobs:
-            state = handle_bitcoin_miner(logger)
+        hours_running = int(time_string.split(":")[0])
+
+        autorestarts = logger.autorestarts
+
+        if hours_running >= autorestarts:
+            state = "autorestart"
         else:
-            state = "workbench"
+            print("Entered bitcoin state")
 
-        print(f"State after bitcoin is {state}")
+            if "Bitcoin" in jobs:
+                state = handle_bitcoin_miner(logger)
+            else:
+                state = "workbench"
+
+            print(f"State after bitcoin is {state}")
 
     elif state == "workbench":
         print("Entered workbench state")
@@ -78,8 +89,7 @@ def state_tree(state, logger, jobs):  # -> check_fuel
         print("Entered scav_case state")
 
         if "scav_case" in jobs:
-            
-            #unpack scav case craft type from job list
+            # unpack scav case craft type from job list
 
             if "15000" in jobs:
                 craft_type = "15000"
@@ -90,7 +100,7 @@ def state_tree(state, logger, jobs):  # -> check_fuel
             elif "Intel" in jobs:
                 craft_type = "intel"
             else:
-                craft_type = '2500'
+                craft_type = "2500"
 
             state = handle_scav_case(logger, craft_type)
         else:

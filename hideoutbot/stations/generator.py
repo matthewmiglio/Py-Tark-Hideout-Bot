@@ -112,6 +112,7 @@ def get_to_generator():
         cycle_hideout_tab()
         time.sleep(1.5)
 
+    time_taken = time.time() - start_time
     print(f"made it to generator in {str(time_taken)[:4]}")
 
 
