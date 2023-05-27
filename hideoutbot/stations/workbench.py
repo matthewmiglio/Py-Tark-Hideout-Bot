@@ -33,7 +33,7 @@ def handle_workbench(logger):
         logger.log("Collecting items from workbench")
 
         # click get items
-        click(x=1091, y=713,clicks=2)
+        click(x=1091, y=713, clicks=2)
         time.sleep(3)
 
         logger.add_workbench_collect()
@@ -43,11 +43,11 @@ def handle_workbench(logger):
         logger.log("Starting workbench craft")
 
         # click start button
-        click(x=1100, y=711,clicks=2,interval = 0.5)
+        click(x=1100, y=711, clicks=2, interval=0.5)
         time.sleep(1)
 
         # click handover button
-        click(x=654, y=672,clicks=2,interval = 0.5)
+        click(x=654, y=672, clicks=2, interval=0.5)
         time.sleep(3)
 
         logger.add_workbench_start()
@@ -142,6 +142,7 @@ def get_to_workbench():
         cycle_hideout_tab()
         time.sleep(1.5)
 
+    time_taken = time.time() - start_time
     print(f"made it to workbench in {str(time_taken)[:4]}")
 
 

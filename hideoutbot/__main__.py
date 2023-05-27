@@ -18,6 +18,7 @@ from hideoutbot.stations.scav_case import (
     handle_scav_case,
 )
 from hideoutbot.stations.water_collector import check_for_water_collector_get_items, handle_water_collector
+from hideoutbot.stations.workbench import check_for_workbench_get_items, check_for_workbench_start, handle_workbench
 from hideoutbot.utils.caching import (
     cache_user_settings,
     check_user_settings,
@@ -248,7 +249,13 @@ def dummy_main():
 
     # handle_water_collector(logger=Logger())
 
-    while 1:print(check_for_water_collector_get_items())
+    # handle_workbench(logger=Logger())
+
+    while 1:print(check_for_workbench_start())
+
+    # while 1:print(check_for_workbench_get_items())
+
+    # while 1:print(check_for_water_collector_get_items())
 
 
 
