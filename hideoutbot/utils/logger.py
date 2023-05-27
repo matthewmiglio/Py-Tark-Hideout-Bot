@@ -66,6 +66,7 @@ class Logger:
             "restarts": self.restarts,
             "profit": self.profit,
             "station_time": self.calculate_station_time(),
+            "autorestarts": self.autorestarts,
         }
         self.queue.put(statistics)
 
@@ -170,10 +171,10 @@ class Logger:
     def calculate_station_time(self):
         stations_visited = self.stations_visited
 
-        if stations_visited == 0:
+        if stations_visited == 0 or self.start_time is None:
             return "0 s"
 
-        time_taken = (time.time() - self.start_time) - 40
+        time_taken = (time.time() - (self.start_time)) - 40
 
         time_per_station = time_taken / stations_visited
 

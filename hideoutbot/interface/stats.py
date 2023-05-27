@@ -61,6 +61,9 @@ stats_title = [
         [
             sg.Text("Est Time Per Station"),
         ],
+        [
+            sg.Text("Autorestarts"),
+        ],
     ],
 ]
 
@@ -110,6 +113,9 @@ stats_values = [
         ],
         [
             stat_box("station_time"),
+        ],
+        [
+            stat_box("autorestarts"),
         ],
     ],
 ]
