@@ -192,6 +192,9 @@ def main():
             break
 
         if event == "Start":
+            if values is None:
+                return
+
             # if values for bitcoin, lavatory,medstation,water,workbench,and scav case are all false, print 'fail'
             if (
                 not values["bitcoin_checkbox"]
@@ -259,7 +262,7 @@ def dummy_main():
 
     pass
 
-    handle_scav_case(logger=Logger(), craft_type='95000')
+    handle_scav_case(logger=Logger(), craft_type="95000")
 
     # while 1:print(check_for_not_enough_space_popup())
 
