@@ -45,15 +45,15 @@ def check_filters_window_orientation():
     return value1 <= 3 and value2 <= 3
 
 
-def orientate_filters_window(logger,start_time=time.time()):
+def orientate_filters_window(logger, start_time=time.time()):
     is_orientated = check_filters_window_orientation()
     loops = 0
     while not is_orientated:
         time_taken = time.time() - start_time
-        print(f'time taken orientating filters {time_taken}')
+        print(f"time taken orientating filters {time_taken}")
         if time_taken > 23:
-            print('failed orientate filters window timeout')
-            return 'restart'
+            print("failed orientate filters window timeout")
+            return "restart"
         loops += 1
         if loops > 10:
             open_filters_window(logger)
@@ -72,9 +72,10 @@ def orientate_filters_window(logger,start_time=time.time()):
 
 def open_filters_window(logger):
     start_time = time.time()
-    click(328, 87,clicks=3,interval=0.5)
+    click(328, 87, clicks=3, interval=0.5)
     time.sleep(0.33)
-    if orientate_filters_window(logger,start_time=start_time)=='restart':return 'restart'
+    if orientate_filters_window(logger, start_time=start_time) == "restart":
+        return "restart"
 
 
 def set_flea_filters(logger):
@@ -84,7 +85,8 @@ def set_flea_filters(logger):
 
     # open filter window
     logger.log("Opening the filters window")
-    if open_filters_window(logger)=='restart':return 'restart'
+    if open_filters_window(logger) == "restart":
+        return "restart"
     time.sleep(operation_delay)
 
     # click 'display offers from' dropdown

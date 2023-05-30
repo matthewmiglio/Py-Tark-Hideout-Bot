@@ -92,6 +92,7 @@ def get_to_bitcoin_miner():
         cycle_hideout_tab()
         time.sleep(1.5)
 
+    time_taken=time.time() - start_time
     print(f"made it to bitcoin miner in {str(time_taken)[:4]}")
 
 

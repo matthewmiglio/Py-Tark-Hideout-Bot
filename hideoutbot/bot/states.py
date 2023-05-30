@@ -34,8 +34,7 @@ def state_tree(state, logger, jobs):  # -> check_fuel
         while 1:
             pass
 
-
-    elif state == 'autorestart':
+    elif state == "autorestart":
         print("Entered autorestart state")
         logger.add_autorestart()
 

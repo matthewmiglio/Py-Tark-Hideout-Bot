@@ -217,7 +217,6 @@ def get_file_count(folder):
 
 
 def read_text_from_image(image, psm=7, oem=1):
-
     # OCR options:
     #   -l LANG[+LANG]        Specify language(s) used for OCR.
     #   --psm NUM             Specify page segmentation mode.
@@ -243,7 +242,7 @@ def read_text_from_image(image, psm=7, oem=1):
     #   1    Neural nets LSTM engine only.
     #   2    Legacy + LSTM engines.
     #   3    Default, based on what is available.
-    
+
     # specify dir of pytesseract
     # pytesseract.pytesseract.tesseract_cmd = get_tesseract_path()
 
