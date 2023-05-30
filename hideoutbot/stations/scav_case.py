@@ -123,24 +123,20 @@ def do_scav_case_scrolling():
         [1273, 410],
     ]
 
-    index = 0
+    wait_time = 0.5
+
     for coord in coord_list:
-        print(f"Doing first scroll index: {index}")
-
+        # first scroll
         pyautogui.moveTo(x=coord[0], y=coord[1])
-        time.sleep(0.5)
+        time.sleep(wait_time)
         pyautogui.dragTo(x=coord[0], y=750)
-        time.sleep(0.5)
+        time.sleep(wait_time)
 
-        print(f"Doing second scroll index: {index}")
-
+        # second scroll
         pyautogui.moveTo(x=coord[0], y=650)
-        time.sleep(0.5)
+        time.sleep(wait_time)
         pyautogui.dragTo(x=coord[0], y=750)
-        time.sleep(0.5)
-
-        index += 1
-        print("-------\n")
+        time.sleep(wait_time)
 
 
 def check_for_95000_get_items():

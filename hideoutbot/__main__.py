@@ -11,7 +11,12 @@ from hideoutbot.interface import (
     show_help_gui,
     user_config_keys,
 )
-from hideoutbot.stations.scav_case import check_for_moonshine_get_items, check_for_moonshine_start, do_scav_case_scrolling, handle_scav_case
+from hideoutbot.stations.scav_case import (
+    check_for_moonshine_get_items,
+    check_for_moonshine_start,
+    do_scav_case_scrolling,
+    handle_scav_case,
+)
 
 
 from hideoutbot.utils.caching import (
@@ -240,24 +245,11 @@ def dummy_main():
 
     pass
 
-    handle_scav_case(logger=Logger(), craft_type="moonshine")
-    # do_scav_case_scrolling()
-    # while 1:print(check_for_moonshine_start())
+    handle_scav_case(logger=Logger(), craft_type="intel")
 
-    
     # handle_water_collector(logger=Logger())
 
     # handle_workbench(lo1gger=Logger())
-
-    # while 1:print(check_for_workbench_start())
-
-    # while 1:print(check_for_workbench_get_items())
-
-    # while 1:print(check_for_water_collector_get_items())
-
-    # do_scav_case_scrolling()
-
-    # while 1:print(check_for_moonshine_get_items())
 
 
 dummy_main()
