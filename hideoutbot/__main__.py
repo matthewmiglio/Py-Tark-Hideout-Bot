@@ -252,7 +252,7 @@ def dummy_main():
     # handle_workbench(lo1gger=Logger())
 
 
-dummy_main()
+# dummy_main()
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
