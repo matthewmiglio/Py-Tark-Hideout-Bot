@@ -12,6 +12,7 @@ from hideoutbot.interface import (
     user_config_keys,
 )
 from hideoutbot.stations.scav_case import (
+    do_scav_case_scrolling,
     handle_scav_case,
 )
 
@@ -241,7 +242,7 @@ def dummy_main():
     # orientate_tarkov_client()
 
     pass
-
+    # do_scav_case_scrolling()
     handle_scav_case(logger=Logger(), craft_type="intel")
 
     # handle_water_collector(logger=Logger())
@@ -249,7 +250,7 @@ def dummy_main():
     # handle_workbench(lo1gger=Logger())
 
 
-# dummy_main()
+dummy_main()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

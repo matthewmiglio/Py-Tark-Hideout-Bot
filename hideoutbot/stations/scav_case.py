@@ -115,6 +115,7 @@ def handle_scav_case(logger, craft_type):
 
 
 def do_scav_case_scrolling():
+    print('Doing scav case scrolling')
     coord_list = [
         [1267, 410],
         [1271, 410],
