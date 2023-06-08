@@ -312,7 +312,7 @@ def orientate_launcher():
 def orientate_terminal():
     try:
         terminal_window = pygetwindow.getWindowsWithTitle("Py-TarkBot")[0]
-        terminal_window.moveTo(pyautogui.size()[0] - 465, 0)
+        terminal_window.moveTo(pyautogui.size()[0] - 445, 0)
     except:
         print("Couldnt orientate terminal.")
 
