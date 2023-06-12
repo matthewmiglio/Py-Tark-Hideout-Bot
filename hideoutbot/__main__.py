@@ -146,7 +146,7 @@ def main():
     logger = Logger(comm_queue, timed=False)  # dont time the inital logger
 
     # window layout
-    window = sg.Window("Py-TarkBot", main_layout)
+    window = sg.Window("Py-Tark-Hideout-Bot", main_layout)
 
     load_last_settings(window)
 
