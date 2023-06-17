@@ -3,6 +3,7 @@ import webbrowser
 from queue import Queue
 
 import PySimpleGUI as sg
+from hideoutbot.bot.client import check_if_play_button_exists_in_launcher, open_tarkov_launcher, orientate_launcher
 
 from hideoutbot.bot.states import state_tree
 from hideoutbot.interface import (
@@ -243,14 +244,18 @@ def dummy_main():
 
     pass
     # do_scav_case_scrolling()
-    handle_scav_case(logger=Logger(), craft_type="intel")
+    # handle_scav_case(logger=Logger(), craft_type="intel")
 
     # handle_water_collector(logger=Logger())
 
     # handle_workbench(lo1gger=Logger())
 
+    # orientate_launcher()
+    open_tarkov_launcher(logger=Logger())
+    # check_if_play_button_exists_in_launcher()
 
-# dummy_main()
 
-if __name__ == "__main__":
-    main()
+dummy_main()
+
+# if __name__ == "__main__":
+#     main()

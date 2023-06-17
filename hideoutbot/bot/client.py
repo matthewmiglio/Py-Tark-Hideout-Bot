@@ -134,6 +134,34 @@ def close_launcher(logger, tark_launcher):
     tark_launcher.close()
 
 
+def open_tarkov_launcher(logger):
+    logger.log("Opening launcher.")
+    try:
+        subprocess.Popen(get_bsg_launcher_path())  # pylint: disable=consider-using-with
+    except FileNotFoundError:
+        tkinter.messagebox.showinfo(
+            "CRITICAL ERROR",
+            "Could not start launcher. Open a bug report on github and share your BSGlauncher install path.",
+        )
+        sys.exit("Launcher path not found")
+
+
+def wait_for_tarkov_launcher(logger):
+    logger.log("Waiting for launcher to open.")
+    index = 0
+    has_window = False
+    while not has_window:
+        orientate_terminal()
+        time.sleep(1)
+        index += 1
+        if len(pygetwindow.getWindowsWithTitle("BsgLauncher")) > 0:
+            has_window = True
+        if index > 25:
+            logger.log("Launcher failed to open.")
+            return restart_tarkov(logger)
+    time.sleep(5)
+
+
 def restart_tarkov(logger):
     # sourcery skip: extract-duplicate-method, extract-method
     orientate_terminal()
@@ -157,30 +185,10 @@ def restart_tarkov(logger):
         time.sleep(5)
 
     # open tark launcher
-    logger.log("Opening launcher.")
-    try:
-        subprocess.Popen(get_bsg_launcher_path())  # pylint: disable=consider-using-with
-    except FileNotFoundError:
-        tkinter.messagebox.showinfo(
-            "CRITICAL ERROR",
-            "Could not start launcher. Open a bug report on github and share your BSGlauncher install path.",
-        )
-        sys.exit("Launcher path not found")
+    open_tarkov_launcher(logger)
 
     # Wait for launcher to open and load up
-    logger.log("Waiting for launcher to open.")
-    index = 0
-    has_window = False
-    while not has_window:
-        orientate_terminal()
-        time.sleep(1)
-        index += 1
-        if len(pygetwindow.getWindowsWithTitle("BsgLauncher")) > 0:
-            has_window = True
-        if index > 25:
-            logger.log("Launcher failed to open.")
-            return restart_tarkov(logger)
-    time.sleep(5)
+    wait_for_tarkov_launcher(logger)
 
     # orientate launcher
     logger.log("orientating launcher")
