@@ -3,7 +3,7 @@ import webbrowser
 from queue import Queue
 
 import PySimpleGUI as sg
-from hideoutbot.bot.client import check_if_play_button_exists_in_launcher, open_tarkov_launcher, orientate_launcher
+from hideoutbot.bot.client import open_tarkov_launcher
 
 from hideoutbot.bot.states import state_tree
 from hideoutbot.interface import (
@@ -11,10 +11,6 @@ from hideoutbot.interface import (
     main_layout,
     show_help_gui,
     user_config_keys,
-)
-from hideoutbot.stations.scav_case import (
-    do_scav_case_scrolling,
-    handle_scav_case,
 )
 
 
