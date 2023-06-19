@@ -10,7 +10,7 @@ include = ["README.md", "hideoutbot/detection/reference_images/**/*.png"]
 [tool.poetry.dependencies]
 python = "^3.10"
 opencv-python = "^4.7.0.72"
-numpy = "^1.24.3"
+numpy = "^1.25.0"
 pytesseract = "^0.3.10"
 joblib = "^1.2.0"
 pillow = "^9.5.0"
