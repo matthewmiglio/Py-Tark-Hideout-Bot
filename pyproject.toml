@@ -21,7 +21,7 @@ pyautogui = "^0.9.54"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
-ipykernel = "^6.23.2"
+ipykernel = "^6.23.3"
 
 
 [tool.poetry.group.build.dependencies]
